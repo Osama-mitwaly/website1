@@ -1,32 +1,53 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <meta name="description" content="شركة رائدة في تصدير الأعشاب المصرية الطبيعية، التوابل، والبذور بأعلى معايير الجودة العالمية">
-    <meta name="keywords" content="أعشاب مصرية, توابل, بذور, تصدير, Egyptian herbs, spices, seeds, export">
-    <meta name="author" content="Egyptian Herbs Export Co.">
+    <meta name="description" content="ناباتة الحياة - شركة رائدة في تصدير الأعشاب المصرية الطبيعية، التوابل، والبذور بأعلى معايير الجودة العالمية">
+    <meta name="keywords" content="أعشاب مصرية, توابل, بذور, تصدير, Egyptian herbs, spices, seeds, export, Napatat Elhaya">
+    <meta name="author" content="Napatat Elhaya">
     
-    <!-- PWA & Mobile -->
     <meta name="theme-color" content="#1A4D2E">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Egyptian Herbs">
+    <meta name="apple-mobile-web-app-title" content="Napatat Elhaya">
     
-    <!-- Title -->
-    <title data-i18n="seo.title">شركة الأعشاب المصرية - تصدير أعشاب وتوابل وبذور</title>
+    <title data-i18n="seo.title">ناباتة الحياة - تصدير أعشاب وتوابل وبذور</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts - محسّن -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
     
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Critical CSS Inline - لتحسين الأداء -->
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{font-family:'Tajawal',-apple-system,BlinkMacSystemFont,sans-serif;background-color:#F4F7F5;color:#2C3333;line-height:1.6;overflow-x:hidden}
+      body[dir="ltr"]{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+      .navbar{background-color:#1A4D2E;padding:1rem 0;position:sticky;top:0;z-index:1000;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
+      .navbar .container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 2rem}
+      .navbar-brand{font-size:1.5rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:0.5rem;text-decoration:none}
+      .navbar-menu{display:flex;list-style:none;gap:2rem;align-items:center}
+      .navbar-menu a{color:#fff;font-weight:500;padding:0.5rem 1rem;border-radius:0.375rem;transition:all 0.2s ease;text-decoration:none}
+      .navbar-menu a:hover{background-color:rgba(255,255,255,0.1);color:#D4A373}
+      .hero{position:relative;height:90vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden}
+      .hero-background{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1920&q=80');background-size:cover;background-position:center;z-index:-2}
+      .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(26,77,46,0.85) 0%,rgba(15,40,24,0.9) 100%);z-index:-1}
+      .hero-content{max-width:800px;padding:2rem;position:relative;z-index:1}
+      .hero h1{font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1rem;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,0.3)}
+      .btn{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.875rem 2rem;font-size:1rem;font-weight:600;border:2px solid transparent;border-radius:0.5rem;cursor:pointer;text-decoration:none}
+      .btn-primary{background-color:#D4A373;color:#1A4D2E;border-color:#D4A373}
+      .btn-secondary{background-color:transparent;color:#fff;border-color:#fff}
+      @media (max-width:767px){.navbar-menu{display:none}.hero{height:70vh;min-height:450px}.hero-buttons{flex-direction:column;width:100%}.hero-buttons .btn{width:100%}}
+    </style>
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/style.css">
@@ -34,24 +55,20 @@
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <!-- ===================================
-         Navbar
-         =================================== -->
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
-            <!-- Logo & Brand -->
             <a href="index.html" class="navbar-brand">
                 <i class="bi bi-flower1"></i>
-                <span class="navbar-brand-name" data-i18n="company.name">شركة الأعشاب المصرية</span>
+                <span class="navbar-brand-name" data-i18n="company.name">ناباتة الحياة</span>
             </a>
             
-            <!-- Desktop Menu -->
             <ul class="navbar-menu">
                 <li><a href="index.html" data-i18n="nav.home">الرئيسية</a></li>
                 <li class="dropdown">
                     <a href="products.html" class="dropdown-toggle" data-i18n="nav.products">المنتجات</a>
                     <ul class="dropdown-menu">
-                        <li><a href="products.html?category=spices"><i class="bi bi-mortarboard-fill"></i> <span data-i18n="nav.spices">توابل</span></a></li>
+                        <li><a href="products.html?category=spices"><i class="bi bi-fire"></i> <span data-i18n="nav.spices">توابل</span></a></li>
                         <li><a href="products.html?category=herbs"><i class="bi bi-flower2"></i> <span data-i18n="nav.herbs">أعشاب</span></a></li>
                         <li><a href="products.html?category=seeds"><i class="bi bi-egg-fill"></i> <span data-i18n="nav.seeds">بذور</span></a></li>
                     </ul>
@@ -60,23 +77,19 @@
                 <li><a href="contact.html" data-i18n="nav.contact">تواصل معنا</a></li>
             </ul>
             
-            <!-- Language Switcher -->
             <div class="lang-switcher">
                 <button class="lang-btn" data-lang="ar">AR</button>
                 <button class="lang-btn" data-lang="en">EN</button>
             </div>
             
-            <!-- Mobile Menu Toggle -->
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
                 <i class="bi bi-list"></i>
             </button>
         </div>
     </nav>
     
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay"></div>
-    
     <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div>
     <div class="mobile-menu">
         <button class="mobile-menu-close" aria-label="Close menu">
             <i class="bi bi-x-lg"></i>
@@ -89,9 +102,7 @@
         </ul>
     </div>
     
-    <!-- ===================================
-         Hero Section
-         =================================== -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-background"></div>
         <div class="hero-overlay"></div>
@@ -111,9 +122,7 @@
         </div>
     </section>
     
-    <!-- ===================================
-         Trust Bar
-         =================================== -->
+    <!-- Trust Bar -->
     <section class="trust-bar">
         <div class="container">
             <div class="trust-bar-content">
@@ -121,37 +130,35 @@
                     <div class="trust-item-icon">
                         <i class="bi bi-patch-check-fill"></i>
                     </div>
-                    <span>ISO 9001 Certified</span>
+                    <span data-i18n="trust.iso">شهادة ISO 9001</span>
                 </div>
                 <div class="trust-item">
                     <div class="trust-item-icon">
                         <i class="bi bi-leaf"></i>
                     </div>
-                    <span>100% Organic</span>
+                    <span data-i18n="trust.organic">عضوي 100%</span>
                 </div>
                 <div class="trust-item">
                     <div class="trust-item-icon">
                         <i class="bi bi-globe2"></i>
                     </div>
-                    <span>Global Shipping</span>
+                    <span data-i18n="trust.shipping">شحن عالمي</span>
                 </div>
                 <div class="trust-item">
                     <div class="trust-item-icon">
                         <i class="bi bi-shield-check"></i>
                     </div>
-                    <span>Quality Guaranteed</span>
+                    <span data-i18n="trust.quality">جودة مضمونة</span>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- ===================================
-         Categories Section
-         =================================== -->
+    <!-- Categories Section -->
     <section class="categories-section">
         <div class="container">
             <div class="section-header scroll-reveal">
-                <h2 data-i18n="home.trust_title">لماذا تختارنا؟</h2>
+                <h2 data-i18n="home.trust_title">فئاتنا المميزة</h2>
                 <p>اكتشف مجموعتنا المتنوعة من المنتجات الطبيعية عالية الجودة</p>
             </div>
             
@@ -161,16 +168,13 @@
         </div>
     </section>
     
-    <!-- ===================================
-         Footer
-         =================================== -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <!-- Company Info -->
                 <div class="footer-section">
-                    <h3 class="footer-company-name" data-i18n="company.name">شركة الأعشاب المصرية</h3>
-                    <p>شركاؤك الموثوقون في تصدير الأعشاب المصرية الطبيعية بأعلى معايير الجودة</p>
+                    <h3 class="footer-company-name" data-i18n="company.name">ناباتة الحياة</h3>
+                    <p class="footer-company-desc" data-i18n="footer.company_desc">شركاؤك الموثوقون في تصدير الأعشاب المصرية الطبيعية بأعلى معايير الجودة</p>
                     <div class="social-links">
                         <a href="#" class="social-link social-facebook" aria-label="Facebook">
                             <i class="bi bi-facebook"></i>
@@ -187,7 +191,6 @@
                     </div>
                 </div>
                 
-                <!-- Quick Links -->
                 <div class="footer-section">
                     <h3 data-i18n="footer.quick_links">روابط سريعة</h3>
                     <ul>
@@ -198,13 +201,12 @@
                     </ul>
                 </div>
                 
-                <!-- Contact Info -->
                 <div class="footer-section">
                     <h3 data-i18n="contact.info_title">معلومات الاتصال</h3>
                     <ul>
                         <li>
                             <i class="bi bi-envelope"></i>
-                            <a href="mailto:info@egyptianherbs.com" class="footer-email">info@egyptianherbs.com</a>
+                            <a href="mailto:info@napatatelhaya.com" class="footer-email">info@napatatelhaya.com</a>
                         </li>
                         <li>
                             <i class="bi bi-telephone"></i>
@@ -219,12 +221,12 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2026 <span data-i18n="company.name">شركة الأعشاب المصرية</span>. <span data-i18n="footer.rights">جميع الحقوق محفوظة</span></p>
+                <p>&copy; 2026 <span class="copyright-name" data-i18n="company.name">ناباتة الحياة</span>. <span data-i18n="footer.rights">جميع الحقوق محفوظة</span></p>
             </div>
         </div>
     </footer>
     
-    <!-- JavaScript Files (الترتيب مهم!) -->
+    <!-- JavaScript Files -->
     <script src="js/translations.js"></script>
     <script src="js/api.js"></script>
     <script src="js/main.js"></script>

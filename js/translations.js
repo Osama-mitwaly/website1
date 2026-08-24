@@ -3,20 +3,18 @@
  * إدارة الترجمة وتبديل اللغة (عربي / إنجليزي)
  */
 
-// المتغيرات العامة لحالة اللغة والبيانات
 let currentLang = localStorage.getItem('site_lang') || 'ar';
 let translationsData = {};
 
 /**
- * دالة مساعدة لاستخراج القيم المتداخلة من كائن JSON
- * مثال: getNestedValue(obj, "nav.home") يرجع قيمة "الرئيسية"
+ * استخراج القيم المتداخلة من كائن JSON
  */
 function getNestedValue(obj, key) {
     return key.split('.').reduce((acc, part) => acc && acc[part], obj);
 }
 
 /**
- * تحميل بيانات الترجمة من ملف JSON
+ * تحميل بيانات الترجمة
  */
 async function loadTranslations() {
     try {
@@ -25,8 +23,6 @@ async function loadTranslations() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         translationsData = await response.json();
-        
-        // بعد التحميل، طبق الترجمات على الصفحة
         applyTranslations();
     } catch (error) {
         console.error('فشل في تحميل ملف الترجمة:', error);
@@ -37,7 +33,7 @@ async function loadTranslations() {
  * تطبيق الترجمات على عناصر DOM
  */
 function applyTranslations() {
-    // 1. تحديث اتجاه الصفحة ولغة المتصفح للـ SEO و Accessibility
+    // 1. تحديث اتجاه الصفحة ولغة المتصفح
     document.documentElement.lang = currentLang;
     document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
@@ -49,37 +45,38 @@ function applyTranslations() {
         const translatedText = getNestedValue(translationsData[currentLang], key);
 
         if (translatedText) {
-            // التعامل مع حقول الإدخال (تحديث الـ placeholder بدلاً من النص)
+            // التعامل مع حقول الإدخال
             if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                 element.placeholder = translatedText;
             } 
-            // التعامل مع الأزرار أو الروابط التي قد تحتوي على أيقونات داخلية
-            else if (element.children.length > 0 && element.children[0].tagName === 'I') {
-                // الحفاظ على الأيقونة وتحديث النص فقط
-                const icon = element.children[0].outerHTML;
+            // التعامل مع العناصر التي تحتوي على أيقونات
+            else if (element.querySelector('i')) {
+                const icon = element.querySelector('i').outerHTML;
                 element.innerHTML = `${icon} ${translatedText}`;
             } 
-            // الحالة الافتراضية: تحديث النص العادي
+            // الحالة الافتراضية
             else {
                 element.textContent = translatedText;
             }
         }
     });
 
-    // 3. تحديث حالة أزرار تبديل اللغة (Active State)
+    // 3. تحديث حالة أزرار تبديل اللغة
     updateLanguageButtons();
+    
+    // 4. إعادة تطبيق البيانات الديناميكية
+    if (typeof renderNavbar === 'function') renderNavbar();
+    if (typeof renderFooter === 'function') renderFooter();
+    if (typeof applyDesignSettings === 'function') applyDesignSettings();
 }
 
 /**
- * تحديث مظهر أزرار اللغة لتعكس اللغة الحالية
+ * تحديث مظهر أزرار اللغة
  */
 function updateLanguageButtons() {
     const langButtons = document.querySelectorAll('.lang-btn');
     langButtons.forEach(btn => {
-        // إزالة الكلاس النشط من جميع الأزرار
         btn.classList.remove('active');
-        
-        // إضافة الكلاس النشط للزر المطابق للغة الحالية
         if (btn.dataset.lang === currentLang) {
             btn.classList.add('active');
         }
@@ -87,8 +84,7 @@ function updateLanguageButtons() {
 }
 
 /**
- * تغيير اللغة وحفظ الاختيار في localStorage
- * @param {string} lang - 'ar' أو 'en'
+ * تغيير اللغة
  */
 function setLanguage(lang) {
     if (lang === 'ar' || lang === 'en') {
@@ -96,17 +92,15 @@ function setLanguage(lang) {
         localStorage.setItem('site_lang', currentLang);
         applyTranslations();
         
-        // إضافة تأثير بصري بسيط عند التبديل (اختياري)
         document.body.classList.add('fade-in');
         setTimeout(() => document.body.classList.remove('fade-in'), 500);
     }
 }
 
 /**
- * تهيئة نظام الترجمة عند تحميل الصفحة
+ * تهيئة نظام الترجمة
  */
 function initTranslations() {
-    // ربط أحداث النقر بأزرار تبديل اللغة
     const langButtons = document.querySelectorAll('.lang-btn');
     langButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -116,12 +110,10 @@ function initTranslations() {
         });
     });
 
-    // بدء عملية التحميل
     loadTranslations();
 }
 
-// تشغيل التهيئة فوراً عند تحميل السكريبت
-// نستخدم DOMContentLoaded للتأكد من أن عناصر HTML جاهزة
+// بدء التشغيل
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initTranslations);
 } else {

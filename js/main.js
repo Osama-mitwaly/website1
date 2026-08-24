@@ -3,21 +3,12 @@
  * الملف الرئيسي - يربط كل شيء معاً
  */
 
-// ===================================
-// 1. المتغيرات العامة
-// ===================================
 let siteSettings = null;
 let allProducts = [];
 let currentPage = '';
 
-// ===================================
-// 2. دوال مساعدة (Helpers)
-// ===================================
-
 /**
- * حماية من هجمات XSS - تنظيف النصوص قبل عرضها
- * @param {string} str - النص المراد تنظيفه
- * @returns {string} نص آمن
+ * حماية من هجمات XSS
  */
 function escapeHtml(str) {
     if (typeof str !== 'string') return '';
@@ -27,7 +18,7 @@ function escapeHtml(str) {
 }
 
 /**
- * تحديد الصفحة الحالية من اسم الملف
+ * تحديد الصفحة الحالية
  */
 function detectCurrentPage() {
     const path = window.location.pathname;
@@ -41,28 +32,25 @@ function detectCurrentPage() {
 }
 
 /**
- * تحديث حالة الرابط النشط في شريط التنقل
+ * تحديث حالة الرابط النشط
  */
 function updateActiveNavLink() {
     const navLinks = document.querySelectorAll('.navbar-menu a');
     navLinks.forEach(link => {
         link.classList.remove('active-link');
-        if (link.getAttribute('href') === `${currentPage}.html`) {
+        const href = link.getAttribute('href');
+        if (href === `${currentPage}.html` || 
+            (currentPage === 'home' && href === 'index.html')) {
             link.classList.add('active-link');
         }
     });
 }
 
-// ===================================
-// 3. تحميل البيانات العامة
-// ===================================
-
 /**
- * تحميل البيانات المشتركة (الإعدادات + المنتجات)
+ * تحميل البيانات العامة
  */
 async function loadGlobalData() {
     try {
-        // تحميل الإعدادات والمنتجات بالتوازي (أسرع)
         const [settings, products] = await Promise.all([
             AppAPI.getSettings(),
             AppAPI.getProducts()
@@ -77,12 +65,28 @@ async function loadGlobalData() {
     }
 }
 
-// ===================================
-// 4. المكونات المشتركة (Navbar & Footer)
-// ===================================
+/**
+ * تحديث Navbar
+ */
+function renderNavbar() {
+    if (!siteSettings) return;
+    
+    const brandName = document.querySelector('.navbar-brand-name');
+    if (brandName) {
+        brandName.textContent = currentLang === 'ar' 
+            ? siteSettings.company.name_ar 
+            : siteSettings.company.name_en;
+    }
+    
+    if (siteSettings.seo) {
+        document.title = currentLang === 'ar' 
+            ? siteSettings.seo.title_ar 
+            : siteSettings.seo.title_en;
+    }
+}
 
 /**
- * تحديث معلومات الشركة في الـ Footer
+ * تحديث Footer
  */
 function renderFooter() {
     if (!siteSettings) return;
@@ -90,25 +94,35 @@ function renderFooter() {
     const company = siteSettings.company;
     const social = siteSettings.social;
     
-    // تحديث اسم الشركة
     const footerCompanyName = document.querySelector('.footer-company-name');
     if (footerCompanyName) {
         footerCompanyName.textContent = currentLang === 'ar' ? company.name_ar : company.name_en;
     }
     
-    // تحديث معلومات الاتصال
+    const footerCompanyDesc = document.querySelector('.footer-company-desc');
+    if (footerCompanyDesc) {
+        footerCompanyDesc.textContent = currentLang === 'ar' 
+            ? translationsData.ar.footer.company_desc 
+            : translationsData.en.footer.company_desc;
+    }
+    
     const footerEmail = document.querySelector('.footer-email');
-    if (footerEmail) footerEmail.textContent = company.email;
+    if (footerEmail) {
+        footerEmail.textContent = company.email;
+        footerEmail.href = `mailto:${company.email}`;
+    }
     
     const footerPhone = document.querySelector('.footer-phone');
-    if (footerPhone) footerPhone.textContent = company.phone;
+    if (footerPhone) {
+        footerPhone.textContent = company.phone;
+        footerPhone.href = `tel:${company.phone.replace(/\s/g, '')}`;
+    }
     
     const footerAddress = document.querySelector('.footer-address');
     if (footerAddress) {
         footerAddress.textContent = currentLang === 'ar' ? company.address_ar : company.address_en;
     }
     
-    // تحديث روابط السوشيال ميديا
     if (social) {
         const socialLinks = {
             facebook: document.querySelector('.social-facebook'),
@@ -123,28 +137,34 @@ function renderFooter() {
             }
         });
     }
-}
-
-/**
- * تحديث اسم الشركة في الـ Navbar
- */
-function renderNavbar() {
-    if (!siteSettings) return;
     
-    const brandName = document.querySelector('.navbar-brand-name');
-    if (brandName) {
-        brandName.textContent = currentLang === 'ar' 
-            ? siteSettings.company.name_ar 
-            : siteSettings.company.name_en;
+    const copyrightName = document.querySelector('.copyright-name');
+    if (copyrightName) {
+        copyrightName.textContent = currentLang === 'ar' ? company.name_ar : company.name_en;
     }
 }
 
-// ===================================
-// 5. التفاعلات (Interactions)
-// ===================================
+/**
+ * تطبيق إعدادات التصميم (مثل Hero Opacity)
+ */
+function applyDesignSettings() {
+    if (!siteSettings?.design) return;
+    
+    const heroOverlay = document.querySelector('.hero-overlay');
+    if (heroOverlay && siteSettings.design.hero_overlay_opacity !== undefined) {
+        const opacity = siteSettings.design.hero_overlay_opacity;
+        heroOverlay.style.background = `linear-gradient(135deg, rgba(26, 77, 46, ${opacity}) 0%, rgba(15, 40, 24, ${Math.min(opacity + 0.05, 1)}) 100%)`;
+    }
+    
+    // تحديث صورة Hero إذا كانت متاحة
+    const heroBg = document.querySelector('.hero-background');
+    if (heroBg && siteSettings?.images?.hero_background) {
+        heroBg.style.backgroundImage = `url('${siteSettings.images.hero_background}')`;
+    }
+}
 
 /**
- * تهيئة قائمة الموبايل (Hamburger Menu)
+ * تهيئة قائمة الموبايل
  */
 function initMobileMenu() {
     const toggle = document.querySelector('.mobile-menu-toggle');
@@ -170,14 +190,13 @@ function initMobileMenu() {
     closeBtn?.addEventListener('click', closeMenu);
     overlay.addEventListener('click', closeMenu);
     
-    // إغلاق القائمة عند النقر على رابط
     menu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', closeMenu);
     });
 }
 
 /**
- * تأثيرات ظهور العناصر عند التمرير (Scroll Reveal)
+ * تأثيرات ظهور العناصر عند التمرير
  */
 function initScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
@@ -194,21 +213,36 @@ function initScrollReveal() {
     });
 }
 
-// ===================================
-// 6. دوال إنشاء العناصر (Renderers)
-// ===================================
+/**
+ * Lazy Loading للصور
+ */
+function initLazyLoading() {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                }
+                img.classList.remove('lazy-load');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
 
 /**
- * إنشاء بطاقة منتج واحدة
- * @param {Object} product - بيانات المنتج
- * @returns {HTMLElement} عنصر DOM للبطاقة
+ * إنشاء بطاقة منتج
  */
 function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'card product-card grid-item';
     card.dataset.category = product.category;
     
-    // الصورة
     const imageWrapper = document.createElement('div');
     imageWrapper.className = 'card-image-wrapper';
     
@@ -216,7 +250,7 @@ function createProductCard(product) {
     img.className = 'card-image';
     img.src = product.image_url;
     img.alt = currentLang === 'ar' ? product.name_ar : product.name_en;
-    img.loading = 'lazy'; // Lazy loading للأداء
+    img.loading = 'lazy';
     
     const badge = document.createElement('span');
     badge.className = 'card-badge';
@@ -227,7 +261,6 @@ function createProductCard(product) {
     imageWrapper.appendChild(img);
     imageWrapper.appendChild(badge);
     
-    // المحتوى
     const content = document.createElement('div');
     content.className = 'card-content';
     
@@ -239,15 +272,14 @@ function createProductCard(product) {
     description.className = 'card-description';
     description.textContent = currentLang === 'ar' ? product.description_ar : product.description_en;
     
-    // المواصفات
     const specs = document.createElement('div');
     specs.className = 'card-specs';
     
     if (product.specs) {
         const specItems = [
-            { icon: 'bi-shield-check', label: 'نقاوة', value: product.specs.purity },
-            { icon: 'bi-droplet', label: 'رطوبة', value: product.specs.moisture },
-            { icon: 'bi-geo-alt', label: 'منشأ', value: product.specs.origin }
+            { icon: 'bi-shield-check', label: currentLang === 'ar' ? 'نقاوة' : 'Purity', value: product.specs.purity },
+            { icon: 'bi-droplet', label: currentLang === 'ar' ? 'رطوبة' : 'Moisture', value: product.specs.moisture },
+            { icon: 'bi-geo-alt', label: currentLang === 'ar' ? 'منشأ' : 'Origin', value: product.specs.origin }
         ];
         
         specItems.forEach(spec => {
@@ -272,7 +304,6 @@ function createProductCard(product) {
         });
     }
     
-    // زر الطلب
     const btn = document.createElement('a');
     btn.className = 'btn btn-outline btn-sm';
     btn.href = `contact.html?product=${encodeURIComponent(product.id)}`;
@@ -330,17 +361,12 @@ function createCategoryCard(category, imageUrl) {
     return card;
 }
 
-// ===================================
-// 7. منطق الصفحات (Page Logic)
-// ===================================
-
 /**
  * تهيئة الصفحة الرئيسية
  */
 function initHomePage() {
     console.log('🏠 تهيئة الصفحة الرئيسية');
     
-    // عرض الفئات الثلاث
     const categoriesGrid = document.querySelector('.categories-grid');
     if (categoriesGrid && siteSettings?.images) {
         const categories = ['spices', 'herbs', 'seeds'];
@@ -350,12 +376,6 @@ function initHomePage() {
                 categoriesGrid.appendChild(createCategoryCard(cat, imageUrl));
             }
         });
-    }
-    
-    // تحديث خلفية Hero إذا كانت متاحة
-    const heroBg = document.querySelector('.hero-background');
-    if (heroBg && siteSettings?.images?.hero_background) {
-        heroBg.style.backgroundImage = `url('${siteSettings.images.hero_background}')`;
     }
 }
 
@@ -370,7 +390,6 @@ function initProductsPage() {
     
     if (!productsGrid) return;
     
-    // دالة لعرض المنتجات
     const renderProducts = (category = 'all') => {
         productsGrid.innerHTML = '';
         
@@ -382,8 +401,8 @@ function initProductsPage() {
             productsGrid.innerHTML = `
                 <div class="empty-state" style="grid-column: 1/-1;">
                     <div class="empty-state-icon">📦</div>
-                    <h3 class="empty-state-title">لا توجد منتجات</h3>
-                    <p class="empty-state-description">لم تتم إضافة منتجات في هذه الفئة بعد</p>
+                    <h3 class="empty-state-title">${currentLang === 'ar' ? 'لا توجد منتجات' : 'No Products'}</h3>
+                    <p class="empty-state-description">${currentLang === 'ar' ? 'لم تتم إضافة منتجات في هذه الفئة بعد' : 'No products have been added to this category yet'}</p>
                 </div>
             `;
             return;
@@ -394,10 +413,8 @@ function initProductsPage() {
         });
     };
     
-    // عرض كل المنتجات افتراضياً
     renderProducts('all');
     
-    // ربط أزرار الفلتر
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             filterButtons.forEach(b => b.classList.remove('active'));
@@ -406,7 +423,6 @@ function initProductsPage() {
         });
     });
     
-    // التحقق من وجود فلتر في الرابط (من صفحة الفئات)
     const urlParams = new URLSearchParams(window.location.search);
     const categoryFilter = urlParams.get('category');
     if (categoryFilter) {
@@ -424,7 +440,6 @@ function initContactPage() {
     const form = document.querySelector('.contact-form');
     if (!form) return;
     
-    // التحقق من وجود منتج محدد في الرابط
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('product');
     if (productId) {
@@ -432,18 +447,15 @@ function initContactPage() {
         if (productField) productField.value = productId;
     }
     
-    // معالجة إرسال النموذج
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         
-        // حالة التحميل
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> جاري الإرسال...';
+        submitBtn.innerHTML = `<i class="bi bi-hourglass-split"></i> ${currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...'}`;
         
-        // جمع البيانات
         const formData = {
             name: form.querySelector('[name="name"]').value,
             company: form.querySelector('[name="company"]').value,
@@ -452,10 +464,8 @@ function initContactPage() {
             message: form.querySelector('[name="message"]').value
         };
         
-        // إرسال البيانات
         const success = await AppAPI.submitContactForm(formData);
         
-        // استعادة الزر
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
         
@@ -472,32 +482,24 @@ function initContactPage() {
     });
 }
 
-// ===================================
-// 8. نقطة الدخول الرئيسية
-// ===================================
-
 /**
  * تهيئة الموقع بالكامل
  */
 async function init() {
     console.log('🚀 بدء تهيئة الموقع...');
     
-    // تحديد الصفحة الحالية
     currentPage = detectCurrentPage();
     console.log(`📍 الصفحة الحالية: ${currentPage}`);
     
-    // تحميل البيانات العامة
     await loadGlobalData();
     
-    // تحديث المكونات المشتركة
     renderNavbar();
     renderFooter();
+    applyDesignSettings();
     updateActiveNavLink();
     
-    // تهيئة التفاعلات
     initMobileMenu();
     
-    // تهيئة الصفحة المحددة
     switch (currentPage) {
         case 'home':
             initHomePage();
@@ -506,18 +508,16 @@ async function init() {
             initProductsPage();
             break;
         case 'about':
-            // صفحة بسيطة، لا تحتاج تهيئة خاصة حالياً
             break;
         case 'contact':
             initContactPage();
             break;
     }
     
-    // تهيئة تأثيرات التمرير (يجب أن تكون في النهاية)
     setTimeout(initScrollReveal, 100);
+    initLazyLoading();
     
     console.log('✅ اكتملت تهيئة الموقع');
 }
 
-// بدء التشغيل
 document.addEventListener('DOMContentLoaded', init);

@@ -1,7 +1,6 @@
 /* ===================================
    Buttons
    =================================== */
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -87,7 +86,6 @@
 /* ===================================
    Cards
    =================================== */
-
 .card {
   background-color: var(--text-light);
   border-radius: var(--radius-lg);
@@ -129,16 +127,7 @@
   line-height: 1.6;
 }
 
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--spacing-sm) var(--spacing-md);
-  background-color: var(--bg-light);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-/* Product Card Specific */
+/* Product Card */
 .product-card {
   display: flex;
   flex-direction: column;
@@ -230,9 +219,8 @@
 }
 
 /* ===================================
-   Trust Bar
+   Trust Bar - مُصلح
    =================================== */
-
 .trust-bar {
   background-color: var(--primary-green);
   padding: var(--spacing-md) 0;
@@ -264,12 +252,21 @@
   color: var(--primary-green);
   border-radius: 50%;
   font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.trust-item-icon i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  width: 100%;
+  height: 100%;
 }
 
 /* ===================================
    Section Headers
    =================================== */
-
 .section-header {
   text-align: center;
   margin-bottom: var(--spacing-xl);
@@ -303,7 +300,6 @@
 /* ===================================
    Forms
    =================================== */
-
 .form-group {
   margin-bottom: var(--spacing-md);
 }
@@ -342,27 +338,9 @@
   resize: vertical;
 }
 
-.form-error {
-  color: #DC2626;
-  font-size: 0.875rem;
-  margin-top: var(--spacing-xs);
-  display: none;
-}
-
-.form-group.error .form-input,
-.form-group.error .form-textarea,
-.form-group.error .form-select {
-  border-color: #DC2626;
-}
-
-.form-group.error .form-error {
-  display: block;
-}
-
 /* ===================================
    Dropdown Menu
    =================================== */
-
 .dropdown {
   position: relative;
 }
@@ -408,7 +386,8 @@
 }
 
 .dropdown-menu li a {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 0.75rem 1.5rem;
   color: var(--text-dark);
   transition: all var(--transition-fast);
@@ -421,41 +400,45 @@
 }
 
 /* ===================================
-   Loading States
+   Grids
    =================================== */
+.categories-grid,
+.products-grid {
+  display: grid;
+  gap: var(--spacing-md);
+}
 
-.loading {
+/* ===================================
+   Filter Buttons
+   =================================== */
+.filter-buttons {
   display: flex;
-  align-items: center;
+  gap: var(--spacing-sm);
   justify-content: center;
-  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
 }
 
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid var(--bg-light);
-  border-top-color: var(--primary-green);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.filter-btn {
+  padding: 0.625rem 1.5rem;
+  background-color: var(--text-light);
+  color: var(--text-dark);
+  border: 2px solid var(--primary-green);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-fast);
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.loading-text {
-  margin-inline-start: var(--spacing-sm);
-  color: var(--text-muted);
-  font-size: 1.125rem;
+.filter-btn:hover,
+.filter-btn.active {
+  background-color: var(--primary-green);
+  color: var(--text-light);
 }
 
 /* ===================================
    Empty State
    =================================== */
-
 .empty-state {
   text-align: center;
   padding: var(--spacing-xl);
@@ -474,50 +457,9 @@
   color: var(--text-dark);
 }
 
-.empty-state-description {
-  font-size: 1rem;
-  margin-bottom: var(--spacing-md);
-}
-
-/* ===================================
-   Utility Classes
-   =================================== */
-
-.text-center {
-  text-align: center;
-}
-
-.text-primary {
-  color: var(--primary-green);
-}
-
-.text-accent {
-  color: var(--accent-gold);
-}
-
-.bg-light {
-  background-color: var(--bg-light);
-}
-
-.bg-dark {
-  background-color: var(--bg-dark);
-  color: var(--text-light);
-}
-
-.mt-1 { margin-top: var(--spacing-xs); }
-.mt-2 { margin-top: var(--spacing-sm); }
-.mt-3 { margin-top: var(--spacing-md); }
-.mt-4 { margin-top: var(--spacing-lg); }
-
-.mb-1 { margin-bottom: var(--spacing-xs); }
-.mb-2 { margin-bottom: var(--spacing-sm); }
-.mb-3 { margin-bottom: var(--spacing-md); }
-.mb-4 { margin-bottom: var(--spacing-lg); }
-
 /* ===================================
    Scroll Animations
    =================================== */
-
 .scroll-reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -529,7 +471,6 @@
   transform: translateY(0);
 }
 
-/* Stagger Animation for Grid Items */
 .grid-item {
   opacity: 0;
   transform: translateY(20px);

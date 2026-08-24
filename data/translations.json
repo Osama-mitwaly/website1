@@ -1,5 +1,9 @@
 {
   "ar": {
+    "company": {
+      "name": "ناباتة الحياة",
+      "tagline": "شركاؤك الموثوقون في تصدير الأعشاب المصرية"
+    },
     "nav": {
       "home": "الرئيسية",
       "products": "المنتجات",
@@ -14,7 +18,7 @@
       "hero_subtitle": "نقدم أفضل الأعشاب والتوابل والبذور بجودة عالمية ومعايير تصدير احترافية",
       "cta_products": "تصفح المنتجات",
       "cta_quote": "اطلب عرض سعر",
-      "trust_title": "لماذا تختارنا؟",
+      "trust_title": "فئاتنا المميزة",
       "category_spices": "توابل طبيعية",
       "category_herbs": "أعشاب طبية",
       "category_seeds": "بذور عالية الجودة",
@@ -30,7 +34,9 @@
       "filter_herbs": "أعشاب",
       "filter_seeds": "بذور",
       "view_details": "عرض التفاصيل",
-      "request_quote": "اطلب عرض سعر"
+      "request_quote": "اطلب عرض سعر",
+      "no_products": "لا توجد منتجات",
+      "no_products_desc": "لم تتم إضافة منتجات في هذه الفئة بعد"
     },
     "about": {
       "title": "من نحن",
@@ -51,6 +57,9 @@
       "form_product": "نوع المنتج المطلوب",
       "form_message": "رسالتك",
       "form_submit": "إرسال الطلب",
+      "form_sending": "جاري الإرسال...",
+      "form_success": "تم إرسال طلبك بنجاح! سنتواصل معك قريباً",
+      "form_error": "حدث خطأ أثناء الإرسال. حاول مرة أخرى",
       "info_title": "معلومات الاتصال",
       "info_email": "البريد الإلكتروني",
       "info_phone": "الهاتف / واتساب",
@@ -59,10 +68,21 @@
     "footer": {
       "rights": "جميع الحقوق محفوظة",
       "quick_links": "روابط سريعة",
-      "follow_us": "تابعنا"
+      "follow_us": "تابعنا",
+      "company_desc": "شركاؤك الموثوقون في تصدير الأعشاب المصرية الطبيعية بأعلى معايير الجودة"
+    },
+    "trust": {
+      "iso": "شهادة ISO 9001",
+      "organic": "عضوي 100%",
+      "shipping": "شحن عالمي",
+      "quality": "جودة مضمونة"
     }
   },
   "en": {
+    "company": {
+      "name": "Napatat Elhaya",
+      "tagline": "Your trusted partners in Egyptian herbs export"
+    },
     "nav": {
       "home": "Home",
       "products": "Products",
@@ -77,7 +97,7 @@
       "hero_subtitle": "We offer the finest herbs, spices, and seeds with global quality and professional export standards",
       "cta_products": "Browse Products",
       "cta_quote": "Request a Quote",
-      "trust_title": "Why Choose Us?",
+      "trust_title": "Our Categories",
       "category_spices": "Natural Spices",
       "category_herbs": "Medicinal Herbs",
       "category_seeds": "Premium Seeds",
@@ -93,7 +113,9 @@
       "filter_herbs": "Herbs",
       "filter_seeds": "Seeds",
       "view_details": "View Details",
-      "request_quote": "Request Quote"
+      "request_quote": "Request Quote",
+      "no_products": "No Products",
+      "no_products_desc": "No products have been added to this category yet"
     },
     "about": {
       "title": "About Us",
@@ -114,6 +136,9 @@
       "form_product": "Product Type",
       "form_message": "Your Message",
       "form_submit": "Send Request",
+      "form_sending": "Sending...",
+      "form_success": "Your request has been sent successfully! We will contact you soon",
+      "form_error": "An error occurred. Please try again",
       "info_title": "Contact Information",
       "info_email": "Email",
       "info_phone": "Phone / WhatsApp",
@@ -122,7 +147,14 @@
     "footer": {
       "rights": "All Rights Reserved",
       "quick_links": "Quick Links",
-      "follow_us": "Follow Us"
+      "follow_us": "Follow Us",
+      "company_desc": "Your trusted partners in exporting natural Egyptian herbs with the highest quality standards"
+    },
+    "trust": {
+      "iso": "ISO 9001 Certified",
+      "organic": "100% Organic",
+      "shipping": "Global Shipping",
+      "quality": "Quality Guaranteed"
     }
   }
 }
