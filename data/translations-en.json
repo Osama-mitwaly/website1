@@ -1,0 +1,79 @@
+{
+  "company": {
+    "name": "Napatat Elhaya",
+    "tagline": "Your trusted partners in Egyptian herbs export"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "spices": "Spices",
+    "herbs": "Herbs",
+    "seeds": "Seeds"
+  },
+  "home": {
+    "hero_title": "Egyptian Nature's Quality, Exported to the World",
+    "hero_subtitle": "We offer the finest herbs, spices, and seeds with global quality and professional export standards",
+    "cta_products": "Browse Products",
+    "cta_quote": "Request a Quote",
+    "trust_title": "Our Categories",
+    "category_spices": "Natural Spices",
+    "category_herbs": "Herbs",
+    "category_seeds": "Premium Seeds",
+    "category_desc_spices": "Carefully selected spices from the finest Egyptian farms",
+    "category_desc_herbs": "Herbs dried to the highest quality standards",
+    "category_desc_seeds": "100% pure seeds ready for global export"
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Discover our diverse collection of herbs, spices, and seeds",
+    "filter_all": "All",
+    "filter_spices": "Spices",
+    "filter_herbs": "Herbs",
+    "filter_seeds": "Seeds",
+    "view_details": "View Details",
+    "request_quote": "Request Quote",
+    "no_products": "No Products",
+    "no_products_desc": "No products have been added to this category yet"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Your trusted partners in Egyptian herbs export",
+    "section_sources_title": "Our Sources",
+    "section_sources_desc": "We select our products from the finest Egyptian farms in the Delta and Upper Egypt, where fertile soil and ideal climate grow herbs and spices",
+    "section_quality_title": "Quality Control",
+    "section_quality_desc": "We apply strict quality control standards at every stage, from harvest to packaging and shipping, ensuring our products arrive with the highest purity and quality",
+    "section_logistics_title": "Logistics",
+    "section_logistics_desc": "Integrated logistics network enables us to ship anywhere in the world, with professional packaging that maintains product quality"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help. Contact us today for a customized quote",
+    "form_name": "Full Name",
+    "form_company": "Company Name",
+    "form_email": "Email Address",
+    "form_product": "Product Type",
+    "form_message": "Your Message",
+    "form_submit": "Send Request",
+    "form_sending": "Sending...",
+    "form_success": "Your request has been sent successfully! We will contact you soon",
+    "form_error": "An error occurred. Please try again",
+    "info_title": "Contact Information",
+    "info_email": "Email",
+    "info_phone": "Phone / WhatsApp",
+    "info_address": "Address"
+  },
+  "footer": {
+    "rights": "All Rights Reserved",
+    "quick_links": "Quick Links",
+    "follow_us": "Follow Us",
+    "company_desc": "Your trusted partners in exporting natural Egyptian herbs with the highest quality standards"
+  },
+  "trust": {
+    "iso": "ISO 9001 Certified",
+    "organic": "100% Organic",
+    "shipping": "Global Shipping",
+    "quality": "Quality Guaranteed"
+  }
+}

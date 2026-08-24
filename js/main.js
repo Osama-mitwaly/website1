@@ -1,6 +1,6 @@
 /**
  * main.js
- * الملف الرئيسي - يربط كل شيء معاً
+ * الملف الرئيسي - يربط كل شيء معاً مع تحسينات الأداء
  */
 
 let siteSettings = null;
@@ -155,12 +155,6 @@ function applyDesignSettings() {
         const opacity = siteSettings.design.hero_overlay_opacity;
         heroOverlay.style.background = `linear-gradient(135deg, rgba(26, 77, 46, ${opacity}) 0%, rgba(15, 40, 24, ${Math.min(opacity + 0.05, 1)}) 100%)`;
     }
-    
-    // تحديث صورة Hero إذا كانت متاحة
-    const heroBg = document.querySelector('.hero-background');
-    if (heroBg && siteSettings?.images?.hero_background) {
-        heroBg.style.backgroundImage = `url('${siteSettings.images.hero_background}')`;
-    }
 }
 
 /**
@@ -214,24 +208,28 @@ function initScrollReveal() {
 }
 
 /**
- * Lazy Loading للصور
+ * نظام Fallback للصور المكسورة
+ * إذا فشل تحميل صورة، يتم استبدالها بصورة بديلة أو إخفاؤها
  */
-function initLazyLoading() {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                }
-                img.classList.remove('lazy-load');
-                observer.unobserve(img);
+function initImageFallback() {
+    const images = document.querySelectorAll('img');
+    
+    images.forEach(img => {
+        img.addEventListener('error', function() {
+            console.warn(`⚠️ فشل تحميل الصورة: ${this.src}`);
+            
+            // إذا كانت صورة Hero، نطبق لون خلفية بديل
+            if (this.classList.contains('hero-bg-img')) {
+                this.style.display = 'none';
+                this.parentElement.style.backgroundColor = 'var(--primary-green)';
+            }
+            // إذا كانت صورة منتج أو فئة، نستبدلها بصورة placeholder
+            else if (this.classList.contains('card-image')) {
+                this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23F4F7F5" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%236B7280" font-family="sans-serif" font-size="16"%3EImage not available%3C/text%3E%3C/svg%3E';
+                this.style.objectFit = 'contain';
+                this.style.padding = '2rem';
             }
         });
-    });
-    
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
     });
 }
 
@@ -499,6 +497,7 @@ async function init() {
     updateActiveNavLink();
     
     initMobileMenu();
+    initImageFallback(); // تفعيل نظام Fallback للصور
     
     switch (currentPage) {
         case 'home':
@@ -515,7 +514,6 @@ async function init() {
     }
     
     setTimeout(initScrollReveal, 100);
-    initLazyLoading();
     
     console.log('✅ اكتملت تهيئة الموقع');
 }

@@ -219,7 +219,7 @@
 }
 
 /* ===================================
-   Trust Bar - مُصلح
+   Trust Bar - مُصلح (تمركز الأيقونات)
    =================================== */
 .trust-bar {
   background-color: var(--primary-green);
@@ -242,6 +242,7 @@
   font-weight: 600;
 }
 
+/* إصلاح تمركز الأيقونات داخل الدوائر */
 .trust-item-icon {
   width: 40px;
   height: 40px;
@@ -260,8 +261,8 @@
   align-items: center;
   justify-content: center;
   line-height: 1;
-  width: 100%;
-  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* ===================================
