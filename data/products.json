@@ -1,0 +1,88 @@
+{
+  "products": [
+    {
+      "id": "spice-001",
+      "name_ar": "كمون صحيح",
+      "name_en": "Whole Cumin",
+      "category": "spices",
+      "image_url": "https://blogger.googleusercontent.com/YOUR_IMAGE_URL_HERE_1",
+      "description_ar": "كمون مصري عالي الجودة، نقاوة 99%، معبأ بعناية للحفاظ على النكهة والرائحة",
+      "description_en": "Premium Egyptian Cumin, 99% Purity, carefully packaged to preserve flavor and aroma",
+      "specs": {
+        "purity": "99%",
+        "moisture": "10%",
+        "origin": "Egypt"
+      }
+    },
+    {
+      "id": "spice-002",
+      "name_ar": "كركم مطحون",
+      "name_en": "Ground Turmeric",
+      "category": "spices",
+      "image_url": "https://blogger.googleusercontent.com/YOUR_IMAGE_URL_HERE_2",
+      "description_ar": "كركم مصري نقي، لون ذهبي غني، مثالي للطهي والصناعات الغذائية",
+      "description_en": "Pure Egyptian Turmeric, rich golden color, perfect for cooking and food industries",
+      "specs": {
+        "purity": "98%",
+        "moisture": "12%",
+        "origin": "Egypt"
+      }
+    },
+    {
+      "id": "herb-001",
+      "name_ar": "نعناع مجفف",
+      "name_en": "Dried Mint",
+      "category": "herbs",
+      "image_url": "https://blogger.googleusercontent.com/YOUR_IMAGE_URL_HERE_3",
+      "description_ar": "نعناع مجفف طبيعياً، يحافظ على الزيوت العطرية والنكهة الأصلية",
+      "description_en": "Naturally dried mint, preserves essential oils and original flavor",
+      "specs": {
+        "purity": "100%",
+        "moisture": "8%",
+        "origin": "Egypt"
+      }
+    },
+    {
+      "id": "herb-002",
+      "name_ar": "بابونج",
+      "name_en": "Chamomile",
+      "category": "herbs",
+      "image_url": "https://blogger.googleusercontent.com/YOUR_IMAGE_URL_HERE_4",
+      "description_ar": "بابونج مصري طبيعي، مثالي للشاي والصناعات الدوائية والتجميلية",
+      "description_en": "Natural Egyptian Chamomile, perfect for tea, pharmaceutical and cosmetic industries",
+      "specs": {
+        "purity": "100%",
+        "moisture": "10%",
+        "origin": "Egypt"
+      }
+    },
+    {
+      "id": "seed-001",
+      "name_ar": "بذور شمر",
+      "name_en": "Fennel Seeds",
+      "category": "seeds",
+      "image_url": "https://blogger.googleusercontent.com/YOUR_IMAGE_URL_HERE_5",
+      "description_ar": "بذور شمر عالية الجودة، نقاوة تامة، رائحة عطرية مميزة",
+      "description_en": "High-quality fennel seeds, complete purity, distinctive aromatic scent",
+      "specs": {
+        "purity": "99.5%",
+        "moisture": "9%",
+        "origin": "Egypt"
+      }
+    },
+    {
+      "id": "seed-002",
+      "name_ar": "بذور كزبرة",
+      "name_en": "Coriander Seeds",
+      "category": "seeds",
+      "image_url": "https://blogger.googleusercontent.com/YOUR_IMAGE_URL_HERE_6",
+      "description_ar": "بذور كزبرة مصرية، حجم موحد، مثالية للتوابل والصناعات الغذائية",
+      "description_en": "Egyptian coriander seeds, uniform size, perfect for spices and food industries",
+      "specs": {
+        "purity": "99%",
+        "moisture": "11%",
+        "origin": "Egypt"
+      }
+    }
+  ]
+}

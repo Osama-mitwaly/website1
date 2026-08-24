@@ -1,0 +1,23 @@
+{
+  "company": {
+    "name_ar": "شركة الأعشاب المصرية للتصدير",
+    "name_en": "Egyptian Herbs Export Co.",
+    "email": "info@egyptianherbs.com",
+    "phone": "+20 123 456 7890",
+    "whatsapp": "+201234567890",
+    "address_ar": "القاهرة، مصر - المنطقة الصناعية",
+    "address_en": "Cairo, Egypt - Industrial Zone"
+  },
+  "social": {
+    "facebook": "https://facebook.com/egyptianherbs",
+    "instagram": "https://instagram.com/egyptianherbs",
+    "linkedin": "https://linkedin.com/company/egyptianherbs",
+    "twitter": "https://twitter.com/egyptianherbs"
+  },
+  "seo": {
+    "title_ar": "شركة الأعشاب المصرية - تصدير أعشاب وتوابل وبذور",
+    "title_en": "Egyptian Herbs Export - Herbs, Spices & Seeds Exporter",
+    "description_ar": "شركة رائدة في تصدير الأعشاب المصرية الطبيعية، التوابل، والبذور بأعلى معايير الجودة العالمية",
+    "description_en": "Leading exporter of natural Egyptian herbs, spices, and seeds with the highest global quality standards"
+  }
+}
