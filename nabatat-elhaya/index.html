@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- =========================================
+         Meta Tags - Performance & SEO
+         ========================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nabatat Elhaya - Premium herbs, spices, and seeds exporter from Egypt to the world. Quality, sustainability, and reliable supply.">
+    <meta name="keywords" content="herbs export, spices, seeds, Egypt, premium herbs, natural products">
+    <meta name="author" content="Nabatat Elhaya">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Nabatat Elhaya | Premium Herbs Export">
+    <meta property="og:description" content="Premium herbs, spices, and seeds exporter from Egypt to the world">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nabatat-elhaya.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    
+    <!-- =========================================
+         Title - Dynamic based on language
+         ========================================= -->
+    <title data-i18n="page_title">Nabatat Elhaya | Premium Herbs Export</title>
+    
+    <!-- =========================================
+         Preconnect - Performance Optimization
+         ========================================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- =========================================
+         Google Fonts - With font-display: swap
+         ========================================= -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- =========================================
+         CSS Files - Loaded in correct order
+         ========================================= -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- =========================================
+         HEADER / NAVIGATION
+         ========================================= -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="#home" class="logo">
+                <div class="logo-icon">🌿</div>
+                <div class="logo-text">
+                    <span data-i18n="brand_name">Nabatat</span> <span>Elhaya</span>
+                </div>
+            </a>
+            
+            <!-- Navigation Menu -->
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link" data-i18n="nav_home">Home</a></li>
+                    <li><a href="#about" class="nav-link" data-i18n="nav_about">About Us</a></li>
+                    <li class="dropdown">
+                        <a href="#products" class="nav-link dropdown-trigger" data-i18n="nav_products">Products</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#products?filter=spices" class="dropdown-item" data-i18n="nav_spices">Spices</a></li>
+                            <li><a href="#products?filter=herbs" class="dropdown-item" data-i18n="nav_herbs">Herbs</a></li>
+                            <li><a href="#products?filter=seeds" class="dropdown-item" data-i18n="nav_seeds">Seeds</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact Us</a></li>
+                    
+                    <!-- Language Switcher -->
+                    <li class="lang-switcher">
+                        <button class="lang-btn active" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="ar">AR</button>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                ☰
+            </button>
+        </div>
+    </header>
+    
+    <!-- =========================================
+         MAIN CONTENT
+         ========================================= -->
+    <main>
+        <!-- =========================================
+             HERO SECTION
+             ========================================= -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <span class="hero-tag" data-i18n="hero_tag">Premium Herbs Export ✦</span>
+                <h1>
+                    <span data-i18n="hero_title_1">Nature's Finest</span> 
+                    <span class="accent" data-i18n="hero_title_2">Herbs</span><br>
+                    <span data-i18n="hero_title_3">Delivered Worldwide</span>
+                </h1>
+                <p data-i18n="hero_desc">From our fertile lands to your doorstep — we export the purest, most aromatic herbs, carefully selected and sustainably harvested for global markets.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary" data-i18n="hero_btn_1">Explore Products →</a>
+                    <a href="#contact" class="btn btn-outline" data-i18n="hero_btn_2">Get in Touch</a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label" data-i18n="stat_countries">Countries</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label" data-i18n="stat_varieties">Herb Varieties</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label" data-i18n="stat_experience">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- =========================================
+             ABOUT SECTION
+             ========================================= -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="about-grid">
+                    <!-- About Image -->
+                    <div class="about-image fade-in">
+                        <img src="assets/images/about.jpg" alt="About Nabatat Elhaya" width="600" height="750" loading="lazy">
+                    </div>
+                    
+                    <!-- About Content -->
+                    <div class="about-content fade-in">
+                        <span class="section-tag" data-i18n="about_tag">About Us</span>
+                        <h2 class="section-title">
+                            <span data-i18n="about_title_1">Rooted in</span> 
+                            <span class="accent" data-i18n="about_title_2">Nature</span>,<br>
+                            <span data-i18n="about_title_3">Grown with Care</span>
+                        </h2>
+                        <p class="about-text" data-i18n="about_text_1">
+                            At <strong>Nabatat Elhaya</strong>, we are passionate about bringing the purest herbs from our rich agricultural lands to the world. For over 15 years, we have been cultivating, harvesting, and exporting premium quality herbs to more than 25 countries across the globe.
+                        </p>
+                        <p class="about-text" data-i18n="about_text_2">
+                            Our commitment to sustainable farming practices, traditional drying methods, and rigorous quality control ensures that every shipment meets the highest international standards. We work directly with local farmers, supporting communities while delivering excellence.
+                        </p>
+                        
+                        <!-- Features Grid -->
+                        <div class="about-features">
+                            <div class="feature">
+                                <div class="feature-icon">🌱</div>
+                                <div>
+                                    <div class="feature-title" data-i18n="feature_1_title">Sustainable Farming</div>
+                                    <div class="feature-desc" data-i18n="feature_1_desc">Eco-friendly cultivation practices</div>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">✨</div>
+                                <div>
+                                    <div class="feature-title" data-i18n="feature_2_title">Premium Quality</div>
+                                    <div class="feature-desc" data-i18n="feature_2_desc">Rigorous quality control</div>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">🌍</div>
+                                <div>
+                                    <div class="feature-title" data-i18n="feature_3_title">Global Export</div>
+                                    <div class="feature-desc" data-i18n="feature_3_desc">Shipped to 25+ countries</div>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">🤝</div>
+                                <div>
+                                    <div class="feature-title" data-i18n="feature_4_title">Fair Trade</div>
+                                    <div class="feature-desc" data-i18n="feature_4_desc">Supporting local farmers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- =========================================
+             PRODUCTS SECTION
+             ========================================= -->
+        <section class="products" id="products">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header fade-in">
+                    <span class="section-tag" data-i18n="products_tag">Our Collection</span>
+                    <h2 class="section-title">
+                        <span data-i18n="products_title_1">Premium</span> 
+                        <span class="accent" data-i18n="products_title_2">Herbs</span> 
+                        <span data-i18n="products_title_3">Selection</span>
+                    </h2>
+                    <p class="section-subtitle" data-i18n="products_subtitle">Discover our carefully curated range of high-quality herbs, harvested at peak freshness and prepared for international export.</p>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="products-filter fade-in">
+                    <button class="filter-btn active" data-filter="all" data-i18n="filter_all">All</button>
+                    <button class="filter-btn" data-filter="spices" data-i18n="filter_spices">Spices</button>
+                    <button class="filter-btn" data-filter="herbs" data-i18n="filter_herbs">Herbs</button>
+                    <button class="filter-btn" data-filter="seeds" data-i18n="filter_seeds">Seeds</button>
+                </div>
+                
+                <!-- Products Grid -->
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card fade-in" data-category="herbs">
+                        <div class="product-image">
+                            <img src="assets/images/product-1.jpg" alt="Peppermint Leaves" width="400" height="300" loading="lazy">
+                            <span class="badge product-badge" data-i18n="badge_bestseller">Bestseller</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category" data-i18n="category_aromatic">Aromatic Herbs</div>
+                            <h3 class="product-name" data-i18n="product_1_name">Peppermint Leaves</h3>
+                            <p class="product-desc" data-i18n="product_1_desc">Fresh, fragrant peppermint leaves with a cool, refreshing aroma. Perfect for teas and culinary uses.</p>
+                            <div class="product-footer">
+                                <div class="product-origin">
+                                    <span data-i18n="origin_label">Origin:</span> 
+                                    <strong data-i18n="origin_egypt">Egypt</strong>
+                                </div>
+                                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-card fade-in" data-category="herbs">
+                        <div class="product-image">
+                            <img src="assets/images/product-2.jpg" alt="Wild Thyme" width="400" height="300" loading="lazy">
+                            <span class="badge product-badge" data-i18n="badge_premium">Premium</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category" data-i18n="category_culinary">Culinary Herbs</div>
+                            <h3 class="product-name" data-i18n="product_2_name">Wild Thyme</h3>
+                            <p class="product-desc" data-i18n="product_2_desc">Hand-picked wild thyme with a robust, earthy flavor. Ideal for seasoning and traditional recipes.</p>
+                            <div class="product-footer">
+                                <div class="product-origin">
+                                    <span data-i18n="origin_label">Origin:</span> 
+                                    <strong data-i18n="origin_mediterranean">Mediterranean</strong>
+                                </div>
+                                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product-card fade-in" data-category="spices">
+                        <div class="product-image">
+                            <img src="assets/images/product-3.jpg" alt="Golden Turmeric" width="400" height="300" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category" data-i18n="category_spice_roots">Spice Roots</div>
+                            <h3 class="product-name" data-i18n="product_3_name">Golden Turmeric</h3>
+                            <p class="product-desc" data-i18n="product_3_desc">Vibrant turmeric roots and powder, rich in natural color and warm, earthy flavor. A kitchen essential.</p>
+                            <div class="product-footer">
+                                <div class="product-origin">
+                                    <span data-i18n="origin_label">Origin:</span> 
+                                    <strong data-i18n="origin_india">India</strong>
+                                </div>
+                                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="product-card fade-in" data-category="seeds">
+                        <div class="product-image">
+                            <img src="assets/images/product-4.jpg" alt="Fennel Seeds" width="400" height="300" loading="lazy">
+                            <span class="badge product-badge" data-i18n="badge_organic">Organic</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category" data-i18n="category_seeds">Seeds</div>
+                            <h3 class="product-name" data-i18n="product_4_name">Fennel Seeds</h3>
+                            <p class="product-desc" data-i18n="product_4_desc">Aromatic fennel seeds with a sweet, licorice-like flavor. Perfect for baking and spice blends.</p>
+                            <div class="product-footer">
+                                <div class="product-origin">
+                                    <span data-i18n="origin_label">Origin:</span> 
+                                    <strong data-i18n="origin_egypt">Egypt</strong>
+                                </div>
+                                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- =========================================
+             CONTACT SECTION
+             ========================================= -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header fade-in">
+                    <span class="section-tag" data-i18n="contact_tag">Get in Touch</span>
+                    <h2 class="section-title">
+                        <span data-i18n="contact_title_1">Let's Start a</span> 
+                        <span class="accent" data-i18n="contact_title_2">Partnership</span>
+                    </h2>
+                    <p class="section-subtitle" data-i18n="contact_subtitle">Interested in our herbs? Reach out to us for bulk orders, export inquiries, or any questions about our products.</p>
+                </div>
+                
+                <div class="contact-grid">
+                    <!-- Contact Info -->
+                    <div class="contact-info fade-in">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <div class="contact-label" data-i18n="contact_location_label">Our Location</div>
+                                <div class="contact-value" data-i18n="contact_location_value">Cairo, Egypt</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <div class="contact-label" data-i18n="contact_email_label">Email Us</div>
+                                <div class="contact-value">info@nabatat-elhaya.com</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <div class="contact-label" data-i18n="contact_phone_label">Call Us</div>
+                                <div class="contact-value">+20 100 123 4567</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🕐</div>
+                            <div>
+                                <div class="contact-label" data-i18n="contact_hours_label">Working Hours</div>
+                                <div class="contact-value" data-i18n="contact_hours_value">Sun - Thu: 9:00 AM - 6:00 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <form class="contact-form fade-in" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form_name">Your Name</label>
+                                <input type="text" class="form-control" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form_email">Email Address</label>
+                                <input type="email" class="form-control" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form_phone">Phone Number</label>
+                                <input type="tel" class="form-control" placeholder="+1 234 567 890">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form_company">Company</label>
+                                <input type="text" class="form-control" placeholder="Your Company">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form_subject">Subject</label>
+                            <input type="text" class="form-control" placeholder="Bulk Order Inquiry" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form_message">Message</label>
+                            <textarea class="form-control" placeholder="Tell us about your requirements..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn" data-i18n="form_submit">Send Message →</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <a href="#home" class="logo">
+                        <div class="logo-icon">🌿</div>
+                        <div class="logo-text">
+                            <span data-i18n="brand_name">Nabatat</span> <span>Elhaya</span>
+                        </div>
+                    </a>
+                    <p data-i18n="footer_desc">Premium herbs exporter, delivering nature's finest products from our fertile lands to the world since 2010.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">f</a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                        <a href="#" class="social-link" aria-label="Instagram">ig</a>
+                        <a href="#" class="social-link" aria-label="Twitter">tw</a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="footer-title" data-i18n="footer_quick_links">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" data-i18n="nav_home">Home</a></li>
+                        <li><a href="#products" data-i18n="nav_products">Products</a></li>
+                        <li><a href="#about" data-i18n="nav_about">About Us</a></li>
+                        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Products -->
+                <div>
+                    <h4 class="footer-title" data-i18n="footer_products">Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="#products" data-i18n="product_1_name">Peppermint</a></li>
+                        <li><a href="#products" data-i18n="product_2_name">Thyme</a></li>
+                        <li><a href="#products" data-i18n="product_3_name">Turmeric</a></li>
+                        <li><a href="#products" data-i18n="product_4_name">Fennel Seeds</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="footer-title" data-i18n="footer_contact">Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@nabatat-elhaya.com">info@nabatat-elhaya.com</a></li>
+                        <li><a href="tel:+201001234567">+20 100 123 4567</a></li>
+                        <li><a href="#" data-i18n="contact_location_value">Cairo, Egypt</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p data-i18n="footer_copyright">© 2026 Nabatat Elhaya. All Rights Reserved. | Crafted with 🌿 for the world.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- =========================================
+         JavaScript Files - Deferred for Performance
+         ========================================= -->
+ 
+      <script src="js/i18n.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/form.js" defer></script>
+    <script src="js/main.js" defer></script>
+</body>
+</html>

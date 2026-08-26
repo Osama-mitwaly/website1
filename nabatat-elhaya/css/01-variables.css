@@ -1,0 +1,90 @@
+/* 01-variables.css: Colors, Fonts, Spacing, Breakpoints */
+/* =========================================
+   01-variables.css
+   الغرض: تعريف نظام التصميم (Design System)
+   يشمل: الألوان، الخطوط، المسافات، نقاط التوقف (Breakpoints)، والظلال.
+   ========================================= */
+
+:root {
+  /* =========================================
+     1. الألوان (Color Palette)
+     مبنية على التباين العالي لضمان قراءة مريحة ونتائج ممتازة في PageSpeed (Accessibility)
+     ========================================= */
+  
+  /* الألوان الأساسية (الهوية البصرية) */
+  --color-green-dark: #0d3b2e;
+  --color-green-mid: #1a5c47;
+  --color-green-light: #2d7a5f;
+  
+  /* ألوان التمييز (Accent - Copper & Gold) */
+  --color-copper: #b87333;
+  --color-copper-light: #d4956a;
+  --color-gold: #c9a227;
+  
+  /* ألوان الخلفيات والنصوص */
+  --color-cream: #f5f1e8;
+  --color-white: #ffffff;
+  --color-text-dark: #1a2e25; /* للنصوص الرئيسية (تباين عالٍ مع الأبيض والكريمي) */
+  --color-text-light: #5a6b62; /* للنصوص الثانوية والأوصاف */
+  --color-border: #e2e8f0;
+
+  /* =========================================
+     2. الخطوط (Typography)
+     ملاحظة: يتم استدعاء الخطوط عبر <link> في index.html مع font-display: swap للأداء
+     ========================================= */
+  --font-en-heading: 'Playfair Display', serif; /* للفخامة والعناوين الإنجليزية */
+  --font-en-body: 'Poppins', sans-serif;        /* للقراءة المريحة للنصوص الإنجليزية */
+  --font-ar: 'Cairo', sans-serif;               /* خط عربي قوي، واضح، وعصري (مفضل لديك) */
+
+  /* أحجام الخطوط (Mobile-First: نبدأ صغيراً ونكبر للشاشات الأكبر) */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+
+  /* =========================================
+     3. المسافات (Spacing System - 8pt Grid)
+     استخدام مضاعفات الرقم 8 يضمن تناسقاً بصرياً مريحاً للعين
+     ========================================= */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 1rem;     /* 16px */
+  --space-md: 1.5rem;   /* 24px */
+  --space-lg: 2rem;     /* 32px */
+  --space-xl: 3rem;     /* 48px */
+  --space-2xl: 4rem;    /* 64px */
+  --space-3xl: 6rem;    /* 96px */
+
+  /* =========================================
+     4. نقاط التوقف (Breakpoints - Mobile First)
+     نكتب الـ CSS الأساسي للموبايل، ثم نستخدم @media للشاشات الأكبر
+     ========================================= */
+  --breakpoint-sm: 640px;  /* هواتف كبيرة */
+  --breakpoint-md: 768px;  /* أجهزة لوحية (Tablets) */
+  --breakpoint-lg: 1024px; /* شاشات لابتوب صغيرة */
+  --breakpoint-xl: 1280px; /* شاشات سطح مكتب */
+
+  /* =========================================
+     5. الزوايا والظلال (Radius & Shadows)
+     ظلال خفيفة جداً لتجنب إجهاد المتصفح (Paint/Composite) والحفاظ على أداء > 90
+     ========================================= */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(13, 59, 46, 0.08);
+  --shadow-md: 0 4px 12px rgba(13, 59, 46, 0.1);
+  --shadow-lg: 0 10px 30px rgba(13, 59, 46, 0.15);
+  
+  /* =========================================
+     6. الحركات والانتقالات (Transitions)
+     ========================================= */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+}

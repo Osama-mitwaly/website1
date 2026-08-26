@@ -1,0 +1,136 @@
+/* 02-reset.css: Modern CSS Reset (e.g., Josh Comeau or Andy Bell reset) */
+/* =========================================
+   02-reset.css
+   الغرض: إعادة ضبط حديثة للمتصفح (Modern CSS Reset)
+   مبنية على أفضل الممارسات (Josh Comeau + Andy Bell) مع تعديلات للأداء وإمكانية الوصول
+   ========================================= */
+
+/* 1. استخدام border-box عالمياً - يسهل حساب الأبعاد ويمنع المفاجآت */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. إزالة الهوامش الافتراضية لكل العناصر */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. إعداد HTML و Body كأساس Mobile-First */
+html {
+  /* منع تغيير حجم الخط عند تدوير الهاتف (iOS Safari issue) */
+  -webkit-text-size-adjust: 100%;
+  /* تمرير سلس مع احترام تفضيلات المستخدم (Accessibility) */
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 4. إعداد Body - خط Cairo للعربية افتراضياً، مع fallback للإنجليزية */
+body {
+  font-family: var(--font-ar), var(--font-en-body), system-ui, -apple-system, sans-serif;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  background-color: var(--color-white);
+  
+  /* منع التمرير الأفقي (مشكلة شائعة تدمر الأداء وتجربة الموبايل) */
+  overflow-x: hidden;
+  /* ضمان أن Body يملأ الشاشة على الأقل */
+  min-height: 100vh;
+  
+  /* تحسين عرض النصوص (Rendering) */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 5. الصور والوسائط - Responsive افتراضياً (يمنع CLS ويحسن الأداء) */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 6. إزالة الأنماط الافتراضية للقوائم (مهم جداً للقوائم المنسدلة) */
+ul, ol {
+  list-style: none;
+}
+
+/* 7. الروابط - إزالة التسطير وتوريث اللون */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 8. الأزرار والحقول - إزالة التنسيق الافتراضى للمتصفح */
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* 9. العناوين - وزن وحجم افتراضي موحد */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-en-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  text-wrap: balance; /* يمنع كلمة وحيدة في سطر جديد (تدعمها المتصفحات الحديثة) */
+}
+
+/* 10. الفقرات - منع كلمة وحيدة في نهاية الفقرة */
+p {
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+/* 11. إمكانية الوصول (Accessibility) - focus-visible فقط عند استخدام لوحة المفاتيح */
+:focus-visible {
+  outline: 2px solid var(--color-copper);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* إزالة outline عند النقر بالفأرة (يحافظ على المظهر النظيف) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* 12. إزالة تأثير اللمس الأزرق على الموبايل (تحسين تجربة المستخدم) */
+a, button, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 13. الجداول - إزالة المسافات الافتراضية */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 14. النماذج - إزالة السهم الافتراضي في بعض المتصفحات */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 15. إخفاء العناصر المخفية بشكل صحيح */
+[hidden] {
+  display: none !important;
+}
