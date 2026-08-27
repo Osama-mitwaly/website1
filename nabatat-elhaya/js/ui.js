@@ -1,23 +1,14 @@
-// ui.js: Handles Mobile Menu, Dropdowns, Scroll Animations (Intersection Observer)
 // =========================================
 // ui.js - User Interface Interactions
-// الغرض: جميع التفاعلات في الواجهة
-// يشمل: Header, Mobile Menu, Dropdowns, Scroll, Filters, Animations
 // =========================================
 
 const UI = (() => {
-  // =========================================
-  // Private Variables
-  // =========================================
   let header, navMenu, menuToggle, menuOpen = false;
   let dropdowns = [];
   let filterButtons = [];
   let productCards = [];
   
-  // =========================================
   // 1. Header Scroll Effect
-  // تغيير مظهر الهيدر عند التمرير (أصغر وأكثر صلابة)
-  // =========================================
   function initHeaderScroll() {
     header = document.getElementById('header');
     if (!header) return;
@@ -35,13 +26,10 @@ const UI = (() => {
       }
       
       lastScroll = currentScroll;
-    }, { passive: true }); // passive: true لتحسين الأداء
+    }, { passive: true });
   }
   
-  // =========================================
   // 2. Mobile Menu Toggle
-  // فتح/إغلاق القائمة على الموبايل
-  // =========================================
   function initMobileMenu() {
     menuToggle = document.getElementById('menuToggle');
     navMenu = document.getElementById('navMenu');
@@ -54,11 +42,9 @@ const UI = (() => {
       menuToggle.textContent = menuOpen ? '✕' : '☰';
       menuToggle.setAttribute('aria-expanded', menuOpen);
       
-      // منع تمرير الصفحة عند فتح القائمة
       document.body.style.overflow = menuOpen ? 'hidden' : '';
     });
     
-    // إغلاق القائمة عند النقر على رابط
     navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         if (menuOpen) {
@@ -71,7 +57,6 @@ const UI = (() => {
       });
     });
     
-    // إغلاق القائمة عند النقر خارجها
     document.addEventListener('click', (e) => {
       if (menuOpen && !navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
         menuOpen = false;
@@ -83,10 +68,7 @@ const UI = (() => {
     });
   }
   
-  // =========================================
   // 3. Dropdown Menus
-  // القوائم المنسدلة (مثل Products)
-  // =========================================
   function initDropdowns() {
     dropdowns = document.querySelectorAll('.dropdown');
     
@@ -94,12 +76,10 @@ const UI = (() => {
       const trigger = dropdown.querySelector('.dropdown-trigger');
       if (!trigger) return;
       
-      // Click toggle (للماوس واللمس)
       trigger.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        // إغلاق القوائم الأخرى
         dropdowns.forEach(d => {
           if (d !== dropdown) d.classList.remove('active');
         });
@@ -107,7 +87,6 @@ const UI = (() => {
         dropdown.classList.toggle('active');
       });
       
-      // Hover للماوس (Desktop فقط)
       if (window.matchMedia('(min-width: 768px)').matches) {
         dropdown.addEventListener('mouseenter', () => {
           dropdown.classList.add('active');
@@ -119,7 +98,6 @@ const UI = (() => {
       }
     });
     
-    // إغلاق القوائم عند النقر خارجها
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.dropdown')) {
         dropdowns.forEach(d => d.classList.remove('active'));
@@ -127,19 +105,14 @@ const UI = (() => {
     });
   }
   
-  // =========================================
   // 4. Smooth Scroll
-  // التمرير السلس للروابط الداخلية (#)
-  // =========================================
   function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
         
-        // تجاهل الروابط الفارغة أو # فقط
         if (href === '#' || href === '') return;
         
-        // التحقق من وجود ?filter= في الرابط
         if (href.includes('?filter=')) {
           const [section, filter] = href.split('?');
           const target = document.querySelector(section);
@@ -147,7 +120,6 @@ const UI = (() => {
           if (target) {
             e.preventDefault();
             
-            // التمرير للقسم
             const headerOffset = 80;
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -157,7 +129,6 @@ const UI = (() => {
               behavior: 'smooth'
             });
             
-            // تفعيل الفلتر بعد التمرير
             setTimeout(() => {
               const filterValue = filter.split('=')[1];
               activateFilter(filterValue);
@@ -166,7 +137,6 @@ const UI = (() => {
           return;
         }
         
-        // الروابط العادية
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
@@ -184,10 +154,7 @@ const UI = (() => {
     });
   }
   
-  // =========================================
   // 5. Intersection Observer (Fade-in Animations)
-  // تأثيرات الظهور عند التمرير
-  // =========================================
   function initScrollAnimations() {
     const fadeElements = document.querySelectorAll('.fade-in');
     
@@ -202,7 +169,7 @@ const UI = (() => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // إلغاء المراقبة بعد الظهور (للأداء)
+          observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
@@ -210,10 +177,7 @@ const UI = (() => {
     fadeElements.forEach(el => observer.observe(el));
   }
   
-  // =========================================
   // 6. Products Filter
-  // فلترة المنتجات (All, Spices, Herbs, Seeds)
-  // =========================================
   function initProductsFilter() {
     filterButtons = document.querySelectorAll('.filter-btn');
     productCards = document.querySelectorAll('.product-card');
@@ -227,7 +191,6 @@ const UI = (() => {
       });
     });
     
-    // قراءة الفلتر من URL عند تحميل الصفحة
     const urlParams = new URLSearchParams(window.location.search);
     const urlFilter = urlParams.get('filter');
     
@@ -236,22 +199,17 @@ const UI = (() => {
     }
   }
   
-  // =========================================
   // 7. Activate Filter (Helper Function)
-  // =========================================
   function activateFilter(filter) {
-    // تحديث الأزرار
     filterButtons.forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
     });
     
-    // فلترة المنتجات
     productCards.forEach(card => {
       const category = card.getAttribute('data-category');
       
       if (filter === 'all' || category === filter) {
         card.style.display = '';
-        // إعادة تشغيل الأنيميشن
         card.classList.remove('visible');
         setTimeout(() => card.classList.add('visible'), 50);
       } else {
@@ -259,7 +217,6 @@ const UI = (() => {
       }
     });
     
-    // التمرير إلى قسم المنتجات
     const productsSection = document.getElementById('products');
     if (productsSection && window.pageYOffset > productsSection.offsetTop) {
       const headerOffset = 80;
@@ -275,9 +232,7 @@ const UI = (() => {
     console.log(`🔍 Filter activated: ${filter}`);
   }
   
-  // =========================================
   // 8. Initialize All UI Components
-  // =========================================
   function initUI() {
     initHeaderScroll();
     initMobileMenu();
@@ -289,15 +244,11 @@ const UI = (() => {
     console.log('✅ All UI components initialized');
   }
   
-  // =========================================
-  // Public API
-  // =========================================
   return {
     initUI,
     activateFilter
   };
 })();
 
-// Expose to global scope for main.js
 window.initUI = UI.initUI;
 window.activateFilter = UI.activateFilter;
