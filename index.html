@@ -28,6 +28,8 @@
                     <li><a href="#products">منتجاتنا</a></li>
                     <li><a href="#about">من نحن</a></li>
                     <li><a href="#contact">اتصل بنا</a></li>
+                    <!-- زر تغيير اللغة -->
+                    <li><a href="en.html" class="lang-btn" style="color: var(--gold); font-weight: bold;">EN 🌐</a></li>
                 </ul>
             </nav>
         </div>
@@ -41,6 +43,73 @@
             <p>من أراضينا الخصبة إلى مستودعاتك — نصدر أنقى الأعشاب المختارة بعناية والمحصودة بطرق مستدامة للأسواق العالمية.</p>
         </div>
     </section>
+
+    <!-- قسم المنتجات -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">مجموعتنا</span>
+                <h2 class="section-title">تشكيلة <span class="accent">الأعشاب</span> الفاخرة</h2>
+                <p class="section-subtitle">نقدم تشكيلة واسعة من الأعشاب الطبية والعطرية المطابقة للمواصفات العالمية.</p>
+            </div>
+            <!-- سيتم حقن المنتجات هنا بواسطة JavaScript -->
+            <div class="products-grid" id="products-container">
+                <p>جاري تحميل المنتجات...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم من نحن -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="section-tag">قصتنا</span>
+                    <h2 class="section-title">جذور في <span class="accent">الطبيعة</span>، رعاية عالمية</h2>
+                    <p class="about-text">نحن في "نباتات الحياة" نفخر بكوننا جسراً بين خصوبة الأراضي المصرية والأسواق العالمية. نصدر أجود أنواع الأعشاب الطبيعية والطبية منذ سنوات، مع الالتزام التام بمعايير الجودة والاستدامة.</p>
+                    <ul class="about-features">
+                        <li>🌱 زراعة مستدامة وخالية من المبيدات</li>
+                        <li>✨ جودة تصدير مطابقة للمواصفات الأوروبية</li>
+                        <li>🤝 التزام بالمواعيد وتوريد الكميات الضخمة</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=2070" alt="عن الشركة">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم اتصل بنا -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" style="color: var(--copper-light);">تواصل معنا</span>
+                <h2 class="section-title">لنبدأ <span class="accent">شراكتنا</span></h2>
+                <p class="section-subtitle">نحن مستعدون لتلبية طلبات التصدير وتوفير أفضل عروض الأسعار.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item"><span>📍</span> المقر الرئيسي: القاهرة، مصر</div>
+                    <div class="contact-item"><span>📧</span> البريد: info@nabatat-elhaya.com</div>
+                    <div class="contact-item"><span>📞</span> الهاتف/واتساب: +20 100 000 0000</div>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="الاسم أو الشركة" required>
+                    <input type="email" placeholder="البريد الإلكتروني" required>
+                    <textarea placeholder="رسالتك أو تفاصيل الطلب..." required rows="5"></textarea>
+                    <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <p>© 2026 نباتات الحياة للتصدير. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
 
     <script src="js/main.js"></script>
 </body>
