@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "أوراق النعناع الفاخرة",
+    "category": "أعشاب عطرية",
+    "description": "أوراق نعناع طازجة ذات رائحة نفاذة، مثالية للاستخدام الطبي والغذائي.",
+    "origin": "مصر",
+    "image": "https://placehold.co/400x300/1a5c47/ffffff?text=Peppermint",
+    "badge": "الأكثر مبيعاً"
+  },
+  {
+    "id": 2,
+    "name": "الزعتر البري",
+    "category": "أعشاب للطهي",
+    "description": "زعتر بري مقطوف يدوياً، يتميز بنكهة ترابية قوية وغني بالزيوت العطرية.",
+    "origin": "مصر",
+    "image": "https://placehold.co/400x300/1a5c47/ffffff?text=Thyme",
+    "badge": "جودة ممتازة"
+  },
+  {
+    "id": 3,
+    "name": "أزهار البابونج",
+    "category": "أعشاب زهرية",
+    "description": "أزهار بابونج مجففة شمسياً بعناية، مثالية للمشروبات المهدئة.",
+    "origin": "مصر",
+    "image": "https://placehold.co/400x300/1a5c47/ffffff?text=Chamomile",
+    "badge": "عضوي"
+  }
+]
