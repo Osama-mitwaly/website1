@@ -177,107 +177,86 @@
         </section>
         
         <!-- Products Section -->
-        <section class="products" id="products">
-            <div class="container">
-                <div class="section-header fade-in">
-                    <span class="section-tag" data-i18n="products_tag">Our Collection</span>
-                    <h2 class="section-title">
-                        <span data-i18n="products_title_1">Premium</span> 
-                        <span class="accent" data-i18n="products_title_2">Herbs</span> 
-                        <span data-i18n="products_title_3">Selection</span>
-                    </h2>
-                    <p class="section-subtitle" data-i18n="products_subtitle">Discover our carefully curated range of high-quality herbs, harvested at peak freshness and prepared for international export.</p>
+        <div class="products-grid">
+    <!-- Product 1 -->
+    <div class="product-card fade-in" data-category="herbs">
+        <div class="product-image">
+            <img src="https://placehold.co/400x300/2d7a5f/ffffff?text=Peppermint+Leaves" alt="Peppermint Leaves" width="400" height="300" loading="lazy">
+            <span class="badge product-badge" data-i18n="badge_bestseller">Bestseller</span>
+        </div>
+        <div class="product-info">
+            <div class="product-category" data-i18n="category_aromatic">Aromatic Herbs</div>
+            <h3 class="product-name" data-i18n="product_1_name">Peppermint Leaves</h3>
+            <p class="product-desc" data-i18n="product_1_desc">Fresh, fragrant peppermint leaves with a cool, refreshing aroma. Perfect for teas and culinary uses.</p>
+            <div class="product-footer">
+                <div class="product-origin">
+                    <span data-i18n="origin_label">Origin:</span> 
+                    <strong data-i18n="origin_egypt">Egypt</strong>
                 </div>
-                
-                <div class="products-filter fade-in">
-                    <button class="filter-btn active" data-filter="all" data-i18n="filter_all">All</button>
-                    <button class="filter-btn" data-filter="spices" data-i18n="filter_spices">Spices</button>
-                    <button class="filter-btn" data-filter="herbs" data-i18n="filter_herbs">Herbs</button>
-                    <button class="filter-btn" data-filter="seeds" data-i18n="filter_seeds">Seeds</button>
-                </div>
-                
-                <div class="products-grid">
-                    <!-- Product 1 -->
-                    <div class="product-card fade-in" data-category="herbs">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1628088062854-dcf28e6918e7?w=400&h=300&fit=crop" alt="Peppermint Leaves" width="400" height="300" loading="lazy">
-                            <span class="badge product-badge" data-i18n="badge_bestseller">Bestseller</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category" data-i18n="category_aromatic">Aromatic Herbs</div>
-                            <h3 class="product-name" data-i18n="product_1_name">Peppermint Leaves</h3>
-                            <p class="product-desc" data-i18n="product_1_desc">Fresh, fragrant peppermint leaves with a cool, refreshing aroma. Perfect for teas and culinary uses.</p>
-                            <div class="product-footer">
-                                <div class="product-origin">
-                                    <span data-i18n="origin_label">Origin:</span> 
-                                    <strong data-i18n="origin_egypt">Egypt</strong>
-                                </div>
-                                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 2 -->
-                    <div class="product-card fade-in" data-category="herbs">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1615485925763-867862f8021a?w=400&h=300&fit=crop" alt="Wild Thyme" width="400" height="300" loading="lazy">
-                            <span class="badge product-badge" data-i18n="badge_premium">Premium</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category" data-i18n="category_culinary">Culinary Herbs</div>
-                            <h3 class="product-name" data-i18n="product_2_name">Wild Thyme</h3>
-                            <p class="product-desc" data-i18n="product_2_desc">Hand-picked wild thyme with a robust, earthy flavor. Ideal for seasoning and traditional recipes.</p>
-                            <div class="product-footer">
-                                <div class="product-origin">
-                                    <span data-i18n="origin_label">Origin:</span> 
-                                    <strong data-i18n="origin_mediterranean">Mediterranean</strong>
-                                </div>
-                                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 3 -->
-                    <div class="product-card fade-in" data-category="spices">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&h=300&fit=crop" alt="Golden Turmeric" width="400" height="300" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category" data-i18n="category_spice_roots">Spice Roots</div>
-                            <h3 class="product-name" data-i18n="product_3_name">Golden Turmeric</h3>
-                            <p class="product-desc" data-i18n="product_3_desc">Vibrant turmeric roots and powder, rich in natural color and warm, earthy flavor. A kitchen essential.</p>
-                            <div class="product-footer">
-                                <div class="product-origin">
-                                    <span data-i18n="origin_label">Origin:</span> 
-                                    <strong data-i18n="origin_india">India</strong>
-                                </div>
-                                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 4 -->
-                    <div class="product-card fade-in" data-category="seeds">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1599940829877-576a4e8e363d?w=400&h=300&fit=crop" alt="Fennel Seeds" width="400" height="300" loading="lazy">
-                            <span class="badge product-badge" data-i18n="badge_organic">Organic</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category" data-i18n="category_seeds">Seeds</div>
-                            <h3 class="product-name" data-i18n="product_4_name">Fennel Seeds</h3>
-                            <p class="product-desc" data-i18n="product_4_desc">Aromatic fennel seeds with a sweet, licorice-like flavor. Perfect for baking and spice blends.</p>
-                            <div class="product-footer">
-                                <div class="product-origin">
-                                    <span data-i18n="origin_label">Origin:</span> 
-                                    <strong data-i18n="origin_egypt">Egypt</strong>
-                                </div>
-                                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
             </div>
-        </section>
+        </div>
+    </div>
+    
+    <!-- Product 2 -->
+    <div class="product-card fade-in" data-category="herbs">
+        <div class="product-image">
+            <img src="https://placehold.co/400x300/1a5c47/ffffff?text=Wild+Thyme" alt="Wild Thyme" width="400" height="300" loading="lazy">
+            <span class="badge product-badge" data-i18n="badge_premium">Premium</span>
+        </div>
+        <div class="product-info">
+            <div class="product-category" data-i18n="category_culinary">Culinary Herbs</div>
+            <h3 class="product-name" data-i18n="product_2_name">Wild Thyme</h3>
+            <p class="product-desc" data-i18n="product_2_desc">Hand-picked wild thyme with a robust, earthy flavor. Ideal for seasoning and traditional recipes.</p>
+            <div class="product-footer">
+                <div class="product-origin">
+                    <span data-i18n="origin_label">Origin:</span> 
+                    <strong data-i18n="origin_mediterranean">Mediterranean</strong>
+                </div>
+                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Product 3 -->
+    <div class="product-card fade-in" data-category="spices">
+        <div class="product-image">
+            <img src="https://placehold.co/400x300/b87333/ffffff?text=Golden+Turmeric" alt="Golden Turmeric" width="400" height="300" loading="lazy">
+        </div>
+        <div class="product-info">
+            <div class="product-category" data-i18n="category_spice_roots">Spice Roots</div>
+            <h3 class="product-name" data-i18n="product_3_name">Golden Turmeric</h3>
+            <p class="product-desc" data-i18n="product_3_desc">Vibrant turmeric roots and powder, rich in natural color and warm, earthy flavor. A kitchen essential.</p>
+            <div class="product-footer">
+                <div class="product-origin">
+                    <span data-i18n="origin_label">Origin:</span> 
+                    <strong data-i18n="origin_india">India</strong>
+                </div>
+                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Product 4 -->
+    <div class="product-card fade-in" data-category="seeds">
+        <div class="product-image">
+            <img src="https://placehold.co/400x300/c9a227/ffffff?text=Fennel+Seeds" alt="Fennel Seeds" width="400" height="300" loading="lazy">
+            <span class="badge product-badge" data-i18n="badge_organic">Organic</span>
+        </div>
+        <div class="product-info">
+            <div class="product-category" data-i18n="category_seeds">Seeds</div>
+            <h3 class="product-name" data-i18n="product_4_name">Fennel Seeds</h3>
+            <p class="product-desc" data-i18n="product_4_desc">Aromatic fennel seeds with a sweet, licorice-like flavor. Perfect for baking and spice blends.</p>
+            <div class="product-footer">
+                <div class="product-origin">
+                    <span data-i18n="origin_label">Origin:</span> 
+                    <strong data-i18n="origin_egypt">Egypt</strong>
+                </div>
+                <a href="#contact" class="product-link" data-i18n="inquire">Inquire →</a>
+            </div>
+        </div>
+    </div>
+</div>
         
         <!-- Contact Section -->
         <section class="contact" id="contact">
