@@ -249,3 +249,29 @@ footer {
         display: none; /* سنحتاج لزر القائمة المنسدلة للموبايل لاحقاً */
     }
 }
+/* ===== الحيوية والأنيميشن (Animations) ===== */
+
+/* تمرير ناعم للصفحة بالكامل */
+html {
+    scroll-behavior: smooth;
+}
+
+/* تأثير شريط القائمة عند التمرير لأسفل */
+header.scrolled {
+    padding: 10px 0;
+    background: rgba(13, 59, 46, 0.98);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* الكلاس المسؤول عن إخفاء العناصر قبل ظهورها */
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* الكلاس الذي سيضيفه الجافاسكريبت لإظهار العناصر بنعومة */
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

@@ -19,7 +19,7 @@ async function loadProducts() {
         // توليد كود HTML لكل منتج
         products.forEach(product => {
             const productCard = `
-                <div class="product-card fade-in">
+                <div class="product-card fade-up">
                     <div class="product-image">
                         <img src="${product.image}" alt="${product.name}">
                         ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
@@ -38,6 +38,22 @@ async function loadProducts() {
             // إضافة المنتج إلى الحاوية
             container.innerHTML += productCard;
         });
+
+        // تفعيل الأنيميشن للمنتجات بعد تحميلها
+        const productCards = document.querySelectorAll('.product-card');
+        const productObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // إضافة تأخير زمني بسيط لكل منتج ليظهروا بالتتابع (شكل فخم جداً)
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100); 
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        productCards.forEach(card => productObserver.observe(card));
 
     } catch (error) {
         console.error('Error fetching products:', error);
