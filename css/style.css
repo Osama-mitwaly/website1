@@ -6,7 +6,7 @@
     position: relative;
     /* خلفية متدرجة مع صورة محلية */
     background: linear-gradient(135deg, rgba(13, 59, 46, 0.85), rgba(13, 59, 46, 0.7)),
-                url('../images/hero-bg.jpg') center/cover fixed;
+                url('../images/hero-bg.png') center/cover fixed;
 }
 
 .hero-content {
