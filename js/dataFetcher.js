@@ -2,21 +2,21 @@
 async function loadProducts() {
     const container = document.getElementById('products-container');
     
+    // 🔥 استكشاف لغة الصفحة الحالية (عربي أم إنجليزي)
+    const currentLang = document.documentElement.lang; 
+    
+    // تحديد مسار الملف والنصوص بناءً على اللغة
+    const jsonPath = currentLang === 'en' ? './data/products-en.json' : './data/products.json';
+    const originText = currentLang === 'en' ? 'Origin:' : 'المنشأ:';
+    const orderText = currentLang === 'en' ? 'Order Now &rarr;' : 'اطلب الآن &larr;';
+    
     try {
-        // جلب البيانات من ملف JSON
-        const response = await fetch('./data/products.json');
+        const response = await fetch(jsonPath);
+        if (!response.ok) throw new Error('فشل في تحميل البيانات / Failed to load data');
         
-        // التحقق من نجاح العملية
-        if (!response.ok) {
-            throw new Error('فشل في تحميل البيانات');
-        }
-
         const products = await response.json();
-        
-        // تفريغ الحاوية من نص "جاري التحميل"
         container.innerHTML = '';
 
-        // توليد كود HTML لكل منتج
         products.forEach(product => {
             const productCard = `
                 <div class="product-card fade-up">
@@ -29,22 +29,19 @@ async function loadProducts() {
                         <h3 class="product-name">${product.name}</h3>
                         <p class="product-desc">${product.description}</p>
                         <div class="product-footer">
-                            <div class="product-origin">المنشأ: <strong>${product.origin}</strong></div>
-                            <a href="#contact" class="product-link">اطلب الآن ←</a>
+                            <div class="product-origin">${originText} <strong>${product.origin}</strong></div>
+                            <a href="#contact" class="product-link">${orderText}</a>
                         </div>
                     </div>
                 </div>
             `;
-            // إضافة المنتج إلى الحاوية
             container.innerHTML += productCard;
         });
 
-        // تفعيل الأنيميشن للمنتجات بعد تحميلها
         const productCards = document.querySelectorAll('.product-card');
         const productObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    // إضافة تأخير زمني بسيط لكل منتج ليظهروا بالتتابع (شكل فخم جداً)
                     setTimeout(() => {
                         entry.target.classList.add('visible');
                     }, index * 100); 
@@ -57,9 +54,8 @@ async function loadProducts() {
 
     } catch (error) {
         console.error('Error fetching products:', error);
-        container.innerHTML = '<p style="color: red;">عذراً، حدث خطأ أثناء تحميل المنتجات. يرجى المحاولة لاحقاً.</p>';
+        container.innerHTML = '<p style="color: red;">عذراً، حدث خطأ أثناء تحميل المنتجات.</p>';
     }
 }
 
-// تشغيل الدالة بمجرد تحميل الصفحة
 document.addEventListener('DOMContentLoaded', loadProducts);

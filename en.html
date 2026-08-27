@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nabatat Elhaya - Premium Herbs Export</title>
+    
+    <!-- خطوط جوجل (الإنجليزية نستخدم Poppins و Playfair كما في تصميمك المفضل) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- تعديل خط الصفحة الإنجليزية -->
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        h1, h2, .section-title { font-family: 'Playfair Display', serif; }
+        /* تعديل اتجاه القائمة للإنجليزية */
+        .logo { flex-direction: row; }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <div class="logo-icon">🌿</div>
+                <div class="logo-text">Nabatat <span>Elhaya</span></div>
+            </a>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <!-- زر تغيير اللغة للعودة للنسخة العربية -->
+                    <li><a href="index.html" class="lang-btn" style="color: var(--gold); font-weight: bold;">AR 🌐</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="hero-tag">✦ Premium Herbs Export ✦</span>
+            <h1>Nature's Finest <span class="accent">Herbs</span><br>Delivered Worldwide</h1>
+            <p>From our fertile lands to your doorstep — we export the purest, carefully selected herbs, harvested sustainably for global markets.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">Explore Products &rarr;</a>
+                <a href="#contact" class="btn btn-outline">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="section-tag">Our Collection</span>
+                <h2 class="section-title">Premium <span class="accent">Herbs</span> Selection</h2>
+                <p class="section-subtitle">Discover our carefully curated range of high-quality herbs, ready for international export.</p>
+            </div>
+            <div class="products-grid" id="products-container">
+                <p>Loading products...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content fade-up">
+                    <span class="section-tag">Our Story</span>
+                    <h2 class="section-title">Rooted in <span class="accent">Nature</span>, Grown with Care</h2>
+                    <p class="about-text">At "Nabatat Elhaya", we take pride in being the bridge between Egypt's fertile lands and global markets. We have been exporting the finest natural and medical herbs for years, fully committed to quality and sustainability standards.</p>
+                    <ul class="about-features">
+                        <li>🌱 Sustainable, pesticide-free farming</li>
+                        <li>✨ Export quality matching European standards</li>
+                        <li>🤝 Commitment to deadlines and bulk supply</li>
+                    </ul>
+                </div>
+                <div class="about-image fade-up">
+                    <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=2070" alt="About Us">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="section-tag" style="color: var(--copper-light);">Get in Touch</span>
+                <h2 class="section-title">Let's Start a <span class="accent">Partnership</span></h2>
+                <p class="section-subtitle">We are ready to fulfill your export requests and provide the best quotations.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-up">
+                    <div class="contact-item"><span>📍</span> Location: Cairo, Egypt</div>
+                    <div class="contact-item"><span>📧</span> Email: info@nabatat-elhaya.com</div>
+                    <div class="contact-item"><span>📞</span> Phone/WhatsApp: +20 100 000 0000</div>
+                </div>
+                <form class="contact-form fade-up">
+                    <input type="text" placeholder="Name or Company" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <textarea placeholder="Your message or order details..." required rows="5"></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Nabatat Elhaya Export. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/dataFetcher.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
