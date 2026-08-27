@@ -210,6 +210,12 @@
   flex-shrink: 0;
 }
 
+.feature-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+
 .feature-title {
   font-size: var(--text-base);
   font-weight: 600;
@@ -354,9 +360,14 @@ textarea.form-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--text-xl);
   color: var(--color-copper-light);
   flex-shrink: 0;
+}
+
+.contact-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
 }
 
 .contact-label {
@@ -393,6 +404,12 @@ textarea.form-control {
   color: var(--color-copper-light);
   text-decoration: none;
   transition: all var(--transition-base);
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }
 
 .social-link:hover {

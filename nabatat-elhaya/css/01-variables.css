@@ -12,10 +12,11 @@
      ========================================= */
   
   /* الألوان الأساسية (الهوية البصرية) */
-  --color-green-dark: #0d3b2e;
-  --color-green-mid: #1a5c47;
-  --color-green-light: #2d7a5f;
-  
+  /* الألوان الأساسية */
+--color-green-dark: #052e1f;  /* أغمق للتباين */
+--color-green-mid: #0f4c3a;   /* أغمق */
+--color-green-light: #1a6b52; /* أغمق */
+
   /* ألوان التمييز (Accent - Copper & Gold) */
   --color-copper: #b87333;
   --color-copper-light: #d4956a;
@@ -27,6 +28,9 @@
   --color-text-dark: #1a2e25; /* للنصوص الرئيسية (تباين عالٍ مع الأبيض والكريمي) */
   --color-text-light: #5a6b62; /* للنصوص الثانوية والأوصاف */
   --color-border: #e2e8f0;
+  /* ألوان النصوص */
+--color-text-dark: #0a1f1a;   /* أسود تقريباً للتباين العالي */
+--color-text-light: #2d4a3e;  /* أغمق للقراءة الواضحة */
 
   /* =========================================
      2. الخطوط (Typography)

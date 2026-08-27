@@ -415,13 +415,13 @@
 /* =========================================
    6. Contact Section
    ========================================= */
+
 .contact {
-  background: linear-gradient(135deg, var(--color-green-dark), var(--color-green-mid));
+  background: linear-gradient(135deg, #052e1f, #0f4c3a); /* خلفية أغمق */
   color: var(--color-white);
   position: relative;
   overflow: hidden;
 }
-
 .contact::before {
   content: '';
   position: absolute;
