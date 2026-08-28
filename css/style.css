@@ -465,25 +465,79 @@ html[dir="rtl"] .whatsapp-float i {
     top: 3px; /* هذه القيمة ستلغي القيمة السابقة وتدفع الأيقونة للأسفل في النسخة العربية فقط */
     left: 0;  /* لإلغاء الإزاحة لليسار إن لم تكن بحاجة إليها في العربي */
 }
-/* ===== إصلاح ترتيب القائمة المنسدلة (عمودياً) ===== */
-#navMenu .dropdown-menu {
-    display: flex;
-    flex-direction: column;
-    padding: 10px 0;
-    gap: 0; /* إلغاء أي مسافات أفقية موروثة */
+/* ===== القائمة المنسدلة (قابلة للطي والفرد) ===== */
+.dropdown {
+    position: relative;
 }
 
-#navMenu .dropdown-menu li {
-    display: block;
+.dropdown-menu {
+    display: none; /* إخفاء القائمة افتراضياً */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--white);
+    min-width: 200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 10px 0;
+    z-index: 100;
+    list-style: none;
+    gap: 0;
+}
+
+/* إظهار القائمة عند الهوفر (كمبيوتر) أو عند النقر (موبايل) */
+@media (min-width: 769px) {
+    .dropdown:hover .dropdown-menu {
+        display: flex;
+    }
+}
+
+.dropdown.active .dropdown-menu {
+    display: flex;
+}
+
+.dropdown-menu li {
     width: 100%;
 }
 
-#navMenu .dropdown-menu li a {
+.dropdown-menu li a {
     display: block;
-    text-align: right; /* محاذاة النص لليمين في النسخة العربية */
+    padding: 10px 20px;
+    color: var(--green-dark) !important;
+    font-size: 16px !important;
+    text-align: right;
+    transition: background 0.3s;
 }
 
-/* محاذاة النص لليسار في النسخة الإنجليزية */
-html[dir="ltr"] #navMenu .dropdown-menu li a {
+.dropdown-menu li a:hover {
+    background-color: var(--cream);
+}
+
+html[dir="ltr"] .dropdown-menu li a {
     text-align: left;
+}
+
+/* حركة دوران السهم عند الفتح */
+.dropdown > a i {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+.dropdown.active > a i,
+.dropdown:hover > a i {
+    transform: rotate(180deg);
+}
+
+/* تنسيقات الموبايل للطي والفرد */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background-color: rgba(255, 255, 255, 0.05);
+        margin-top: 10px;
+    }
+    .dropdown-menu li a {
+        color: var(--white) !important;
+        font-size: 18px !important;
+    }
 }
