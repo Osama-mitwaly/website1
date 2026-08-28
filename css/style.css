@@ -465,13 +465,13 @@ html[dir="rtl"] .whatsapp-float i {
     top: 3px; /* هذه القيمة ستلغي القيمة السابقة وتدفع الأيقونة للأسفل في النسخة العربية فقط */
     left: 0;  /* لإلغاء الإزاحة لليسار إن لم تكن بحاجة إليها في العربي */
 }
-/* ===== القائمة المنسدلة (قابلة للطي والفرد) ===== */
+/* ===== القائمة المنسدلة (بالنقر فقط) ===== */
 .dropdown {
     position: relative;
 }
 
 .dropdown-menu {
-    display: none; /* إخفاء القائمة افتراضياً */
+    display: none;
     flex-direction: column;
     position: absolute;
     top: 100%;
@@ -486,13 +486,7 @@ html[dir="rtl"] .whatsapp-float i {
     gap: 0;
 }
 
-/* إظهار القائمة عند الهوفر (كمبيوتر) أو عند النقر (موبايل) */
-@media (min-width: 769px) {
-    .dropdown:hover .dropdown-menu {
-        display: flex;
-    }
-}
-
+/* إظهار القائمة عند الفتح بالنقر فقط */
 .dropdown.active .dropdown-menu {
     display: flex;
 }
@@ -523,12 +517,12 @@ html[dir="ltr"] .dropdown-menu li a {
     transition: transform 0.3s ease;
     display: inline-block;
 }
-.dropdown.active > a i,
-.dropdown:hover > a i {
+
+.dropdown.active > a i {
     transform: rotate(180deg);
 }
 
-/* تنسيقات الموبايل للطي والفرد */
+/* تنسيقات الموبايل */
 @media (max-width: 768px) {
     .dropdown-menu {
         position: static;
