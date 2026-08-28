@@ -451,3 +451,10 @@ header.scrolled {
         transform: translateY(-9px) rotate(-45deg);
     }
 }
+/* ===== ضبط أيقونة الواتساب في المنتصف تماماً ===== */
+.whatsapp-float i {
+    position: relative;
+    top: -1px;  /* لتغيير المسار للأعلى أو الأسفل */
+    left: 1px;  /* لتغيير المسار لليمين أو اليسار */
+    line-height: 1; /* لإلغاء أي مسافات إضافية من الخط */
+}
