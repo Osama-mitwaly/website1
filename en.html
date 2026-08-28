@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nabatat Elhaya - Premium Herbs Export</title>
     
-    <!-- خطوط جوجل (الإنجليزية نستخدم Poppins و Playfair كما في تصميمك المفضل) -->
+    <!-- خطوط جوجل (إنجليزية) -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- إخبار المتصفح بتحميل صورة الخلفية فوراً (يحسن الـ LCP بشكل كبير) -->
-<link rel="preload" as="image" href="images/hero-bg.jpg">
+    
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/style.css">
@@ -17,12 +16,12 @@
     <style>
         body { font-family: 'Poppins', sans-serif; }
         h1, h2, .section-title { font-family: 'Playfair Display', serif; }
-        /* تعديل اتجاه القائمة للإنجليزية */
         .logo { flex-direction: row; }
     </style>
 </head>
 <body>
 
+    <!-- الهيدر (Header) -->
     <header id="header">
         <div class="nav-container">
             <a href="#home" class="logo">
@@ -42,11 +41,13 @@
         </div>
     </header>
 
+    <!-- القسم الرئيسي (Hero Section) -->
     <section class="hero" id="home">
         <div class="hero-content">
             <span class="hero-tag">✦ Premium Herbs Export ✦</span>
             <h1>Nature's Finest <span class="accent">Herbs</span><br>Delivered Worldwide</h1>
             <p>From our fertile lands to your doorstep — we export the purest, carefully selected herbs, harvested sustainably for global markets.</p>
+            
             <div class="hero-buttons">
                 <a href="#products" class="btn btn-primary">Explore Products &rarr;</a>
                 <a href="#contact" class="btn btn-outline">Get in Touch</a>
@@ -54,6 +55,7 @@
         </div>
     </section>
 
+    <!-- قسم المنتجات -->
     <section class="products" id="products">
         <div class="container">
             <div class="section-header fade-up">
@@ -61,12 +63,14 @@
                 <h2 class="section-title">Premium <span class="accent">Herbs</span> Selection</h2>
                 <p class="section-subtitle">Discover our carefully curated range of high-quality herbs, ready for international export.</p>
             </div>
+            <!-- سيتم حقن المنتجات هنا بواسطة JavaScript -->
             <div class="products-grid" id="products-container">
                 <p>Loading products...</p>
             </div>
         </div>
     </section>
 
+    <!-- قسم من نحن -->
     <section class="about" id="about">
         <div class="container">
             <div class="about-grid">
@@ -87,6 +91,7 @@
         </div>
     </section>
 
+    <!-- قسم اتصل بنا -->
     <section class="contact" id="contact">
         <div class="container">
             <div class="section-header fade-up">
@@ -95,27 +100,43 @@
                 <p class="section-subtitle">We are ready to fulfill your export requests and provide the best quotations.</p>
             </div>
             <div class="contact-grid">
+                <!-- بيانات التواصل الحقيقية الخاصة بك (مترجمة ومضبوطة للاتجاه الأيسر) -->
                 <div class="contact-info fade-up">
                     <div class="contact-item"><span>📍</span> Location: Cairo, Egypt</div>
-                    <div class="contact-item"><span>📧</span> Email: info@nabatat-elhaya.com</div>
-                    <div class="contact-item"><span>📞</span> Phone/WhatsApp: +20 100 000 0000</div>
+                    
+                    <div class="contact-item">
+                        <span>📧</span> Email: 
+                        <a href="mailto:alsayed0852.as@gmail.com" style="color: var(--white); text-decoration: none; margin-left: 10px;">alsayed0852.as@gmail.com</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span>📞</span> Phone/WhatsApp: 
+                        <div style="margin-left: 10px; display: flex; flex-direction: column; gap: 5px;">
+                            <a href="tel:+201067131398" style="color: var(--white); text-decoration: none;">+20 106 713 1398</a>
+                            <a href="tel:+201096413175" style="color: var(--white); text-decoration: none;">+20 109 641 3175</a>
+                        </div>
+                    </div>
                 </div>
-                <form class="contact-form fade-up">
-                    <input type="text" placeholder="Name or Company" required>
-                    <input type="email" placeholder="Email Address" required>
-                    <textarea placeholder="Your message or order details..." required rows="5"></textarea>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
+                
+                <!-- ⚠️ لا تنسَ تغيير YOUR_FORM_ID بالرمز الخاص بك من موقع Formspree ⚠️ -->
+                <form class="contact-form fade-up" id="contactForm">
+    <input type="text" id="clientName" placeholder="Name or Company" required>
+    <input type="email" id="clientEmail" placeholder="Email Address" required>
+    <textarea id="clientMessage" placeholder="Your message or order details..." required rows="5"></textarea>
+    <button type="submit" class="btn btn-primary">Send Message</button>
+</form>
             </div>
         </div>
     </section>
 
+    <!-- الفوتر -->
     <footer>
         <div class="container">
             <p>&copy; 2026 Nabatat Elhaya Export. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <!-- استدعاء ملفات الجافاسكريبت -->
     <script src="js/dataFetcher.js"></script>
     <script src="js/main.js"></script>
 </body>

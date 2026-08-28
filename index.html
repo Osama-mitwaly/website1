@@ -42,7 +42,6 @@
             <h1>أجود <span class="accent">أعشاب الطبيعة</span><br>نصدرها للعالم</h1>
             <p>من أراضينا الخصبة إلى مستودعاتك — نصدر أنقى الأعشاب المختارة بعناية والمحصودة بطرق مستدامة للأسواق العالمية.</p>
             
-            <!-- الأزرار التي كانت مفقودة -->
             <div class="hero-buttons">
                 <a href="#products" class="btn btn-primary">تصفح المنتجات &larr;</a>
                 <a href="#contact" class="btn btn-outline">تواصل معنا</a>
@@ -53,7 +52,6 @@
     <!-- قسم المنتجات -->
     <section class="products" id="products">
         <div class="container">
-            <!-- أضفنا fade-up هنا للحركة -->
             <div class="section-header fade-up">
                 <span class="section-tag">مجموعتنا</span>
                 <h2 class="section-title">تشكيلة <span class="accent">الأعشاب</span> الفاخرة</h2>
@@ -70,7 +68,6 @@
     <section class="about" id="about">
         <div class="container">
             <div class="about-grid">
-                <!-- أضفنا fade-up هنا للحركة -->
                 <div class="about-content fade-up">
                     <span class="section-tag">قصتنا</span>
                     <h2 class="section-title">جذور في <span class="accent">الطبيعة</span>، رعاية عالمية</h2>
@@ -81,7 +78,6 @@
                         <li>🤝 التزام بالمواعيد وتوريد الكميات الضخمة</li>
                     </ul>
                 </div>
-                <!-- أضفنا fade-up هنا للحركة -->
                 <div class="about-image fade-up">
                     <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=2070" alt="عن الشركة">
                 </div>
@@ -92,28 +88,37 @@
     <!-- قسم اتصل بنا -->
     <section class="contact" id="contact">
         <div class="container">
-            <!-- أضفنا fade-up هنا للحركة -->
             <div class="section-header fade-up">
                 <span class="section-tag" style="color: var(--copper-light);">تواصل معنا</span>
                 <h2 class="section-title">لنبدأ <span class="accent">شراكتنا</span></h2>
                 <p class="section-subtitle">نحن مستعدون لتلبية طلبات التصدير وتوفير أفضل عروض الأسعار.</p>
             </div>
             <div class="contact-grid">
-                <!-- أضفنا fade-up هنا للحركة -->
+                <!-- بيانات التواصل الحقيقية الخاصة بك -->
                 <div class="contact-info fade-up">
                     <div class="contact-item"><span>📍</span> المقر الرئيسي: القاهرة، مصر</div>
-                    <div class="contact-item"><span>📧</span> البريد: info@nabatat-elhaya.com</div>
-                    <div class="contact-item"><span>📞</span> الهاتف/واتساب: +20 100 000 0000</div>
+                    
+                    <div class="contact-item">
+                        <span>📧</span> البريد: 
+                        <a href="mailto:alsayed0852.as@gmail.com" style="color: var(--white); text-decoration: none; margin-right: 10px;">alsayed0852.as@gmail.com</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span>📞</span> الهاتف/واتساب: 
+                        <div style="margin-right: 10px; display: flex; flex-direction: column; gap: 5px;">
+                            <a href="tel:+201067131398" style="color: var(--white); text-decoration: none; direction: ltr; text-align: right;">+20 106 713 1398</a>
+                            <a href="tel:+201096413175" style="color: var(--white); text-decoration: none; direction: ltr; text-align: right;">+20 109 641 3175</a>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- تم تفعيل النموذج باستخدام Formspree وإضافة سمات name -->
                 <!-- ⚠️ لا تنسَ تغيير YOUR_FORM_ID بالرمز الخاص بك من موقع Formspree ⚠️ -->
-                <form class="contact-form fade-up" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                    <input type="text" name="name" placeholder="الاسم أو الشركة" required>
-                    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
-                    <textarea name="message" placeholder="رسالتك أو تفاصيل الطلب..." required rows="5"></textarea>
-                    <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
-                </form>
+               <form class="contact-form fade-up" id="contactForm">
+    <input type="text" id="clientName" placeholder="الاسم أو الشركة" required>
+    <input type="email" id="clientEmail" placeholder="البريد الإلكتروني" required>
+    <textarea id="clientMessage" placeholder="رسالتك أو تفاصيل الطلب..." required rows="5"></textarea>
+    <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
+</form>
             </div>
         </div>
     </section>
@@ -125,7 +130,7 @@
         </div>
     </footer>
 
-    <!-- استدعاء ملفات الجافاسكريبت (مهم جداً الترتيب) -->
+    <!-- استدعاء ملفات الجافاسكريبت -->
     <script src="js/dataFetcher.js"></script>
     <script src="js/main.js"></script>
 </body>

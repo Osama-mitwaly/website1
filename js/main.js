@@ -33,4 +33,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // تفعيل المراقبة على العناصر
     animatedElements.forEach(el => observer.observe(el));
+
+    // 3. برمجة نموذج الاتصال لفتح تطبيق الإيميل
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // منع إعادة تحميل الصفحة الافتراضي
+
+            // جلب البيانات التي كتبها العميل من الحقول
+            const name = document.getElementById('clientName').value;
+            const email = document.getElementById('clientEmail').value;
+            const message = document.getElementById('clientMessage').value;
+
+            // الإيميل الخاص بك لاستقبال الرسائل
+            const receiverEmail = 'alsayed0852.as@gmail.com';
+            
+            // تحديد لغة الصفحة لتخصيص عنوان الرسالة
+            const currentLang = document.documentElement.lang;
+            const subjectTitle = currentLang === 'en' ? 'New Inquiry from Nabatat Elhaya -' : 'طلب تواصل جديد من موقع نباتات الحياة -';
+            
+            // تشفير النصوص لكي تقرأها تطبيقات الإيميل بشكل صحيح (لمنع الأخطاء مع المسافات والحروف العربية)
+            const subject = encodeURIComponent(`${subjectTitle} ${name}`);
+            const body = encodeURIComponent(`الاسم / Name: ${name}\nالبريد / Email: ${email}\n\nالرسالة / Message:\n${message}`);
+
+            // أمر فتح تطبيق الإيميل الافتراضي في جهاز المستخدم مع تعبئة البيانات
+            window.location.href = `mailto:${receiverEmail}?subject=${subject}&body=${body}`;
+        });
+    }
+
 });
