@@ -25,7 +25,7 @@
     <!-- الهيدر (Header) -->
     <header id="header">
         <div class="nav-container">
-            <a href="#home" class="logo">
+            <a href="index.html" class="logo">
                 <div class="logo-icon"><i class="bi bi-tree-fill"></i></div>
                 <div class="logo-text">نباتات <span>الحياة</span></div>
             </a>
@@ -39,10 +39,21 @@
 
             <nav id="nav">
                 <ul id="navMenu">
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#products">منتجاتنا</a></li>
-                    <li><a href="#about">من نحن</a></li>
-                    <li><a href="#contact">اتصل بنا</a></li>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    
+                    <!-- القائمة المنسدلة للمنتجات -->
+                    <li class="dropdown">
+                        <a href="products.html">منتجاتنا <i class="bi bi-chevron-down" style="font-size: 14px;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="products.html?category=herbs">أعشاب</a></li>
+                            <li><a href="products.html?category=spices">توابل</a></li>
+                            <li><a href="products.html?category=seeds">بذور</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                    
                     <!-- زر تغيير اللغة مع أيقونة -->
                     <li><a href="en.html" class="lang-btn" style="color: var(--gold); font-weight: bold;"><i class="bi bi-globe"></i> EN</a></li>
                 </ul>
@@ -58,32 +69,37 @@
             <p>من أراضينا الخصبة إلى مستودعاتك — نصدر أنقى الأعشاب المختارة بعناية والمحصودة بطرق مستدامة للأسواق العالمية.</p>
             
             <div class="hero-buttons">
-                <a href="#products" class="btn btn-primary">تصفح المنتجات <i class="bi bi-arrow-left ms-2"></i></a>
-                <a href="#contact" class="btn btn-outline">تواصل معنا</a>
+                <!-- تم التعديل لتوجيه الزائر لصفحات المنتجات والاتصال المستقلة -->
+                <a href="products.html" class="btn btn-primary">تصفح المنتجات <i class="bi bi-arrow-left ms-2"></i></a>
+                <a href="contact.html" class="btn btn-outline">تواصل معنا</a>
             </div>
         </div>
     </section>
 
-    <!-- قسم المنتجات -->
-    <section class="products" id="products">
+    <!-- قسم المنتجات (نسخة مختصرة للرئيسية) -->
+    <section class="products">
         <div class="container">
             <div class="section-header fade-up">
-                <span class="section-tag">مجموعتنا</span>
+                <span class="section-tag">أبرز المنتجات</span>
                 <h2 class="section-title">تشكيلة <span class="accent">الأعشاب</span> الفاخرة</h2>
                 <p class="section-subtitle">نقدم تشكيلة واسعة من الأعشاب الطبية والعطرية المطابقة للمواصفات العالمية.</p>
             </div>
             <div class="products-grid" id="products-container">
                 <p>جاري تحميل المنتجات...</p>
             </div>
+            <!-- زر لعرض باقي المنتجات -->
+            <div style="text-align: center; margin-top: 40px;" class="fade-up">
+                <a href="products.html" class="btn btn-primary">عرض جميع المنتجات <i class="bi bi-grid ms-2"></i></a>
+            </div>
         </div>
     </section>
 
-    <!-- قسم من نحن -->
-    <section class="about" id="about">
+    <!-- قسم من نحن (مقتطف للرئيسية) -->
+    <section class="about">
         <div class="container">
             <div class="about-grid">
                 <div class="about-content fade-up">
-                    <span class="section-tag">قصتنا</span>
+                    <span class="section-tag">نبذة عنا</span>
                     <h2 class="section-title">جذور في <span class="accent">الطبيعة</span>، رعاية عالمية</h2>
                     <p class="about-text">نحن في "نباتات الحياة" نفخر بكوننا جسراً بين خصوبة الأراضي المصرية والأسواق العالمية. نصدر أجود أنواع الأعشاب الطبيعية منذ سنوات، مع الالتزام التام بمعايير الجودة والاستدامة.</p>
                     <ul class="about-features">
@@ -91,6 +107,7 @@
                         <li><i class="bi bi-check-circle-fill"></i> جودة تصدير مطابقة للمواصفات الأوروبية</li>
                         <li><i class="bi bi-check-circle-fill"></i> التزام بالمواعيد وتوريد الكميات الضخمة</li>
                     </ul>
+                    <a href="about.html" class="btn btn-outline" style="margin-top: 20px; color: var(--green-dark); border-color: var(--green-dark);">اقرأ قصتنا كاملة</a>
                 </div>
                 <div class="about-image fade-up">
                     <img src="https://i.pinimg.com/1200x/62/24/b3/6224b386b62d80e6671f2eb2c30d2c75.jpg" alt="عن الشركة">
@@ -99,11 +116,11 @@
         </div>
     </section>
 
-    <!-- قسم اتصل بنا -->
-    <section class="contact" id="contact">
+    <!-- قسم اتصل بنا (مقتطف للرئيسية) -->
+    <section class="contact">
         <div class="container">
             <div class="section-header fade-up">
-                <span class="section-tag" style="color: var(--copper-light);">تواصل معنا</span>
+                <span class="section-tag" style="color: var(--copper-light);">تواصل سريع</span>
                 <h2 class="section-title">لنبدأ <span class="accent">شراكتنا</span></h2>
                 <p class="section-subtitle">نحن مستعدون لتلبية طلبات التصدير وتوفير أفضل عروض الأسعار.</p>
             </div>

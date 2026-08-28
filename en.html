@@ -32,7 +32,7 @@
     <!-- الهيدر (Header) -->
     <header id="header">
         <div class="nav-container">
-            <a href="#home" class="logo">
+            <a href="en.html" class="logo">
                 <div class="logo-icon"><i class="bi bi-tree-fill"></i></div>
                 <div class="logo-text">Nabatat <span>Elhaya</span></div>
             </a>
@@ -46,10 +46,21 @@
 
             <nav id="nav">
                 <ul id="navMenu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="en.html">Home</a></li>
+                    
+                    <!-- القائمة المنسدلة للمنتجات -->
+                    <li class="dropdown">
+                        <a href="products-en.html">Products <i class="bi bi-chevron-down" style="font-size: 14px;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="products-en.html?category=herbs">Herbs</a></li>
+                            <li><a href="products-en.html?category=spices">Spices</a></li>
+                            <li><a href="products-en.html?category=seeds">Seeds</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="about-en.html">About Us</a></li>
+                    <li><a href="contact-en.html">Contact</a></li>
+                    
                     <!-- زر تغيير اللغة للعودة للنسخة العربية -->
                     <li><a href="index.html" class="lang-btn" style="color: var(--gold); font-weight: bold;"><i class="bi bi-globe"></i> AR</a></li>
                 </ul>
@@ -65,29 +76,32 @@
             <p>From our fertile lands to your doorstep — we export the purest, carefully selected herbs, harvested sustainably for global markets.</p>
             
             <div class="hero-buttons">
-                <a href="#products" class="btn btn-primary">Explore Products <i class="bi bi-arrow-right ms-2"></i></a>
-                <a href="#contact" class="btn btn-outline">Get in Touch</a>
+                <a href="products-en.html" class="btn btn-primary">Explore Products <i class="bi bi-arrow-right ms-2"></i></a>
+                <a href="contact-en.html" class="btn btn-outline">Get in Touch</a>
             </div>
         </div>
     </section>
 
     <!-- قسم المنتجات -->
-    <section class="products" id="products">
+    <section class="products">
         <div class="container">
             <div class="section-header fade-up">
                 <span class="section-tag">Our Collection</span>
                 <h2 class="section-title">Premium <span class="accent">Herbs</span> Selection</h2>
                 <p class="section-subtitle">Discover our carefully curated range of high-quality herbs, ready for international export.</p>
             </div>
-            <!-- سيتم حقن المنتجات هنا بواسطة JavaScript -->
             <div class="products-grid" id="products-container">
                 <p>Loading products...</p>
+            </div>
+            <!-- زر لعرض باقي المنتجات -->
+            <div style="text-align: center; margin-top: 40px;" class="fade-up">
+                <a href="products-en.html" class="btn btn-primary">View All Products <i class="bi bi-grid ms-2"></i></a>
             </div>
         </div>
     </section>
 
     <!-- قسم من نحن -->
-    <section class="about" id="about">
+    <section class="about">
         <div class="container">
             <div class="about-grid">
                 <div class="about-content fade-up">
@@ -99,9 +113,9 @@
                         <li><i class="bi bi-check-circle-fill"></i> Export quality matching European standards</li>
                         <li><i class="bi bi-check-circle-fill"></i> Commitment to deadlines and bulk supply</li>
                     </ul>
+                    <a href="about-en.html" class="btn btn-outline" style="margin-top: 20px; color: var(--green-dark); border-color: var(--green-dark);">Read Our Full Story</a>
                 </div>
                 <div class="about-image fade-up">
-                    <!-- تم توحيد الصورة لتطابق النسخة العربية -->
                     <img src="https://i.pinimg.com/1200x/62/24/b3/6224b386b62d80e6671f2eb2c30d2c75.jpg" alt="About Us">
                 </div>
             </div>
@@ -109,10 +123,10 @@
     </section>
 
     <!-- قسم اتصل بنا -->
-    <section class="contact" id="contact">
+    <section class="contact">
         <div class="container">
             <div class="section-header fade-up">
-                <span class="section-tag" style="color: var(--copper-light);">Get in Touch</span>
+                <span class="section-tag" style="color: var(--copper-light);">Quick Contact</span>
                 <h2 class="section-title">Let's Start a <span class="accent">Partnership</span></h2>
                 <p class="section-subtitle">We are ready to fulfill your export requests and provide the best quotations.</p>
             </div>
