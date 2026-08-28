@@ -332,3 +332,78 @@ header.scrolled {
     opacity: 1;
     transform: translateY(0);
 }
+/* ===== زر الواتساب العائم ===== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* يسار الشاشة ليتوافق مع الاتجاه العربي */
+    background-color: #25d366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+/* ===== تهيئة زر قائمة الموبايل (Hamburger) ===== */
+.mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.mobile-toggle span {
+    width: 30px;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* التجاوب مع شاشات الجوال */
+@media (max-width: 768px) {
+    .mobile-toggle {
+        display: flex; /* إظهار الزر في الجوال فقط */
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: #082419; /* لون القائمة الجانبية */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.4s ease;
+        z-index: 1000;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    }
+
+    /* كلاس الفتح الذي سيضيفه الجافاسكريبت */
+    nav.active {
+        right: 0;
+    }
+
+    #navMenu {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    #navMenu li a {
+        font-size: 20px;
+    }
+}

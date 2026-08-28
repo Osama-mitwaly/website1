@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="نباتات الحياة - تصدير أجود الأعشاب الطبيعية والطبية من مصر إلى جميع أنحاء العالم.">
     <title>نباتات الحياة - لتصدير الأعشاب الفاخرة</title>
+    
+    <!-- أيقونة الموقع (Favicon) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
     
     <!-- خطوط جوجل (Tajawal) -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -22,7 +26,15 @@
                 <div class="logo-icon">🌿</div>
                 <div class="logo-text">نباتات <span>الحياة</span></div>
             </a>
-            <nav>
+            
+            <!-- زر القائمة للهاتف (Hamburger) -->
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav id="nav">
                 <ul id="navMenu">
                     <li><a href="#home">الرئيسية</a></li>
                     <li><a href="#products">منتجاتنا</a></li>
@@ -94,7 +106,6 @@
                 <p class="section-subtitle">نحن مستعدون لتلبية طلبات التصدير وتوفير أفضل عروض الأسعار.</p>
             </div>
             <div class="contact-grid">
-                <!-- بيانات التواصل الحقيقية الخاصة بك -->
                 <div class="contact-info fade-up">
                     <div class="contact-item"><span>📍</span> المقر الرئيسي: القاهرة، مصر</div>
                     
@@ -112,13 +123,12 @@
                     </div>
                 </div>
                 
-                <!-- ⚠️ لا تنسَ تغيير YOUR_FORM_ID بالرمز الخاص بك من موقع Formspree ⚠️ -->
                <form class="contact-form fade-up" id="contactForm">
-    <input type="text" id="clientName" placeholder="الاسم أو الشركة" required>
-    <input type="email" id="clientEmail" placeholder="البريد الإلكتروني" required>
-    <textarea id="clientMessage" placeholder="رسالتك أو تفاصيل الطلب..." required rows="5"></textarea>
-    <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
-</form>
+                    <input type="text" id="clientName" placeholder="الاسم أو الشركة" required>
+                    <input type="email" id="clientEmail" placeholder="البريد الإلكتروني" required>
+                    <textarea id="clientMessage" placeholder="رسالتك أو تفاصيل الطلب..." required rows="5"></textarea>
+                    <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
+                </form>
             </div>
         </div>
     </section>
@@ -129,6 +139,13 @@
             <p>© 2026 نباتات الحياة للتصدير. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
+
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/201067131398" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 32 32" width="30" height="30" fill="white">
+            <path d="M16.05 32h-.05c-2.67-.02-5.28-.75-7.58-2.1L0 32l2.18-8.25C.7 21.36-.02 18.72 0 16.02 0 7.18 7.2 0 16.05 0 24.87 0 32 7.18 32 16.02c0 8.8-7.15 15.98-15.95 15.98zm-7.98-4.48c2.32 1.37 5.08 2.1 7.9 2.1 7.4 0 13.43-6.02 13.43-13.44C29.4 8.78 23.4 2.76 16 2.76 8.62 2.76 2.6 8.78 2.6 16.2c0 2.92.8 5.7 2.3 8.08l-1.3 4.9 5.05-1.32c-.02 0-.02-.02 0 0zm13.1-8.5c-.38-.2-2.22-1.1-2.58-1.23-.35-.12-.6-.2-.85.2-.25.38-1 .1.23-1.23.5-.23.2-.48.02-.85-.18-.38-1-.38-2.22-1.1-.9-.35-.18-.8.2-.18.3.1.2.2.3.4.1.25.1.48.06.85-.04.38-.18 1-.48 2.22-1.1s-2.18-3.08-2.48-3.48c-.3-.4-1.1-1.48-1.1-2.82s.7-2.6 1.05-2.98c.35-.38.75-.48 1-.48.25 0 .5 0 .7.02.2.02.48-.08.75.52.28.62.98 2.38 1.05 2.52.08.15.12.32.02.52-.1.2-.15.32-.3.5-.15.18-.32.4-.45.52-.15.15-.32.32-.12.65.2.32.9 1.48 1.95 2.42 1.35 1.2 2.48 1.58 2.82 1.72.35.15.55.12.75-.1.2-.22.88-1 1.1-1.35.25-.35.48-.3.8-.18.32.12 2.05.98 2.4 1.15.35.18.58.28.68.42.08.15.08.9-.35 1.75z"/>
+        </svg>
+    </a>
 
     <!-- استدعاء ملفات الجافاسكريبت -->
     <script src="js/dataFetcher.js"></script>
