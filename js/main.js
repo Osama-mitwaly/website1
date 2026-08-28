@@ -2,23 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 1. تأثير تصغير شريط التنقل (Header) عند التمرير
     const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
 
     // 2. مراقب التمرير لإظهار العناصر بنعومة (Scroll Reveal)
-    const animatedElements = document.querySelectorAll('.section-header, .about-content, .about-image, .contact-info, .contact-form');
-    
-    animatedElements.forEach(el => el.classList.add('fade-up'));
-
-    const observerOptions = {
-        threshold: 0.15
-    };
-
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const observerOptions = { threshold: 0.15 };
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -28,19 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    animatedElements.forEach(el => observer.observe(el));
+    fadeElements.forEach(el => observer.observe(el));
 
     // 3. برمجة نموذج الاتصال لفتح تطبيق الإيميل
     const contactForm = document.getElementById('contactForm');
-    
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault(); 
-
             const name = document.getElementById('clientName').value;
             const email = document.getElementById('clientEmail').value;
             const message = document.getElementById('clientMessage').value;
-
             const receiverEmail = 'alsayed0852.as@gmail.com';
             
             const currentLang = document.documentElement.lang;
@@ -48,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const subject = encodeURIComponent(`${subjectTitle} ${name}`);
             const body = encodeURIComponent(`الاسم / Name: ${name}\nالبريد / Email: ${email}\n\nالرسالة / Message:\n${message}`);
-
             window.location.href = `mailto:${receiverEmail}?subject=${subject}&body=${body}`;
         });
     }
@@ -62,12 +54,33 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.classList.toggle('active'); 
         });
 
-        // إغلاق القائمة تلقائياً عند الضغط على أي رابط بداخلها
-        const navLinks = document.querySelectorAll('#navMenu li a');
+        // حل المشكلة: إغلاق القائمة تلقائياً عند الضغط على الروابط (باستثناء القائمة المنسدلة)
+        const navLinks = document.querySelectorAll('#navMenu li a:not(.dropdown > a)');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 nav.classList.remove('active');
             });
         });
     }
+
+    // 5. برمجة القائمة المنسدلة (الطي والفرد بالنقر فقط)
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('a');
+        
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // منع الانتقال
+            dropdown.classList.toggle('active'); // طي أو فرد القائمة
+        });
+    });
+
+    // إغلاق القائمة المنسدلة عند النقر في أي مكان خارجها
+    document.addEventListener('click', function(e) {
+        dropdowns.forEach(dropdown => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+    });
+
 });
