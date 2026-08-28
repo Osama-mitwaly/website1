@@ -465,3 +465,25 @@ html[dir="rtl"] .whatsapp-float i {
     top: 3px; /* هذه القيمة ستلغي القيمة السابقة وتدفع الأيقونة للأسفل في النسخة العربية فقط */
     left: 0;  /* لإلغاء الإزاحة لليسار إن لم تكن بحاجة إليها في العربي */
 }
+/* ===== إصلاح ترتيب القائمة المنسدلة (عمودياً) ===== */
+#navMenu .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    gap: 0; /* إلغاء أي مسافات أفقية موروثة */
+}
+
+#navMenu .dropdown-menu li {
+    display: block;
+    width: 100%;
+}
+
+#navMenu .dropdown-menu li a {
+    display: block;
+    text-align: right; /* محاذاة النص لليمين في النسخة العربية */
+}
+
+/* محاذاة النص لليسار في النسخة الإنجليزية */
+html[dir="ltr"] #navMenu .dropdown-menu li a {
+    text-align: left;
+}
