@@ -465,13 +465,14 @@ html[dir="rtl"] .whatsapp-float i {
     top: 3px; /* هذه القيمة ستلغي القيمة السابقة وتدفع الأيقونة للأسفل في النسخة العربية فقط */
     left: 0;  /* لإلغاء الإزاحة لليسار إن لم تكن بحاجة إليها في العربي */
 }
-/* ===== القائمة المنسدلة (بالنقر فقط) ===== */
+/* ===== القائمة المنسدلة (بحركة انسيابية ناعمة) ===== */
 .dropdown {
     position: relative;
 }
 
 .dropdown-menu {
-    display: none;
+    /* تم إلغاء display: none لكي تعمل الحركة */
+    display: flex;
     flex-direction: column;
     position: absolute;
     top: 100%;
@@ -480,15 +481,24 @@ html[dir="rtl"] .whatsapp-float i {
     min-width: 200px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     border-radius: 10px;
-    padding: 10px 0;
     z-index: 100;
     list-style: none;
     gap: 0;
+
+    /* إعدادات النعومة والحركة */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px); /* تبدأ من الأسفل قليلاً */
+    padding: 0;
+    transition: all 0.4s ease; /* سرعة النزول ونعومته */
 }
 
-/* إظهار القائمة عند الفتح بالنقر فقط */
+/* إظهار القائمة بنعومة عند الفتح */
 .dropdown.active .dropdown-menu {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* تستقر في مكانها */
+    padding: 10px 0;
 }
 
 .dropdown-menu li {
@@ -522,14 +532,22 @@ html[dir="ltr"] .dropdown-menu li a {
     transform: rotate(180deg);
 }
 
-/* تنسيقات الموبايل */
+/* ===== حركة الانزلاق (Slide Down) في الموبايل ===== */
 @media (max-width: 768px) {
     .dropdown-menu {
         position: static;
         box-shadow: none;
         background-color: rgba(255, 255, 255, 0.05);
+        transform: none; /* إلغاء حركة الصعود في الموبايل */
+        max-height: 0; /* تبدأ بارتفاع صفر لكي تُطوى */
+        overflow: hidden; /* إخفاء ما يخرج عن الارتفاع */
+    }
+
+    .dropdown.active .dropdown-menu {
+        max-height: 400px; /* مساحة كافية لتفرد بداخلها */
         margin-top: 10px;
     }
+
     .dropdown-menu li a {
         color: var(--white) !important;
         font-size: 18px !important;
