@@ -92,6 +92,8 @@
     color: var(--green-dark);
 }
 
+.ms-2 { margin-right: 8px; } /* لتباعد الأيقونة عن النص داخل الزر */
+
 /* ===== التنسيقات الهيكلية للأقسام ===== */
 section {
     padding: 100px 0;
@@ -149,7 +151,6 @@ section {
     transform: translateY(-10px);
 }
 
-/* صورة المنتج والشريط البرتقالي (البادج) */
 .product-image {
     position: relative;
     background-color: var(--green-mid);
@@ -237,11 +238,17 @@ section {
 }
 
 .about-features {
-    line-height: 2;
+    line-height: 2.2;
     color: var(--green-dark);
     font-weight: bold;
     list-style: none;
     padding: 0;
+}
+
+.about-features i {
+    color: var(--copper);
+    margin-left: 10px;
+    font-size: 18px;
 }
 
 .about-image img {
@@ -250,7 +257,7 @@ section {
     box-shadow: 0 10px 30px rgba(13, 59, 46, 0.2);
 }
 
-/* ===== قسم اتصل بنا ===== */
+/* ===== قسم اتصل بنا وتنسيق الأيقونات ===== */
 .contact {
     background: var(--green-dark);
     color: var(--white);
@@ -270,8 +277,31 @@ section {
     font-size: 18px;
     margin-bottom: 25px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 15px;
+}
+
+.contact-icon {
+    font-size: 26px;
+    color: var(--copper-light);
+    margin-top: -3px;
+}
+
+.contact-item a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-item a:hover {
+    color: var(--copper-light);
+}
+
+.phone-numbers {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
 }
 
 .contact-form {
@@ -296,47 +326,33 @@ footer {
     padding: 30px 0;
 }
 
-/* تجاوب الشاشات الصغيرة */
-@media (max-width: 768px) {
-    .about-grid, .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    nav ul {
-        display: none;
-    }
-}
-
 /* ===== الحيوية والأنيميشن (Animations) ===== */
-
-/* تمرير ناعم للصفحة بالكامل */
 html {
     scroll-behavior: smooth;
 }
 
-/* تأثير شريط القائمة عند التمرير لأسفل */
 header.scrolled {
     padding: 10px 0;
     background: rgba(13, 59, 46, 0.98);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* الكلاس المسؤول عن إخفاء العناصر قبل ظهورها */
 .fade-up {
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* الكلاس الذي سيضيفه الجافاسكريبت لإظهار العناصر بنعومة */
 .fade-up.visible {
     opacity: 1;
     transform: translateY(0);
 }
+
 /* ===== زر الواتساب العائم ===== */
 .whatsapp-float {
     position: fixed;
     bottom: 30px;
-    left: 30px; /* يسار الشاشة ليتوافق مع الاتجاه العربي */
+    left: 30px; 
     background-color: #25d366;
     color: white;
     width: 60px;
@@ -348,10 +364,13 @@ header.scrolled {
     box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
     z-index: 1000;
     transition: transform 0.3s ease;
+    font-size: 30px;
+    text-decoration: none;
 }
 
 .whatsapp-float:hover {
     transform: scale(1.1);
+    color: white;
 }
 
 /* ===== تهيئة زر قائمة الموبايل (Hamburger) ===== */
@@ -368,42 +387,67 @@ header.scrolled {
     height: 3px;
     background-color: var(--white);
     border-radius: 2px;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
-/* التجاوب مع شاشات الجوال */
+/* ===== تجاوب الشاشات وحل مشكلة القائمة ===== */
 @media (max-width: 768px) {
+    .about-grid, .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
     .mobile-toggle {
-        display: flex; /* إظهار الزر في الجوال فقط */
+        display: flex; /* إظهار الزر في الموبايل */
     }
 
     nav {
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 70%;
+        right: -100%; /* إخفاء القائمة خارج الشاشة */
+        width: 75%;
         height: 100vh;
-        background-color: #082419; /* لون القائمة الجانبية */
+        background-color: var(--green-dark);
         display: flex;
         align-items: center;
         justify-content: center;
         transition: right 0.4s ease;
         z-index: 1000;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+        box-shadow: -5px 0 20px rgba(0,0,0,0.6);
     }
 
-    /* كلاس الفتح الذي سيضيفه الجافاسكريبت */
+    /* هذا الكلاس سيضيفه الجافاسكريبت لإظهار القائمة */
     nav.active {
         right: 0;
     }
 
+    /* حل المشكلة: إجبار الـ ul على الظهور كعمود */
     #navMenu {
+        display: flex !important;
         flex-direction: column;
-        gap: 30px;
+        gap: 35px;
         text-align: center;
+        padding: 0;
     }
 
     #navMenu li a {
-        font-size: 20px;
+        font-size: 22px;
+    }
+
+    /* تأثير تحويل البرجر إلى علامة X عند الفتح */
+    nav.active ~ .mobile-toggle span:nth-child(1),
+    .mobile-toggle.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+    nav.active ~ .mobile-toggle span:nth-child(2),
+    .mobile-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    nav.active ~ .mobile-toggle span:nth-child(3),
+    .mobile-toggle.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
     }
 }
