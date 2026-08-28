@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نباتات الحياة - لتصدير  الاعشاب</title>
+    <title>نباتات الحياة - لتصدير الأعشاب الفاخرة</title>
     
     <!-- خطوط جوجل (Tajawal) -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <!-- إخبار المتصفح بتحميل صورة الخلفية فوراً (يحسن الـ LCP بشكل كبير) -->
-<link rel="preload" as="image" href="images/hero-bg.jpg">
-
+    
     <!-- ملفات التنسيق -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/layout.css">
@@ -40,16 +38,23 @@
     <!-- القسم الرئيسي (Hero Section) -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <span class="hero-tag"> تصدير الأعشاب  </span>
+            <span class="hero-tag">✦ تصدير الأعشاب الفاخرة ✦</span>
             <h1>أجود <span class="accent">أعشاب الطبيعة</span><br>نصدرها للعالم</h1>
             <p>من أراضينا الخصبة إلى مستودعاتك — نصدر أنقى الأعشاب المختارة بعناية والمحصودة بطرق مستدامة للأسواق العالمية.</p>
+            
+            <!-- الأزرار التي كانت مفقودة -->
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">تصفح المنتجات &larr;</a>
+                <a href="#contact" class="btn btn-outline">تواصل معنا</a>
+            </div>
         </div>
     </section>
 
     <!-- قسم المنتجات -->
     <section class="products" id="products">
         <div class="container">
-            <div class="section-header">
+            <!-- أضفنا fade-up هنا للحركة -->
+            <div class="section-header fade-up">
                 <span class="section-tag">مجموعتنا</span>
                 <h2 class="section-title">تشكيلة <span class="accent">الأعشاب</span> الفاخرة</h2>
                 <p class="section-subtitle">نقدم تشكيلة واسعة من الأعشاب الطبية والعطرية المطابقة للمواصفات العالمية.</p>
@@ -65,7 +70,8 @@
     <section class="about" id="about">
         <div class="container">
             <div class="about-grid">
-                <div class="about-content">
+                <!-- أضفنا fade-up هنا للحركة -->
+                <div class="about-content fade-up">
                     <span class="section-tag">قصتنا</span>
                     <h2 class="section-title">جذور في <span class="accent">الطبيعة</span>، رعاية عالمية</h2>
                     <p class="about-text">نحن في "نباتات الحياة" نفخر بكوننا جسراً بين خصوبة الأراضي المصرية والأسواق العالمية. نصدر أجود أنواع الأعشاب الطبيعية والطبية منذ سنوات، مع الالتزام التام بمعايير الجودة والاستدامة.</p>
@@ -75,7 +81,8 @@
                         <li>🤝 التزام بالمواعيد وتوريد الكميات الضخمة</li>
                     </ul>
                 </div>
-                <div class="about-image">
+                <!-- أضفنا fade-up هنا للحركة -->
+                <div class="about-image fade-up">
                     <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=2070" alt="عن الشركة">
                 </div>
             </div>
@@ -85,21 +92,26 @@
     <!-- قسم اتصل بنا -->
     <section class="contact" id="contact">
         <div class="container">
-            <div class="section-header">
+            <!-- أضفنا fade-up هنا للحركة -->
+            <div class="section-header fade-up">
                 <span class="section-tag" style="color: var(--copper-light);">تواصل معنا</span>
                 <h2 class="section-title">لنبدأ <span class="accent">شراكتنا</span></h2>
                 <p class="section-subtitle">نحن مستعدون لتلبية طلبات التصدير وتوفير أفضل عروض الأسعار.</p>
             </div>
             <div class="contact-grid">
-                <div class="contact-info">
+                <!-- أضفنا fade-up هنا للحركة -->
+                <div class="contact-info fade-up">
                     <div class="contact-item"><span>📍</span> المقر الرئيسي: القاهرة، مصر</div>
                     <div class="contact-item"><span>📧</span> البريد: info@nabatat-elhaya.com</div>
                     <div class="contact-item"><span>📞</span> الهاتف/واتساب: +20 100 000 0000</div>
                 </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="الاسم أو الشركة" required>
-                    <input type="email" placeholder="البريد الإلكتروني" required>
-                    <textarea placeholder="رسالتك أو تفاصيل الطلب..." required rows="5"></textarea>
+                
+                <!-- تم تفعيل النموذج باستخدام Formspree وإضافة سمات name -->
+                <!-- ⚠️ لا تنسَ تغيير YOUR_FORM_ID بالرمز الخاص بك من موقع Formspree ⚠️ -->
+                <form class="contact-form fade-up" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <input type="text" name="name" placeholder="الاسم أو الشركة" required>
+                    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+                    <textarea name="message" placeholder="رسالتك أو تفاصيل الطلب..." required rows="5"></textarea>
                     <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
                 </form>
             </div>
@@ -113,6 +125,8 @@
         </div>
     </footer>
 
+    <!-- استدعاء ملفات الجافاسكريبت (مهم جداً الترتيب) -->
+    <script src="js/dataFetcher.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

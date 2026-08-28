@@ -1,16 +1,20 @@
 /* ===== القسم الرئيسي (Hero) ===== */
-
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
     position: relative;
-    /* رابط مؤقت لصورة أعشاب فخمة ومضغوطة جداً لسرعة التحميل */
-    background: linear-gradient(135deg, rgba(13, 59, 46, 0.85), rgba(13, 59, 46, 0.7)),
-                url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=60') center/cover fixed;
-
-            
+    
+    /* 
+      السر هنا: تم فصل الخصائص لتجنب أي خطأ في المتصفحات
+    */
+    background-image: linear-gradient(135deg, rgba(13, 59, 46, 0.85), rgba(13, 59, 46, 0.7)), url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=60');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
+
 .hero-content {
     position: relative;
     z-index: 2;
