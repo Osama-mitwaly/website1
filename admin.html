@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | نباتات الحياة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #082419;
+            --green-mid: #0d3b2e;
+            --copper: #b87333;
+            --cream: #f9f6f0;
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--cream);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--cream);
+        }
+        .header h1 {
+            color: var(--green-dark);
+            margin: 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--green-mid);
+        }
+        input[type="text"], textarea, select, input[type="file"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Tajawal', sans-serif;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+        }
+        .btn {
+            background-color: var(--copper);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #9a5e27;
+        }
+        /* نظام تسجيل الدخول */
+        #dashboardSection {
+            display: none;
+        }
+        .login-box {
+            max-width: 400px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة تسجيل الدخول -->
+    <div class="admin-container login-box" id="loginSection">
+        <div class="header">
+            <h1>تسجيل الدخول للإدارة</h1>
+        </div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>كلمة المرور</label>
+                <input type="password" id="adminPassword" required placeholder="أدخل كلمة المرور للوصول...">
+            </div>
+            <button type="submit" class="btn">دخول</button>
+        </form>
+    </div>
+
+    <!-- لوحة التحكم (تظهر بعد تسجيل الدخول) -->
+    <div class="admin-container" id="dashboardSection">
+        <div class="header">
+            <h1>إضافة منتج جديد 🌿</h1>
+            <p>سيتم عرض هذا المنتج تلقائياً في النسختين العربية والإنجليزية</p>
+        </div>
+        
+        <form id="addProductForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>اسم المنتج (عربي)</label>
+                    <input type="text" id="nameAr" required placeholder="مثال: بابونج مصري فاخر">
+                </div>
+                <div class="form-group">
+                    <label>Product Name (English)</label>
+                    <input type="text" id="nameEn" required placeholder="e.g: Premium Egyptian Chamomile">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>الوصف (عربي)</label>
+                    <textarea id="descAr" rows="4" required placeholder="وصف المنتج ومميزاته..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Description (English)</label>
+                    <textarea id="descEn" rows="4" required placeholder="Product features and description..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>القسم / Category</label>
+                    <select id="category" required>
+                        <option value="herbs">أعشاب / Herbs</option>
+                        <option value="spices">توابل / Spices</option>
+                        <option value="seeds">بذور / Seeds</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>صورة المنتج (يتم رفعها لـ Cloudflare R2)</label>
+                    <input type="file" id="productImage" accept="image/*" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">نشر المنتج في الموقع</button>
+        </form>
+    </div>
+
+    <script>
+        // برمجة واجهة الدخول البسيطة (الحماية الحقيقية ستتم عبر Cloudflare لاحقاً)
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const pass = document.getElementById('adminPassword').value;
+            // كلمة المرور المبدئية (يمكنك تغييرها)
+            if (pass === 'admin2026') {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+            } else {
+                alert('كلمة المرور غير صحيحة');
+            }
+        });
+
+        // منع إرسال النموذج الافتراضي (سنبرمجه لاحقاً ليتصل بـ Cloudflare Workers)
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.textContent = 'جاري المعالجة...';
+            btn.style.opacity = '0.7';
+            
+            // سنضيف هنا كود الاتصال بـ Cloudflare API في المرحلة القادمة
+            setTimeout(() => {
+                alert('الواجهة جاهزة! في الخطوة القادمة سنقوم بربط هذا الزر بقاعدة بيانات Cloudflare D1 و R2.');
+                btn.textContent = 'نشر المنتج في الموقع';
+                btn.style.opacity = '1';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
