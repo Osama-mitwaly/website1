@@ -5,223 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة الإدارة | نباتات الحياة</title>
     
-    <!-- خطوط جوجل (Tajawal) -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- أيقونات Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
         :root {
-            --green-dark: #082419;
-            --green-mid: #0d3b2e;
-            --copper: #b87333;
-            --cream: #f4f4f6; /* لون خلفية يشبه إعدادات الهاتف */
-            --white: #ffffff;
-            --text-dark: #333333;
-            --text-muted: #888888;
+            --green-dark: #082419; --green-mid: #0d3b2e; --copper: #b87333;
+            --cream: #f4f4f6; --white: #ffffff; --text-dark: #333333; --text-muted: #888888;
         }
-
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--cream);
-            margin: 0;
-            padding: 0;
-            color: var(--text-dark);
-        }
-
-        .app-container {
-            max-width: 600px; /* عرض مناسب يشبه التطبيقات */
-            margin: 0 auto;
-            min-height: 100vh;
-            background-color: var(--cream);
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        /* ===== شاشات العرض ===== */
-        .view-section {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        .view-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== العناوين وزر العودة ===== */
-        .page-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            margin-top: 20px;
-            position: relative;
-        }
-
-        .back-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--copper);
-            cursor: pointer;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            position: absolute;
-            right: 0;
-        }
-
-        .page-title {
-            flex-grow: 1;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--green-dark);
-            margin: 0;
-        }
-
-        /* ===== القوائم (المستطيلات دائرية الحواف) ===== */
-        .menu-group {
-            background-color: var(--white);
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 20px;
-            cursor: pointer;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background 0.2s;
-        }
-
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .menu-item:hover {
-            background-color: #fcfcfc;
-        }
-
-        .menu-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .menu-icon {
-            font-size: 22px;
-            color: var(--copper);
-            background: rgba(184, 115, 51, 0.1);
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-        }
-
-        .menu-text {
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .arrow-icon {
-            color: #ccc;
-            font-size: 18px;
-        }
-
-        /* ===== النماذج (Forms) ===== */
-        .form-card {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--green-mid);
-        }
-
-        input[type="text"], input[type="password"], textarea, select, input[type="file"] {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            font-family: 'Tajawal', sans-serif;
-            font-size: 15px;
-            box-sizing: border-box;
-            background-color: #fafafa;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        .btn-primary {
-            background-color: var(--copper);
-            color: #fff;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            width: 100%;
-            transition: background 0.3s;
-            margin-top: 10px;
-        }
-
-        .btn-primary:hover {
-            background-color: #9a5e27;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        /* شاشة الدخول المخصصة */
-        .login-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 80vh;
-        }
-        .login-logo {
-            text-align: center;
-            font-size: 50px;
-            margin-bottom: 10px;
-        }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--cream); margin: 0; padding: 0; color: var(--text-dark); }
+        .app-container { max-width: 600px; margin: 0 auto; min-height: 100vh; background-color: var(--cream); padding: 20px; box-sizing: border-box; }
+        .view-section { display: none; animation: fadeIn 0.3s ease; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .page-header { display: flex; align-items: center; margin-bottom: 30px; margin-top: 20px; position: relative; }
+        .back-btn { background: none; border: none; font-size: 24px; color: var(--copper); cursor: pointer; padding: 0; display: flex; align-items: center; position: absolute; right: 0; }
+        .page-title { flex-grow: 1; text-align: center; font-size: 20px; font-weight: 700; color: var(--green-dark); margin: 0; }
+        .menu-group { background-color: var(--white); border-radius: 16px; overflow: hidden; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+        .menu-item { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; cursor: pointer; border-bottom: 1px solid #f0f0f0; transition: background 0.2s; }
+        .menu-item:last-child { border-bottom: none; }
+        .menu-item:hover { background-color: #fcfcfc; }
+        .menu-content { display: flex; align-items: center; gap: 15px; }
+        .menu-icon { font-size: 22px; color: var(--copper); background: rgba(184, 115, 51, 0.1); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; }
+        .menu-text { font-size: 16px; font-weight: 500; }
+        .arrow-icon { color: #ccc; font-size: 18px; }
+        .form-card { background: var(--white); padding: 25px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; color: var(--green-mid); }
+        input[type="text"], input[type="password"], textarea, select, input[type="file"] { width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 15px; box-sizing: border-box; background-color: #fafafa; }
+        textarea { resize: vertical; }
+        .btn-primary { background-color: var(--copper); color: #fff; border: none; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.3s; margin-top: 10px; }
+        .btn-primary:hover { background-color: #9a5e27; }
+        .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+        .login-wrapper { display: flex; flex-direction: column; justify-content: center; min-height: 80vh; }
+        .login-logo { text-align: center; font-size: 50px; margin-bottom: 10px; }
+        #successMessage { display: none; background: #d4edda; color: #155724; padding: 15px; border-radius: 10px; text-align: center; margin-top: 20px; font-weight: bold; border: 1px solid #c3e6cb; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
 
-        <!-- ============================== -->
-        <!-- شاشة تسجيل الدخول -->
-        <!-- ============================== -->
+        <!-- شاشة الدخول -->
         <div id="loginView" class="view-section active">
             <div class="login-wrapper">
                 <div class="login-logo">🌿</div>
@@ -238,14 +63,11 @@
             </div>
         </div>
 
-        <!-- ============================== -->
         <!-- القائمة الرئيسية -->
-        <!-- ============================== -->
         <div id="mainMenuView" class="view-section">
             <div class="page-header">
                 <h1 class="page-title">لوحة التحكم</h1>
             </div>
-
             <div class="menu-group">
                 <div class="menu-item" onclick="switchView('productsMenuView')">
                     <div class="menu-content">
@@ -254,26 +76,15 @@
                     </div>
                     <i class="bi bi-chevron-left arrow-icon"></i>
                 </div>
-                
-                <div class="menu-item" onclick="switchView('settingsMenuView')">
-                    <div class="menu-content">
-                        <div class="menu-icon" style="background: rgba(13, 59, 46, 0.1); color: var(--green-dark);"><i class="bi bi-gear"></i></div>
-                        <span class="menu-text">إعدادات الموقع</span>
-                    </div>
-                    <i class="bi bi-chevron-left arrow-icon"></i>
-                </div>
             </div>
         </div>
 
-        <!-- ============================== -->
-        <!-- قائمة المنتجات الفرعية -->
-        <!-- ============================== -->
+        <!-- قائمة المنتجات -->
         <div id="productsMenuView" class="view-section">
             <div class="page-header">
                 <button class="back-btn" onclick="switchView('mainMenuView')"><i class="bi bi-arrow-right"></i></button>
                 <h1 class="page-title">المنتجات</h1>
             </div>
-
             <div class="menu-group">
                 <div class="menu-item" onclick="switchView('addProductView')">
                     <div class="menu-content">
@@ -282,20 +93,10 @@
                     </div>
                     <i class="bi bi-chevron-left arrow-icon"></i>
                 </div>
-                
-                <div class="menu-item" onclick="switchView('editProductView')">
-                    <div class="menu-content">
-                        <div class="menu-icon" style="background: rgba(220, 53, 69, 0.1); color: #dc3545;"><i class="bi bi-pencil-square"></i></div>
-                        <span class="menu-text">حذف أو تعديل منتج</span>
-                    </div>
-                    <i class="bi bi-chevron-left arrow-icon"></i>
-                </div>
             </div>
         </div>
 
-        <!-- ============================== -->
-        <!-- شاشة إضافة منتج -->
-        <!-- ============================== -->
+        <!-- شاشة إضافة منتج (مع دمج Imgbb و Firebase) -->
         <div id="addProductView" class="view-section">
             <div class="page-header">
                 <button class="back-btn" onclick="switchView('productsMenuView')"><i class="bi bi-arrow-right"></i></button>
@@ -306,15 +107,15 @@
                 <form id="addProductForm">
                     <div class="form-group">
                         <label>اسم المنتج (عربي)</label>
-                        <input type="text" required>
+                        <input type="text" id="prodNameAr" required placeholder="مثال: ينسون مصري">
                     </div>
                     <div class="form-group">
                         <label>Product Name (English)</label>
-                        <input type="text" required>
+                        <input type="text" id="prodNameEn" required placeholder="e.g. Egyptian Anise">
                     </div>
                     <div class="form-group">
                         <label>القسم / Category</label>
-                        <select required>
+                        <select id="prodCategory" required>
                             <option value="herbs">أعشاب / Herbs</option>
                             <option value="spices">توابل / Spices</option>
                             <option value="seeds">بذور / Seeds</option>
@@ -322,168 +123,160 @@
                     </div>
                     <div class="form-group">
                         <label>الوصف (عربي)</label>
-                        <textarea rows="3" required></textarea>
+                        <textarea id="prodDescAr" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Description (English)</label>
+                        <textarea id="prodDescEn" rows="3" required></textarea>
                     </div>
                     <div class="form-group">
                         <label>صورة المنتج</label>
-                        <input type="file" accept="image/*" required>
+                        <input type="file" id="prodImage" accept="image/*" required>
                     </div>
-                    <button type="submit" class="btn-primary">حفظ ونشر</button>
+                    <button type="submit" id="submitBtn" class="btn-primary"><i class="bi bi-cloud-arrow-up"></i> حفظ ونشر في الموقع</button>
                 </form>
-            </div>
-        </div>
 
-        <!-- ============================== -->
-        <!-- شاشة تعديل/حذف منتج -->
-        <!-- ============================== -->
-        <div id="editProductView" class="view-section">
-            <div class="page-header">
-                <button class="back-btn" onclick="switchView('productsMenuView')"><i class="bi bi-arrow-right"></i></button>
-                <h1 class="page-title">تعديل المنتجات</h1>
-            </div>
-            
-            <div class="menu-group" style="padding: 20px; text-align: center; color: var(--text-muted);">
-                <i class="bi bi-hourglass-split" style="font-size: 30px;"></i>
-                <p>سيتم ربط هذه القائمة بقاعدة بيانات المنتجات قريباً لعرضها هنا.</p>
-            </div>
-        </div>
-
-        <!-- ============================== -->
-        <!-- قائمة الإعدادات الفرعية -->
-        <!-- ============================== -->
-        <div id="settingsMenuView" class="view-section">
-            <div class="page-header">
-                <button class="back-btn" onclick="switchView('mainMenuView')"><i class="bi bi-arrow-right"></i></button>
-                <h1 class="page-title">الإعدادات</h1>
-            </div>
-
-            <div class="menu-group">
-                <div class="menu-item" onclick="switchView('logoSettingsView')">
-                    <div class="menu-content">
-                        <div class="menu-icon" style="background: rgba(0, 123, 255, 0.1); color: #007bff;"><i class="bi bi-image"></i></div>
-                        <span class="menu-text">إعدادات اللوجو</span>
-                    </div>
-                    <i class="bi bi-chevron-left arrow-icon"></i>
-                </div>
-                
-                <div class="menu-item" onclick="switchView('aboutSettingsView')">
-                    <div class="menu-content">
-                        <div class="menu-icon" style="background: rgba(253, 126, 20, 0.1); color: #fd7e14;"><i class="bi bi-info-circle"></i></div>
-                        <span class="menu-text">قسم من نحن</span>
-                    </div>
-                    <i class="bi bi-chevron-left arrow-icon"></i>
-                </div>
-
-                <div class="menu-item" onclick="switchView('contactSettingsView')">
-                    <div class="menu-content">
-                        <div class="menu-icon" style="background: rgba(32, 201, 151, 0.1); color: #20c997;"><i class="bi bi-telephone"></i></div>
-                        <span class="menu-text">قسم تواصل معنا</span>
-                    </div>
-                    <i class="bi bi-chevron-left arrow-icon"></i>
+                <!-- رسالة النجاح -->
+                <div id="successMessage">
+                    <i class="bi bi-check-circle-fill"></i> تم نشر المنتج بنجاح وسيظهر فوراً في الموقع!
                 </div>
             </div>
         </div>
-
-        <!-- ============================== -->
-        <!-- إعدادات اللوجو -->
-        <!-- ============================== -->
-        <div id="logoSettingsView" class="view-section">
-            <div class="page-header">
-                <button class="back-btn" onclick="switchView('settingsMenuView')"><i class="bi bi-arrow-right"></i></button>
-                <h1 class="page-title">إعدادات اللوجو</h1>
-            </div>
-
-            <div class="form-card">
-                <form onsubmit="event.preventDefault(); alert('سيتم تحديث اللوجو عند ربط قاعدة البيانات');">
-                    <div class="form-group">
-                        <label>رفع لوجو جديد</label>
-                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 0;">هذا اللوجو سيستبدل الأيقونة (🌿) في شريط القوائم العلوي.</p>
-                        <input type="file" accept="image/*" required>
-                    </div>
-                    <button type="submit" class="btn-primary">حفظ اللوجو</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- ============================== -->
-        <!-- إعدادات من نحن -->
-        <!-- ============================== -->
-        <div id="aboutSettingsView" class="view-section">
-            <div class="page-header">
-                <button class="back-btn" onclick="switchView('settingsMenuView')"><i class="bi bi-arrow-right"></i></button>
-                <h1 class="page-title">نصوص من نحن</h1>
-            </div>
-
-            <div class="form-card">
-                <form onsubmit="event.preventDefault(); alert('سيتم تحديث النصوص لاحقاً');">
-                    <div class="form-group">
-                        <label>العنوان الرئيسي (عربي)</label>
-                        <input type="text" value="جذور في الطبيعة، رعاية عالمية">
-                    </div>
-                    <div class="form-group">
-                        <label>محتوى الفقرة (عربي)</label>
-                        <textarea rows="4">نحن في "نباتات الحياة" نفخر بكوننا جسراً بين خصوبة الأراضي المصرية والأسواق العالمية...</textarea>
-                    </div>
-                    <button type="submit" class="btn-primary">تحديث البيانات</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- ============================== -->
-        <!-- إعدادات اتصل بنا -->
-        <!-- ============================== -->
-        <div id="contactSettingsView" class="view-section">
-            <div class="page-header">
-                <button class="back-btn" onclick="switchView('settingsMenuView')"><i class="bi bi-arrow-right"></i></button>
-                <h1 class="page-title">بيانات التواصل</h1>
-            </div>
-
-            <div class="form-card">
-                <form onsubmit="event.preventDefault(); alert('سيتم تحديث الأرقام لاحقاً');">
-                    <div class="form-group">
-                        <label>رقم الهاتف / الواتساب الأول</label>
-                        <input type="text" value="+201067131398">
-                    </div>
-                    <div class="form-group">
-                        <label>البريد الإلكتروني المستلم</label>
-                        <input type="text" value="alsayed0852.as@gmail.com">
-                    </div>
-                    <div class="form-group">
-                        <label>عنوان المقر</label>
-                        <input type="text" value="القاهرة، مصر">
-                    </div>
-                    <button type="submit" class="btn-primary">حفظ بيانات التواصل</button>
-                </form>
-            </div>
-        </div>
-
     </div>
 
-    <!-- سكريبت التنقل بين الشاشات -->
-    <script>
-        // 1. نظام الدخول البسيط
+    <!-- كود الجافاسكريبت مدمج كـ Module لدعم Firebase -->
+    <script type="module">
+        // استدعاء مكتبات Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // مفاتيح الربط التي استخرجتها من صورتك
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
+            authDomain: "napatatelhaya-98cb9.firebaseapp.com",
+            projectId: "napatatelhaya-98cb9",
+            storageBucket: "napatatelhaya-98cb9.firebasestorage.app",
+            messagingSenderId: "794316862369",
+            appId: "1:794316862369:web:592fF5ce4e867c97bc91e0"
+        };
+
+        // تهيئة قاعدة البيانات
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // مفتاح Imgbb الخاص بك
+        const IMGBB_API_KEY = '0ec6aadd9fe8bc68bdbe45aee860ce45';
+
+        // نظام الدخول والتنقل
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const pass = document.getElementById('adminPassword').value;
-            if (pass === 'admin2026') {
-                switchView('mainMenuView');
+            if (document.getElementById('adminPassword').value === 'admin2026') {
+                window.switchView('mainMenuView');
             } else {
                 alert('كلمة المرور غير صحيحة');
             }
         });
 
-        // 2. دالة التنقل بين الشاشات
-        function switchView(targetViewId) {
-            // إخفاء كل الشاشات
-            const views = document.querySelectorAll('.view-section');
-            views.forEach(view => view.classList.remove('active'));
-            
-            // إظهار الشاشة المطلوبة
+        window.switchView = function(targetViewId) {
+            document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
             document.getElementById(targetViewId).classList.add('active');
-            
-            // التمرير لأعلى الصفحة عند التبديل
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('addProductForm').reset();
+        };
+
+        // دالة معالجة وتوحيد أبعاد الصورة
+        function processImage(file) {
+            return new Promise((resolve, reject) => {
+                const MAX_SIZE = 32 * 1024 * 1024;
+                if (file.size > MAX_SIZE) return reject('حجم الصورة كبير جداً. الحد الأقصى هو 32 ميجابايت.');
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        const TARGET_SIZE = 800;
+                        canvas.width = TARGET_SIZE;
+                        canvas.height = TARGET_SIZE;
+
+                        let srcX = 0, srcY = 0, srcWidth = img.width, srcHeight = img.height;
+                        if (img.width > img.height) {
+                            srcWidth = img.height;
+                            srcX = (img.width - img.height) / 2;
+                        } else {
+                            srcHeight = img.width;
+                            srcY = (img.height - img.width) / 2;
+                        }
+
+                        ctx.fillStyle = "#ffffff";
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, srcX, srcY, srcWidth, srcHeight, 0, 0, TARGET_SIZE, TARGET_SIZE);
+
+                        canvas.toBlob((blob) => resolve(blob), 'image/jpeg', 0.85);
+                    };
+                    img.src = event.target.result;
+                };
+                reader.onerror = () => reject('حدث خطأ أثناء قراءة ملف الصورة.');
+                reader.readAsDataURL(file);
+            });
         }
+
+        // الإرسال لقاعدة البيانات
+        document.getElementById('addProductForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const imageInput = document.getElementById('prodImage');
+            
+            if (!imageInput.files.length) return alert('الرجاء اختيار صورة.');
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> جاري الرفع والنشر...';
+            document.getElementById('successMessage').style.display = 'none';
+
+            try {
+                // 1. معالجة الصورة ورفعها إلى Imgbb
+                const processedBlob = await processImage(imageInput.files[0]);
+                const formData = new FormData();
+                formData.append('image', processedBlob, 'product.jpg');
+
+                const imgResponse = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const imgResult = await imgResponse.json();
+                
+                if (!imgResult.success) throw new Error('خطأ في رفع الصورة: ' + imgResult.error.message);
+                
+                // 2. إرسال البيانات إلى Firebase Firestore
+                await addDoc(collection(db, "products"), {
+                    category: document.getElementById('prodCategory').value,
+                    name: {
+                        ar: document.getElementById('prodNameAr').value,
+                        en: document.getElementById('prodNameEn').value
+                    },
+                    description: {
+                        ar: document.getElementById('prodDescAr').value,
+                        en: document.getElementById('prodDescEn').value
+                    },
+                    image: imgResult.data.url,
+                    createdAt: serverTimestamp() // لحفظ وقت الإضافة لترتيب المنتجات لاحقاً
+                });
+
+                // 3. عرض رسالة النجاح وتفريغ الحقول
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('addProductForm').reset();
+                
+            } catch (error) {
+                alert(error.message || error);
+                console.error(error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="bi bi-cloud-arrow-up"></i> حفظ ونشر في الموقع';
+            }
+        });
     </script>
 </body>
 </html>
