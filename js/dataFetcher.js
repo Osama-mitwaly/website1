@@ -16,20 +16,20 @@ const db = getFirestore(app);
 let allProducts = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const productsContainer = document.getElementById('products-container');
+    const productsContainer = document.querySelector('.products-grid'); // تم التحديث ليتطابق مع الكود الخاص بك
     if (!productsContainer) return;
 
-    const currentLang = document.documentElement.lang || 'ar';
+    const currentLang = document.documentElement.lang || 'en';
     const isArabic = currentLang === 'ar';
 
     try {
-        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%;">جاري تحميل المنتجات... 🌿</p>' : '<p style="text-align:center; width:100%;">Loading products... 🌿</p>';
+        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">جاري تحميل المنتجات... 🌿</p>' : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">Loading products... 🌿</p>';
 
         const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) {
-            productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%;">لا توجد منتجات حالياً.</p>' : '<p style="text-align:center; width:100%;">No products available currently.</p>';
+            productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">لا توجد منتجات حالياً.</p>' : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">No products available currently.</p>';
             return;
         }
 
@@ -48,12 +48,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (error) {
         console.error("Error fetching products:", error);
-        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%;">حدث خطأ في تحميل البيانات.</p>' : '<p style="text-align:center; width:100%;">Error loading data.</p>';
+        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">حدث خطأ في تحميل البيانات.</p>' : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">Error loading data.</p>';
     }
 });
 
 function renderProducts(category, isArabic) {
-    const productsContainer = document.getElementById('products-container');
+    const productsContainer = document.querySelector('.products-grid');
     if (!productsContainer) return;
 
     productsContainer.innerHTML = '';
@@ -63,28 +63,39 @@ function renderProducts(category, isArabic) {
         : allProducts.filter(p => p.category === category);
 
     if (filteredProducts.length === 0) {
-        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%;">لا توجد منتجات في هذا القسم.</p>' : '<p style="text-align:center; width:100%;">No products in this category.</p>';
+        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">لا توجد منتجات في هذا القسم.</p>' : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">No products in this category.</p>';
         return;
     }
 
-    // استعادة التصميم الأصلي الدقيق للبطاقة
     filteredProducts.forEach(product => {
         const productName = isArabic ? product.name.ar : product.name.en;
         const productDesc = isArabic ? product.description.ar : product.description.en;
         const whatsappMsg = isArabic ? `أريد الاستفسار عن منتج: ${productName}` : `I would like to inquire about: ${productName}`;
-        const btnText = isArabic ? 'طلب تسعير' : 'Request Quote';
+        
+        // ترجمة اسم القسم
+        let catName = '';
+        if (product.category === 'herbs') catName = isArabic ? 'أعشاب' : 'Herbs';
+        else if (product.category === 'spices') catName = isArabic ? 'توابل' : 'Spices';
+        else if (product.category === 'seeds') catName = isArabic ? 'بذور' : 'Seeds';
+        else catName = product.category;
 
+        const originText = isArabic ? 'المنشأ: <strong>مصر</strong>' : 'Origin: <strong>Egypt</strong>';
+        const linkText = isArabic ? 'استفسار ←' : 'Inquire →';
+
+        // استخدام نفس هيكل HTML الخاص بك بالضبط
         const productCard = `
-            <div class="product-card fade-up visible">
+            <div class="product-card fade-in visible">
                 <div class="product-image">
                     <img src="${product.image}" alt="${productName}">
                 </div>
                 <div class="product-info">
-                    <h3>${productName}</h3>
-                    <p style="font-size: 14px; color: var(--text-muted, #666); margin-bottom: 15px;">${productDesc}</p>
-                    <a href="https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}" target="_blank" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">
-                        <i class="bi bi-whatsapp"></i> ${btnText}
-                    </a>
+                    <div class="product-category">${catName}</div>
+                    <h3 class="product-name">${productName}</h3>
+                    <p class="product-desc">${productDesc}</p>
+                    <div class="product-footer">
+                        <div class="product-origin">${originText}</div>
+                        <a href="https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}" target="_blank" class="product-link">${linkText}</a>
+                    </div>
                 </div>
             </div>
         `;
@@ -93,7 +104,7 @@ function renderProducts(category, isArabic) {
 }
 
 window.filterProducts = function(category) {
-    const isArabic = (document.documentElement.lang || 'ar') === 'ar';
+    const isArabic = (document.documentElement.lang || 'en') === 'ar';
     renderProducts(category, isArabic);
     updateActiveButton(category);
     
@@ -105,6 +116,6 @@ window.updateActiveButton = function(category) {
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
     
-    const activeBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(category));
+    const activeBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(category));
     if (activeBtn) activeBtn.classList.add('active');
 };
