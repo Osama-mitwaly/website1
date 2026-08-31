@@ -1,61 +1,75 @@
-// دالة لجلب المنتجات من ملف JSON وعرضها في الصفحة
-async function loadProducts() {
-    const container = document.getElementById('products-container');
-    
-    // 🔥 استكشاف لغة الصفحة الحالية (عربي أم إنجليزي)
-    const currentLang = document.documentElement.lang; 
-    
-    // تحديد مسار الملف والنصوص بناءً على اللغة
-    const jsonPath = currentLang === 'en' ? './data/products-en.json' : './data/products.json';
-    const originText = currentLang === 'en' ? 'Origin:' : 'المنشأ:';
-    const orderText = currentLang === 'en' ? 'Order Now &rarr;' : 'اطلب الآن &larr;';
-    
-    try {
-        const response = await fetch(jsonPath);
-        if (!response.ok) throw new Error('فشل في تحميل البيانات / Failed to load data');
-        
-        const products = await response.json();
-        container.innerHTML = '';
+// استدعاء مكتبات Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        products.forEach(product => {
+// مفاتيح الربط الخاصة بمشروعك
+const firebaseConfig = {
+    apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
+    authDomain: "napatatelhaya-98cb9.firebaseapp.com",
+    projectId: "napatatelhaya-98cb9",
+    storageBucket: "napatatelhaya-98cb9.firebasestorage.app",
+    messagingSenderId: "794316862369",
+    appId: "1:794316862369:web:592fF5ce4e867c97bc91e0"
+};
+
+// تهيئة قاعدة البيانات
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const productsContainer = document.getElementById('products-container');
+    if (!productsContainer) return;
+
+    // معرفة لغة الصفحة الحالية من وسم html
+    const currentLang = document.documentElement.lang || 'ar';
+    const isArabic = currentLang === 'ar';
+
+    try {
+        // رسالة التحميل
+        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%;">جاري تحميل المنتجات... 🌿</p>' : '<p style="text-align:center; width:100%;">Loading products... 🌿</p>';
+
+        // جلب المنتجات وترتيبها من الأحدث للأقدم
+        const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+
+        productsContainer.innerHTML = ''; // تفريغ رسالة التحميل
+
+        if (querySnapshot.empty) {
+            productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%;">لا توجد منتجات حالياً.</p>' : '<p style="text-align:center; width:100%;">No products available currently.</p>';
+            return;
+        }
+
+        // بناء بطاقات المنتجات
+        querySnapshot.forEach((doc) => {
+            const product = doc.data();
+            
+            // اختيار النص بناءً على اللغة
+            const productName = isArabic ? product.name.ar : product.name.en;
+            const productDesc = isArabic ? product.description.ar : product.description.en;
+            
+            // رسالة الواتساب المجهزة باسم المنتج
+            const whatsappMsg = isArabic ? `أريد الاستفسار عن منتج: ${productName}` : `I would like to inquire about: ${productName}`;
+            const btnText = isArabic ? 'طلب تسعير' : 'Request Quote';
+
             const productCard = `
-                <div class="product-card fade-up">
+                <div class="product-card fade-up visible">
                     <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}">
-                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                        <img src="${product.image}" alt="${productName}">
                     </div>
                     <div class="product-info">
-                        <div class="product-category">${product.category}</div>
-                        <h3 class="product-name">${product.name}</h3>
-                        <p class="product-desc">${product.description}</p>
-                        <div class="product-footer">
-                            <div class="product-origin">${originText} <strong>${product.origin}</strong></div>
-                            <a href="#contact" class="product-link">${orderText}</a>
-                        </div>
+                        <h3>${productName}</h3>
+                        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 15px;">${productDesc}</p>
+                        <a href="https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}" target="_blank" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">
+                            <i class="bi bi-whatsapp"></i> ${btnText}
+                        </a>
                     </div>
                 </div>
             `;
-            container.innerHTML += productCard;
+            productsContainer.innerHTML += productCard;
         });
 
-        const productCards = document.querySelectorAll('.product-card');
-        const productObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100); 
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        productCards.forEach(card => productObserver.observe(card));
-
     } catch (error) {
-        console.error('Error fetching products:', error);
-        container.innerHTML = '<p style="color: red;">عذراً، حدث خطأ أثناء تحميل المنتجات.</p>';
+        console.error("Error fetching products:", error);
+        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%;">حدث خطأ في تحميل البيانات.</p>' : '<p style="text-align:center; width:100%;">Error loading data.</p>';
     }
-}
-
-document.addEventListener('DOMContentLoaded', loadProducts);
+});

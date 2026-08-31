@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
-        /* نفس التصميم السابق تماماً */
         :root {
             --green-dark: #082419; --green-mid: #0d3b2e; --copper: #b87333;
             --cream: #f4f4f6; --white: #ffffff; --text-dark: #333333; --text-muted: #888888;
@@ -40,18 +39,14 @@
         .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
         .login-wrapper { display: flex; flex-direction: column; justify-content: center; min-height: 80vh; }
         .login-logo { text-align: center; font-size: 50px; margin-bottom: 10px; }
-        
-        /* تنسيقات نافذة الكود الناتج */
-        #resultContainer { display: none; margin-top: 20px; }
-        .code-box { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 14px; direction: ltr; text-align: left; overflow-x: auto; margin-bottom: 10px; }
-        .btn-success { background-color: #28a745; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; }
+        #successMessage { display: none; background: #d4edda; color: #155724; padding: 15px; border-radius: 10px; text-align: center; margin-top: 20px; font-weight: bold; border: 1px solid #c3e6cb; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
 
-        <!-- شاشة تسجيل الدخول -->
+        <!-- شاشة الدخول -->
         <div id="loginView" class="view-section active">
             <div class="login-wrapper">
                 <div class="login-logo">🌿</div>
@@ -84,7 +79,7 @@
             </div>
         </div>
 
-        <!-- قائمة المنتجات الفرعية -->
+        <!-- قائمة المنتجات -->
         <div id="productsMenuView" class="view-section">
             <div class="page-header">
                 <button class="back-btn" onclick="switchView('mainMenuView')"><i class="bi bi-arrow-right"></i></button>
@@ -101,7 +96,7 @@
             </div>
         </div>
 
-        <!-- شاشة إضافة منتج (مع دمج Imgbb) -->
+        <!-- شاشة إضافة منتج (مع دمج Imgbb و Firebase) -->
         <div id="addProductView" class="view-section">
             <div class="page-header">
                 <button class="back-btn" onclick="switchView('productsMenuView')"><i class="bi bi-arrow-right"></i></button>
@@ -135,54 +130,67 @@
                         <textarea id="prodDescEn" rows="3" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label>صورة المنتج (سيتم رفعها لـ Imgbb تلقائياً)</label>
+                        <label>صورة المنتج</label>
                         <input type="file" id="prodImage" accept="image/*" required>
                     </div>
-                    <button type="submit" id="submitBtn" class="btn-primary">رفع الصورة وتوليد الكود</button>
+                    <button type="submit" id="submitBtn" class="btn-primary"><i class="bi bi-cloud-arrow-up"></i> حفظ ونشر في الموقع</button>
                 </form>
 
-                <!-- صندوق الكود الناتج -->
-                <div id="resultContainer">
-                    <label style="color: #28a745;"><i class="bi bi-check-circle-fill"></i> تم الرفع! انسخ هذا الكود وضعه في ملف products.json</label>
-                    <div class="code-box" id="jsonOutput"></div>
-                    <button class="btn-success" onclick="copyJsonCode()"><i class="bi bi-clipboard-check"></i> نسخ الكود</button>
+                <!-- رسالة النجاح -->
+                <div id="successMessage">
+                    <i class="bi bi-check-circle-fill"></i> تم نشر المنتج بنجاح وسيظهر فوراً في الموقع!
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
+    <!-- كود الجافاسكريبت مدمج كـ Module لدعم Firebase -->
+    <script type="module">
+        // استدعاء مكتبات Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // مفاتيح الربط التي استخرجتها من صورتك
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
+            authDomain: "napatatelhaya-98cb9.firebaseapp.com",
+            projectId: "napatatelhaya-98cb9",
+            storageBucket: "napatatelhaya-98cb9.firebasestorage.app",
+            messagingSenderId: "794316862369",
+            appId: "1:794316862369:web:592fF5ce4e867c97bc91e0"
+        };
+
+        // تهيئة قاعدة البيانات
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         // مفتاح Imgbb الخاص بك
         const IMGBB_API_KEY = '0ec6aadd9fe8bc68bdbe45aee860ce45';
 
-        // 1. نظام الدخول البسيط
+        // نظام الدخول والتنقل
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             if (document.getElementById('adminPassword').value === 'admin2026') {
-                switchView('mainMenuView');
+                window.switchView('mainMenuView');
             } else {
                 alert('كلمة المرور غير صحيحة');
             }
         });
 
-        // 2. التنقل بين الشاشات
-        function switchView(targetViewId) {
+        window.switchView = function(targetViewId) {
             document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
             document.getElementById(targetViewId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            document.getElementById('resultContainer').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
             document.getElementById('addProductForm').reset();
-        }
+        };
 
-        // --- دالة جديدة: معالجة وتوحيد أبعاد الصورة قبل الرفع ---
+        // دالة معالجة وتوحيد أبعاد الصورة
         function processImage(file) {
             return new Promise((resolve, reject) => {
-                // التحقق من الحجم (الحد الأقصى 32 ميجابايت)
-                const MAX_SIZE = 32 * 1024 * 1024; // 32MB بالبايت
-                if (file.size > MAX_SIZE) {
-                    return reject('حجم الصورة كبير جداً. الحد الأقصى هو 32 ميجابايت.');
-                }
+                const MAX_SIZE = 32 * 1024 * 1024;
+                if (file.size > MAX_SIZE) return reject('حجم الصورة كبير جداً. الحد الأقصى هو 32 ميجابايت.');
 
                 const reader = new FileReader();
                 reader.onload = (event) => {
@@ -190,13 +198,10 @@
                     img.onload = () => {
                         const canvas = document.createElement('canvas');
                         const ctx = canvas.getContext('2d');
-
-                        // توحيد الأبعاد (800x800 بكسل - مربعة لتناسب بطاقات المنتجات)
                         const TARGET_SIZE = 800;
                         canvas.width = TARGET_SIZE;
                         canvas.height = TARGET_SIZE;
 
-                        // حسابات القص الذكي (أخذ منتصف الصورة بدون مط أو تشويه)
                         let srcX = 0, srcY = 0, srcWidth = img.width, srcHeight = img.height;
                         if (img.width > img.height) {
                             srcWidth = img.height;
@@ -206,15 +211,11 @@
                             srcY = (img.height - img.width) / 2;
                         }
 
-                        // رسم الصورة في الكانفاس باللون الأبيض للخلفية (في حال كانت شفافة)
                         ctx.fillStyle = "#ffffff";
                         ctx.fillRect(0, 0, canvas.width, canvas.height);
                         ctx.drawImage(img, srcX, srcY, srcWidth, srcHeight, 0, 0, TARGET_SIZE, TARGET_SIZE);
 
-                        // تحويل الصورة المعالجة إلى ملف (Blob) مضغوط بنسبة 85%
-                        canvas.toBlob((blob) => {
-                            resolve(blob);
-                        }, 'image/jpeg', 0.85);
+                        canvas.toBlob((blob) => resolve(blob), 'image/jpeg', 0.85);
                     };
                     img.src = event.target.result;
                 };
@@ -223,80 +224,59 @@
             });
         }
 
-        // 3. برمجة رفع الصورة وتوليد JSON
+        // الإرسال لقاعدة البيانات
         document.getElementById('addProductForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
             const imageInput = document.getElementById('prodImage');
             
-            if (!imageInput.files || imageInput.files.length === 0) {
-                alert('الرجاء اختيار صورة.');
-                return;
-            }
+            if (!imageInput.files.length) return alert('الرجاء اختيار صورة.');
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> جاري المعالجة والرفع...';
+            submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> جاري الرفع والنشر...';
+            document.getElementById('successMessage').style.display = 'none';
 
             try {
-                // معالجة الصورة وتوحيد أبعادها
-                const originalFile = imageInput.files[0];
-                const processedImageBlob = await processImage(originalFile);
-
-                // تجهيز الصورة للإرسال إلى Imgbb
+                // 1. معالجة الصورة ورفعها إلى Imgbb
+                const processedBlob = await processImage(imageInput.files[0]);
                 const formData = new FormData();
-                formData.append('image', processedImageBlob, 'product.jpg');
+                formData.append('image', processedBlob, 'product.jpg');
 
-                // الاتصال بـ API
-                const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                const imgResponse = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
                     method: 'POST',
                     body: formData
                 });
+                const imgResult = await imgResponse.json();
                 
-                const result = await response.json();
+                if (!imgResult.success) throw new Error('خطأ في رفع الصورة: ' + imgResult.error.message);
+                
+                // 2. إرسال البيانات إلى Firebase Firestore
+                await addDoc(collection(db, "products"), {
+                    category: document.getElementById('prodCategory').value,
+                    name: {
+                        ar: document.getElementById('prodNameAr').value,
+                        en: document.getElementById('prodNameEn').value
+                    },
+                    description: {
+                        ar: document.getElementById('prodDescAr').value,
+                        en: document.getElementById('prodDescEn').value
+                    },
+                    image: imgResult.data.url,
+                    createdAt: serverTimestamp() // لحفظ وقت الإضافة لترتيب المنتجات لاحقاً
+                });
 
-                if (result.success) {
-                    const imageUrl = result.data.url;
-
-                    // تكوين كود JSON للمنتج الجديد
-                    const newProduct = {
-                        id: Date.now().toString(),
-                        category: document.getElementById('prodCategory').value,
-                        name: {
-                            ar: document.getElementById('prodNameAr').value,
-                            en: document.getElementById('prodNameEn').value
-                        },
-                        description: {
-                            ar: document.getElementById('prodDescAr').value,
-                            en: document.getElementById('prodDescEn').value
-                        },
-                        image: imageUrl
-                    };
-
-                    // عرض الكود
-                    const formattedJson = JSON.stringify(newProduct, null, 4) + ",";
-                    document.getElementById('jsonOutput').innerText = formattedJson;
-                    document.getElementById('resultContainer').style.display = 'block';
-                    
-                } else {
-                    alert('حدث خطأ أثناء رفع الصورة: ' + result.error.message);
-                }
-
+                // 3. عرض رسالة النجاح وتفريغ الحقول
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('addProductForm').reset();
+                
             } catch (error) {
-                alert(error);
+                alert(error.message || error);
                 console.error(error);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerText = 'رفع الصورة وتوليد الكود';
+                submitBtn.innerHTML = '<i class="bi bi-cloud-arrow-up"></i> حفظ ونشر في الموقع';
             }
         });
-
-        // 4. دالة نسخ الكود بضغطة زر
-        function copyJsonCode() {
-            const jsonText = document.getElementById('jsonOutput').innerText;
-            navigator.clipboard.writeText(jsonText).then(() => {
-                alert('تم نسخ الكود بنجاح! اذهب الآن والصقه داخل ملف products.json');
-            });
-        }
-    </script>>
+    </script>
 </body>
 </html>
