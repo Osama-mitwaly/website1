@@ -709,3 +709,247 @@ html[dir="ltr"] .vm-card::before {
     .features-grid { grid-template-columns: 1fr; } /* عمود واحد في الهاتف لوضوح أكبر */
     .feature-card { padding: 30px 20px; display: flex; flex-direction: column; align-items: center; }
 }
+/* ===== تحسينات صفحة تواصل معنا (Contact Page Enhancements) ===== */
+
+/* 1. بطاقات معلومات الاتصال */
+.contact-info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+.info-card {
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--copper), var(--gold));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(13, 59, 46, 0.12);
+}
+
+.info-card:hover::before {
+    transform: scaleX(1);
+}
+
+.info-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(184, 115, 51, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: var(--copper);
+    margin: 0 auto 20px;
+    transition: all 0.4s ease;
+}
+
+.info-card:hover .info-icon {
+    background: var(--copper);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+.info-title {
+    font-size: 18px;
+    color: var(--green-dark);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.info-text {
+    color: var(--text-light);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.info-text a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+}
+
+.info-text a:hover {
+    color: var(--copper);
+}
+
+/* 2. ساعات العمل */
+.business-hours {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.hours-title {
+    font-size: 22px;
+    color: var(--green-dark);
+    margin-bottom: 25px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hours-title i {
+    color: var(--copper);
+    font-size: 26px;
+}
+
+.hours-list {
+    list-style: none;
+    padding: 0;
+}
+
+.hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+    font-size: 15px;
+    color: var(--text-dark);
+}
+
+.hours-list li:last-child {
+    border-bottom: none;
+}
+
+.hours-list li span:first-child {
+    font-weight: 600;
+    color: var(--green-dark);
+}
+
+.hours-list li span:last-child {
+    color: var(--text-light);
+}
+
+.hours-list li.closed span:last-child {
+    color: #c0392b;
+    font-weight: 600;
+}
+
+/* 3. قسم الخريطة */
+.map-section {
+    padding: 0;
+    background: var(--cream);
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: grayscale(20%) contrast(1.05);
+}
+
+.map-overlay {
+    position: absolute;
+    top: 30px;
+    right: 30px; /* للعربية */
+    background: var(--white);
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    max-width: 300px;
+    z-index: 10;
+}
+
+html[dir="ltr"] .map-overlay {
+    right: auto;
+    left: 30px;
+}
+
+.map-overlay h4 {
+    color: var(--green-dark);
+    margin-bottom: 10px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.map-overlay h4 i {
+    color: var(--copper);
+}
+
+.map-overlay p {
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 4. تحسينات الهاتف لصفحة التواصل */
+@media (max-width: 768px) {
+    .contact-info-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .info-card {
+        padding: 30px 20px;
+    }
+    
+    .info-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 30px;
+    }
+    
+    .business-hours {
+        padding: 25px 20px;
+    }
+    
+    .hours-title {
+        font-size: 18px;
+    }
+    
+    .hours-list li {
+        font-size: 14px;
+        padding: 12px 0;
+    }
+    
+    .map-container {
+        height: 350px;
+    }
+    
+    .map-overlay {
+        position: relative;
+        top: 0;
+        right: 0;
+        left: 0;
+        max-width: 100%;
+        border-radius: 0;
+        margin: 0;
+        box-shadow: none;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+}
