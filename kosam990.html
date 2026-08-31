@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الإدارة | نباتات الحياة</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* نفس التصميم السابق تماماً */
+        :root {
+            --green-dark: #082419; --green-mid: #0d3b2e; --copper: #b87333;
+            --cream: #f4f4f6; --white: #ffffff; --text-dark: #333333; --text-muted: #888888;
+        }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--cream); margin: 0; padding: 0; color: var(--text-dark); }
+        .app-container { max-width: 600px; margin: 0 auto; min-height: 100vh; background-color: var(--cream); padding: 20px; box-sizing: border-box; }
+        .view-section { display: none; animation: fadeIn 0.3s ease; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .page-header { display: flex; align-items: center; margin-bottom: 30px; margin-top: 20px; position: relative; }
+        .back-btn { background: none; border: none; font-size: 24px; color: var(--copper); cursor: pointer; padding: 0; display: flex; align-items: center; position: absolute; right: 0; }
+        .page-title { flex-grow: 1; text-align: center; font-size: 20px; font-weight: 700; color: var(--green-dark); margin: 0; }
+        .menu-group { background-color: var(--white); border-radius: 16px; overflow: hidden; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+        .menu-item { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; cursor: pointer; border-bottom: 1px solid #f0f0f0; transition: background 0.2s; }
+        .menu-item:last-child { border-bottom: none; }
+        .menu-item:hover { background-color: #fcfcfc; }
+        .menu-content { display: flex; align-items: center; gap: 15px; }
+        .menu-icon { font-size: 22px; color: var(--copper); background: rgba(184, 115, 51, 0.1); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; }
+        .menu-text { font-size: 16px; font-weight: 500; }
+        .arrow-icon { color: #ccc; font-size: 18px; }
+        .form-card { background: var(--white); padding: 25px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; color: var(--green-mid); }
+        input[type="text"], input[type="password"], textarea, select, input[type="file"] { width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 15px; box-sizing: border-box; background-color: #fafafa; }
+        textarea { resize: vertical; }
+        .btn-primary { background-color: var(--copper); color: #fff; border: none; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.3s; margin-top: 10px; }
+        .btn-primary:hover { background-color: #9a5e27; }
+        .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+        .login-wrapper { display: flex; flex-direction: column; justify-content: center; min-height: 80vh; }
+        .login-logo { text-align: center; font-size: 50px; margin-bottom: 10px; }
+        
+        /* تنسيقات نافذة الكود الناتج */
+        #resultContainer { display: none; margin-top: 20px; }
+        .code-box { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 14px; direction: ltr; text-align: left; overflow-x: auto; margin-bottom: 10px; }
+        .btn-success { background-color: #28a745; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- شاشة تسجيل الدخول -->
+        <div id="loginView" class="view-section active">
+            <div class="login-wrapper">
+                <div class="login-logo">🌿</div>
+                <h2 style="text-align: center; color: var(--green-dark); margin-bottom: 30px;">إدارة نباتات الحياة</h2>
+                <div class="form-card">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label>كلمة المرور</label>
+                            <input type="password" id="adminPassword" required placeholder="أدخل كلمة المرور...">
+                        </div>
+                        <button type="submit" class="btn-primary">تسجيل الدخول</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- القائمة الرئيسية -->
+        <div id="mainMenuView" class="view-section">
+            <div class="page-header">
+                <h1 class="page-title">لوحة التحكم</h1>
+            </div>
+            <div class="menu-group">
+                <div class="menu-item" onclick="switchView('productsMenuView')">
+                    <div class="menu-content">
+                        <div class="menu-icon"><i class="bi bi-box-seam"></i></div>
+                        <span class="menu-text">إدارة المنتجات</span>
+                    </div>
+                    <i class="bi bi-chevron-left arrow-icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- قائمة المنتجات الفرعية -->
+        <div id="productsMenuView" class="view-section">
+            <div class="page-header">
+                <button class="back-btn" onclick="switchView('mainMenuView')"><i class="bi bi-arrow-right"></i></button>
+                <h1 class="page-title">المنتجات</h1>
+            </div>
+            <div class="menu-group">
+                <div class="menu-item" onclick="switchView('addProductView')">
+                    <div class="menu-content">
+                        <div class="menu-icon" style="background: rgba(40, 167, 69, 0.1); color: #28a745;"><i class="bi bi-plus-lg"></i></div>
+                        <span class="menu-text">إضافة منتج جديد</span>
+                    </div>
+                    <i class="bi bi-chevron-left arrow-icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- شاشة إضافة منتج (مع دمج Imgbb) -->
+        <div id="addProductView" class="view-section">
+            <div class="page-header">
+                <button class="back-btn" onclick="switchView('productsMenuView')"><i class="bi bi-arrow-right"></i></button>
+                <h1 class="page-title">إضافة منتج</h1>
+            </div>
+
+            <div class="form-card">
+                <form id="addProductForm">
+                    <div class="form-group">
+                        <label>اسم المنتج (عربي)</label>
+                        <input type="text" id="prodNameAr" required placeholder="مثال: ينسون مصري">
+                    </div>
+                    <div class="form-group">
+                        <label>Product Name (English)</label>
+                        <input type="text" id="prodNameEn" required placeholder="e.g. Egyptian Anise">
+                    </div>
+                    <div class="form-group">
+                        <label>القسم / Category</label>
+                        <select id="prodCategory" required>
+                            <option value="herbs">أعشاب / Herbs</option>
+                            <option value="spices">توابل / Spices</option>
+                            <option value="seeds">بذور / Seeds</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف (عربي)</label>
+                        <textarea id="prodDescAr" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Description (English)</label>
+                        <textarea id="prodDescEn" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>صورة المنتج (سيتم رفعها لـ Imgbb تلقائياً)</label>
+                        <input type="file" id="prodImage" accept="image/*" required>
+                    </div>
+                    <button type="submit" id="submitBtn" class="btn-primary">رفع الصورة وتوليد الكود</button>
+                </form>
+
+                <!-- صندوق الكود الناتج -->
+                <div id="resultContainer">
+                    <label style="color: #28a745;"><i class="bi bi-check-circle-fill"></i> تم الرفع! انسخ هذا الكود وضعه في ملف products.json</label>
+                    <div class="code-box" id="jsonOutput"></div>
+                    <button class="btn-success" onclick="copyJsonCode()"><i class="bi bi-clipboard-check"></i> نسخ الكود</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // مفتاح Imgbb الخاص بك
+        const IMGBB_API_KEY = '0ec6aadd9fe8bc68bdbe45aee860ce45';
+
+        // 1. نظام الدخول البسيط
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (document.getElementById('adminPassword').value === 'admin2026') {
+                switchView('mainMenuView');
+            } else {
+                alert('كلمة المرور غير صحيحة');
+            }
+        });
+
+        // 2. التنقل بين الشاشات
+        function switchView(targetViewId) {
+            document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
+            document.getElementById(targetViewId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            document.getElementById('resultContainer').style.display = 'none';
+            document.getElementById('addProductForm').reset();
+        }
+
+        // --- دالة جديدة: معالجة وتوحيد أبعاد الصورة قبل الرفع ---
+        function processImage(file) {
+            return new Promise((resolve, reject) => {
+                // التحقق من الحجم (الحد الأقصى 32 ميجابايت)
+                const MAX_SIZE = 32 * 1024 * 1024; // 32MB بالبايت
+                if (file.size > MAX_SIZE) {
+                    return reject('حجم الصورة كبير جداً. الحد الأقصى هو 32 ميجابايت.');
+                }
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+
+                        // توحيد الأبعاد (800x800 بكسل - مربعة لتناسب بطاقات المنتجات)
+                        const TARGET_SIZE = 800;
+                        canvas.width = TARGET_SIZE;
+                        canvas.height = TARGET_SIZE;
+
+                        // حسابات القص الذكي (أخذ منتصف الصورة بدون مط أو تشويه)
+                        let srcX = 0, srcY = 0, srcWidth = img.width, srcHeight = img.height;
+                        if (img.width > img.height) {
+                            srcWidth = img.height;
+                            srcX = (img.width - img.height) / 2;
+                        } else {
+                            srcHeight = img.width;
+                            srcY = (img.height - img.width) / 2;
+                        }
+
+                        // رسم الصورة في الكانفاس باللون الأبيض للخلفية (في حال كانت شفافة)
+                        ctx.fillStyle = "#ffffff";
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, srcX, srcY, srcWidth, srcHeight, 0, 0, TARGET_SIZE, TARGET_SIZE);
+
+                        // تحويل الصورة المعالجة إلى ملف (Blob) مضغوط بنسبة 85%
+                        canvas.toBlob((blob) => {
+                            resolve(blob);
+                        }, 'image/jpeg', 0.85);
+                    };
+                    img.src = event.target.result;
+                };
+                reader.onerror = () => reject('حدث خطأ أثناء قراءة ملف الصورة.');
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // 3. برمجة رفع الصورة وتوليد JSON
+        document.getElementById('addProductForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const imageInput = document.getElementById('prodImage');
+            
+            if (!imageInput.files || imageInput.files.length === 0) {
+                alert('الرجاء اختيار صورة.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> جاري المعالجة والرفع...';
+
+            try {
+                // معالجة الصورة وتوحيد أبعادها
+                const originalFile = imageInput.files[0];
+                const processedImageBlob = await processImage(originalFile);
+
+                // تجهيز الصورة للإرسال إلى Imgbb
+                const formData = new FormData();
+                formData.append('image', processedImageBlob, 'product.jpg');
+
+                // الاتصال بـ API
+                const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+
+                if (result.success) {
+                    const imageUrl = result.data.url;
+
+                    // تكوين كود JSON للمنتج الجديد
+                    const newProduct = {
+                        id: Date.now().toString(),
+                        category: document.getElementById('prodCategory').value,
+                        name: {
+                            ar: document.getElementById('prodNameAr').value,
+                            en: document.getElementById('prodNameEn').value
+                        },
+                        description: {
+                            ar: document.getElementById('prodDescAr').value,
+                            en: document.getElementById('prodDescEn').value
+                        },
+                        image: imageUrl
+                    };
+
+                    // عرض الكود
+                    const formattedJson = JSON.stringify(newProduct, null, 4) + ",";
+                    document.getElementById('jsonOutput').innerText = formattedJson;
+                    document.getElementById('resultContainer').style.display = 'block';
+                    
+                } else {
+                    alert('حدث خطأ أثناء رفع الصورة: ' + result.error.message);
+                }
+
+            } catch (error) {
+                alert(error);
+                console.error(error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'رفع الصورة وتوليد الكود';
+            }
+        });
+
+        // 4. دالة نسخ الكود بضغطة زر
+        function copyJsonCode() {
+            const jsonText = document.getElementById('jsonOutput').innerText;
+            navigator.clipboard.writeText(jsonText).then(() => {
+                alert('تم نسخ الكود بنجاح! اذهب الآن والصقه داخل ملف products.json');
+            });
+        }
+    </script>>
+</body>
+</html>
