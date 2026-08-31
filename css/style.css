@@ -122,8 +122,14 @@ section {
     color: var(--copper);
 }
 
+.section-subtitlef{
+    color:white;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 .section-subtitle {
-    color: var(--text-light);
+    color:var(--text-light);
     max-width: 600px;
     margin: 0 auto;
 }
