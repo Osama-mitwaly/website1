@@ -728,9 +728,9 @@ html[dir="ltr"] .vm-card::before {
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     overflow: hidden;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .info-card::before {
@@ -785,6 +785,7 @@ html[dir="ltr"] .vm-card::before {
     color: var(--text-light);
     font-size: 15px;
     line-height: 1.7;
+    margin-bottom: 10px;
 }
 
 .info-text a {
@@ -797,6 +798,23 @@ html[dir="ltr"] .vm-card::before {
 
 .info-text a:hover {
     color: var(--copper);
+}
+
+/* رابط "اضغط لفتح النموذج" */
+.info-action-link {
+    color: var(--copper) !important;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.info-action-link:hover {
+    color: var(--green-dark) !important;
+    transform: translateY(-2px);
 }
 
 /* 2. شبكة نموذج الاتصال + ساعات العمل */
@@ -870,7 +888,7 @@ html[dir="ltr"] .vm-card::before {
 .contact-benefits {
     margin-top: 30px;
     padding-top: 25px;
-    border-top: 2px solid rgba(0,0,0,0.05);
+    border-top: 2px solid rgba(255,255,255,0.1);
 }
 
 .benefit-item {
@@ -878,12 +896,13 @@ html[dir="ltr"] .vm-card::before {
     align-items: center;
     gap: 12px;
     margin-bottom: 15px;
-    font-size: 14px;
-    color: var(--text-light);
+    font-size: 15px;
+    color: var(--white); /* تم التغيير إلى الأبيض */
+    font-weight: 500;
 }
 
 .benefit-item i {
-    color: var(--copper);
+    color: var(--copper-light);
     font-size: 20px;
     flex-shrink: 0;
 }
@@ -898,22 +917,12 @@ html[dir="ltr"] .vm-card::before {
     animation: float 3s ease-in-out infinite;
 }
 
-.info-card:nth-child(1) { animation-delay: 0.1s; }
-.info-card:nth-child(2) { animation-delay: 0.2s; }
-.info-card:nth-child(3) { animation-delay: 0.3s; }
-
-/* تأثير نبض على أيقونة الواتساب */
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(184, 115, 51, 0.4); }
-    70% { box-shadow: 0 0 0 15px rgba(184, 115, 51, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(184, 115, 51, 0); }
+/* 6. حل مشكلة التمرير عند الضغط على الروابط الداخلية */
+#contactFormSection {
+    scroll-margin-top: 100px; /* مسافة لتجنب تغطية الـ Header الثابت */
 }
 
-.info-card:hover .info-icon {
-    animation: pulse 1.5s infinite;
-}
-
-/* 6. تحسينات الهاتف */
+/* 7. تحسينات الهاتف */
 @media (max-width: 768px) {
     .contact-info-cards {
         grid-template-columns: 1fr;
@@ -946,5 +955,9 @@ html[dir="ltr"] .vm-card::before {
     .hours-list li {
         font-size: 14px;
         padding: 12px 0;
+    }
+    
+    .benefit-item {
+        font-size: 14px;
     }
 }
