@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>المنتجات | نباتات الحياة</title>
 
-<!-- مكتبة Bootstrap Icons (مطلوبة لأيقونة اللغة والتصميم الموحد) -->
+<!-- مكتبة Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +33,17 @@
   /* ===== HEADER ===== */
   header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(13, 59, 46, 0.95); backdrop-filter: blur(12px); padding: 18px 0; transition: all 0.3s ease; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
   header.scrolled { padding: 12px 0; background: rgba(13, 59, 46, 0.98); }
-  .nav-container { max-width: 1300px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; }
+  
+  .nav-container { 
+    max-width: 1300px; 
+    margin: 0 auto; 
+    padding: 0 30px; 
+    display: flex; 
+    justify-content: space-between; /* يضمن دفع الشعار والبرجر لأقصى الأطراف */
+    align-items: center; 
+    width: 100%;
+  }
+  
   .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
   .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--copper), var(--gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--white); box-shadow: 0 4px 15px rgba(184, 115, 51, 0.4); }
   .logo-text { font-size: 24px; font-weight: 700; color: var(--white); letter-spacing: 0.5px; }
@@ -46,7 +56,6 @@
   nav a:not(.lang-btn):hover, nav a.active:not(.lang-btn) { color: var(--copper-light); }
   nav a:not(.lang-btn):hover::after, nav a.active:not(.lang-btn):after { width: 100%; }
 
-  /* ===== زر تغيير اللغة (مطابق للصفحة الرئيسية) ===== */
   .lang-btn {
     color: var(--gold) !important;
     font-weight: 700 !important;
@@ -58,7 +67,7 @@
   .lang-btn::after { display: none !important; }
   .lang-btn:hover { color: var(--copper-light) !important; transform: translateY(-2px); }
 
-  /* ===== زر قائمة الهاتف (Hamburger) المطابق للصفحة الرئيسية ===== */
+  /* ===== زر قائمة الهاتف (Hamburger) ===== */
   .mobile-toggle {
     display: none;
     flex-direction: column;
@@ -67,6 +76,7 @@
     height: 21px;
     cursor: pointer;
     z-index: 1001;
+    /* لا نضيف هوامش هنا لكي يسمح space-between بدفعه للحافة تماماً */
   }
   .mobile-toggle span {
     display: block;
@@ -76,7 +86,6 @@
     border-radius: 3px;
     transition: all 0.3s ease-in-out;
   }
-  /* حركة التحول إلى X */
   .mobile-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
   .mobile-toggle.active span:nth-child(2) { opacity: 0; }
   .mobile-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
@@ -125,14 +134,15 @@
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
-    .mobile-toggle { display: flex; } /* إظهار زر القائمة */
+    .mobile-toggle { display: flex; } 
     
-    nav ul {
+    /* جعل القائمة خارج تدفق الصفحة لضمان عدم تأثيرها على مسافة space-between */
+    #navMenu {
       display: flex;
       flex-direction: column;
       position: fixed;
       top: 0;
-      right: -100%; /* مخفية من اليمين */
+      right: -100%; 
       width: 75%;
       max-width: 320px;
       height: 100vh;
@@ -143,10 +153,10 @@
       box-shadow: -5px 0 25px rgba(0,0,0,0.3);
       z-index: 999;
     }
-    nav ul.active { right: 0; } /* إظهار القائمة */
+    #navMenu.active { right: 0; } 
     
-    nav ul li { width: 100%; text-align: right; }
-    nav a { font-size: 18px; display: block; padding: 10px 0; }
+    #navMenu li { width: 100%; text-align: right; }
+    #navMenu a { font-size: 18px; display: block; padding: 10px 0; }
     .lang-btn { justify-content: center; margin-top: 20px; font-size: 18px !important; }
     .footer-grid { grid-template-columns: 1fr; }
   }
@@ -162,20 +172,20 @@
       <div class="logo-text">نباتات <span>الحياة</span></div>
     </a>
     
-    <!-- زر قائمة الهاتف (Hamburger) المطابق للصفحة الرئيسية -->
+    <!-- زر قائمة الهاتف (مطابق للصفحة الرئيسية) -->
     <div class="mobile-toggle" id="mobileToggle">
       <span></span>
       <span></span>
       <span></span>
     </div>
 
-    <nav>
+    <!-- تمت إضافة id="nav" لمطابقة index.html -->
+    <nav id="nav">
       <ul id="navMenu">
         <li><a href="index.html">الرئيسية</a></li>
         <li><a href="products.html" class="active">المنتجات</a></li>
         <li><a href="index.html#about">من نحن</a></li>
         <li><a href="index.html#contact">تواصل معنا</a></li>
-        <!-- زر تغيير اللغة المطابق للصفحة الرئيسية -->
         <li><a href="products-en.html" class="lang-btn"><i class="bi bi-globe"></i> EN</a></li>
       </ul>
     </nav>
@@ -236,25 +246,21 @@
   </div>
 </footer>
 
-<!-- سكريبت الهيدر والقائمة -->
 <script>
-  // تأثير الهيدر عند التمرير
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
   });
 
-  // التحكم في قائمة الهاتف (مطابق لمنطق index.html)
   const mobileToggle = document.getElementById('mobileToggle');
   const navMenu = document.getElementById('navMenu');
 
   mobileToggle.addEventListener('click', () => {
-    mobileToggle.classList.toggle('active'); // لتحويل الخطوط إلى X
-    navMenu.classList.toggle('active');      // لإظهار/إخفاء القائمة
+    mobileToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
   });
 
-  // إغلاق القائمة عند الضغط على أي رابط
   document.querySelectorAll('#navMenu a').forEach(link => {
     link.addEventListener('click', () => {
       mobileToggle.classList.remove('active');
@@ -263,8 +269,6 @@
   });
 </script>
 
-<!-- سكريبت جلب المنتجات -->
 <script type="module" src="js/dataFetcher.js"></script>
-
 </body>
 </html>
