@@ -709,7 +709,7 @@ html[dir="ltr"] .vm-card::before {
     .features-grid { grid-template-columns: 1fr; } /* عمود واحد في الهاتف لوضوح أكبر */
     .feature-card { padding: 30px 20px; display: flex; flex-direction: column; align-items: center; }
 }
-/* ===== تحسينات صفحة تواصل معنا (Contact Page Enhancements) ===== */
+/* ===== تحسينات صفحة تواصل معنا (Contact Page Enhancements) ===== *//* ===== تحسينات صفحة تواصل معنا (Contact Page Enhancements) ===== */
 
 /* 1. بطاقات معلومات الاتصال */
 .contact-info-cards {
@@ -728,8 +728,10 @@ html[dir="ltr"] .vm-card::before {
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     overflow: hidden;
+    min-height: 280px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -764,8 +766,9 @@ html[dir="ltr"] .vm-card::before {
     justify-content: center;
     font-size: 36px;
     color: var(--copper);
-    margin: 0 auto 20px;
+    margin-bottom: 20px;
     transition: all 0.4s ease;
+    flex-shrink: 0;
 }
 
 .info-card:hover .info-icon {
@@ -777,7 +780,7 @@ html[dir="ltr"] .vm-card::before {
 .info-title {
     font-size: 18px;
     color: var(--green-dark);
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
@@ -785,7 +788,8 @@ html[dir="ltr"] .vm-card::before {
     color: var(--text-light);
     font-size: 15px;
     line-height: 1.7;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    flex-grow: 0;
 }
 
 .info-text a {
@@ -794,6 +798,7 @@ html[dir="ltr"] .vm-card::before {
     transition: color 0.3s ease;
     display: block;
     margin: 5px 0;
+    word-break: break-all;
 }
 
 .info-text a:hover {
@@ -808,12 +813,16 @@ html[dir="ltr"] .vm-card::before {
     text-decoration: none;
     transition: all 0.3s ease;
     display: inline-block;
-    margin-top: 8px;
+    margin-top: auto;
     cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: rgba(184, 115, 51, 0.1);
 }
 
 .info-action-link:hover {
-    color: var(--green-dark) !important;
+    background: var(--copper);
+    color: var(--white) !important;
     transform: translateY(-2px);
 }
 
@@ -897,7 +906,7 @@ html[dir="ltr"] .vm-card::before {
     gap: 12px;
     margin-bottom: 15px;
     font-size: 15px;
-    color: var(--white); /* تم التغيير إلى الأبيض */
+    color: var(--white);
     font-weight: 500;
 }
 
@@ -919,7 +928,7 @@ html[dir="ltr"] .vm-card::before {
 
 /* 6. حل مشكلة التمرير عند الضغط على الروابط الداخلية */
 #contactFormSection {
-    scroll-margin-top: 100px; /* مسافة لتجنب تغطية الـ Header الثابت */
+    scroll-margin-top: 100px;
 }
 
 /* 7. تحسينات الهاتف */
