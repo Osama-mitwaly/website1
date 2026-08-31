@@ -38,25 +38,36 @@
   nav ul { display: flex; list-style: none; gap: 35px; align-items: center; }
   nav a { color: var(--white); text-decoration: none; font-weight: 500; font-size: 15px; position: relative; padding: 5px 0; transition: color 0.3s ease; }
   
-  /* خط سفلي للروابط العادية عند التمرير */
   nav a:not(.lang-toggle)::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--copper); transition: width 0.3s ease; }
   nav a:not(.lang-toggle):hover, nav a.active:not(.lang-toggle) { color: var(--copper-light); }
   nav a:not(.lang-toggle):hover::after, nav a.active:not(.lang-toggle):after { width: 100%; }
 
-  /* ===== تصميم زر اللغة (English) المطابق للصورة ===== */
   .lang-toggle {
     background-color: var(--copper) !important;
     color: var(--white) !important;
     padding: 6px 22px !important;
     border-radius: 25px !important;
-    font-family: 'Poppins', sans-serif; /* خط إنجليزي ليتناسب مع كلمة English */
+    font-family: 'Poppins', sans-serif;
     font-weight: 600 !important;
     font-size: 15px !important;
     display: inline-block;
     transition: all 0.3s ease;
   }
-  .lang-toggle::after { display: none !important; /* إخفاء الخط السفلي */ }
+  .lang-toggle::after { display: none !important; }
   .lang-toggle:hover { background-color: var(--copper-light) !important; transform: translateY(-2px); }
+
+  /* ===== زر قائمة الهاتف (Burger Menu) ===== */
+  .mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-size: 28px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+  }
+  .mobile-menu-btn:hover { transform: scale(1.1); }
 
   /* ===== PAGE HEADER ===== */
   .page-header { background: linear-gradient(135deg, rgba(13, 59, 46, 0.9), rgba(13, 59, 46, 0.8)), url('https://image.qwenlm.ai/public_source/f925885c-9cf5-478e-a6f5-b6f34c2588bb/1a6e639e1-f6bf-43e1-8311-ee50d5f96330.png'); background-size: cover; background-position: center; padding: 150px 20px 80px; text-align: center; color: white; }
@@ -102,7 +113,29 @@
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
-    nav ul { display: none; /* يمكن إضافة قائمة الجوال لاحقاً إذا لزم الأمر */ }
+    .mobile-menu-btn { display: block; }
+    nav ul {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      right: -100%; /* مخفية خارج الشاشة من اليمين */
+      width: 75%;
+      max-width: 320px;
+      height: 100vh;
+      background: var(--green-dark);
+      padding: 90px 30px 30px;
+      gap: 25px;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: -5px 0 25px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+    nav ul.active {
+      right: 0; /* تظهر عند التفعيل */
+    }
+    nav ul li { width: 100%; text-align: right; }
+    nav a { font-size: 18px; display: block; padding: 10px 0; }
+    .lang-toggle { text-align: center; margin-top: 20px; display: block; }
     .footer-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -116,13 +149,16 @@
       <div class="logo-icon">🌿</div>
       <div class="logo-text">نباتات <span>الحياة</span></div>
     </a>
+    
+    <!-- زر قائمة الهاتف -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="فتح القائمة">☰</button>
+
     <nav>
       <ul id="navMenu">
         <li><a href="index.html">الرئيسية</a></li>
         <li><a href="products.html" class="active">المنتجات</a></li>
         <li><a href="index.html#about">من نحن</a></li>
         <li><a href="index.html#contact">تواصل معنا</a></li>
-        <!-- زر تغيير اللغة المضبوط -->
         <li><a href="products-en.html" class="lang-toggle">English</a></li>
       </ul>
     </nav>
@@ -146,7 +182,7 @@
 <!-- PRODUCTS GRID -->
 <div class="container">
     <div class="products-grid" id="products-container">
-        <!-- سيتم جلب المنتجات هنا عبر dataFetcher.js بنفس شكل البطاقات الأصلي -->
+        <!-- سيتم جلب المنتجات هنا عبر dataFetcher.js -->
     </div>
 </div>
 
@@ -183,12 +219,30 @@
   </div>
 </footer>
 
-<!-- سكريبت الهيدر -->
+<!-- سكريبت الهيدر والقائمة -->
 <script>
+  // تأثير الهيدر عند التمرير
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
+  });
+
+  // التحكم في قائمة الهاتف
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const navMenu = document.getElementById('navMenu');
+
+  mobileMenuBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? '✕' : '☰';
+  });
+
+  // إغلاق القائمة عند الضغط على أي رابط
+  document.querySelectorAll('#navMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      mobileMenuBtn.innerHTML = '☰';
+    });
   });
 </script>
 
