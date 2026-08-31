@@ -31,5 +31,5 @@ body {
   color: var(--text-dark);
   background: var(--white);
   line-height: 1.6;
-  direction: rtl;
+  /* تم حذف direction: rtl; من هنا ليعتمد المتصفح على dir="rtl" أو dir="ltr" في وسم HTML تلقائياً */
 }

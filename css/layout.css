@@ -14,19 +14,21 @@ ul {
 }
 
 /* ===== شريط التنقل (Header) ===== */
+/* ===== شريط التنقل (Header) ===== */
 header {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;       /* تمت الإضافة لدعم الاتجاهين */
+    right: 0;      /* معدلة لضمان التمدد الكامل */
     width: 100%;
     z-index: 1000;
-    background: rgba(13, 59, 46, 0.95); /* لون أخضر داكن شفاف */
+    background: rgba(13, 59, 46, 0.95);
     backdrop-filter: blur(12px);
     padding: 18px 0;
     transition: all var(--transition-speed) ease;
     box-shadow: 0 2px 20px rgba(0,0,0,0.1);
 }
-
+/* ... باقي الكود كما هو ممتاز ... */
 .nav-container {
     max-width: 1300px;
     margin: 0 auto;
