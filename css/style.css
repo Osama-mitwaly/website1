@@ -553,3 +553,153 @@ html[dir="ltr"] .dropdown-menu li a {
         font-size: 18px !important;
     }
 }
+/* ===== تحسينات صفحة من نحن (About Us Enhancements) ===== */
+
+/* 1. إصلاح الهيرو على الهاتف */
+@media (max-width: 768px) {
+    .hero { min-height: 50vh !important; }
+    .hero-content { padding: 100px 20px 40px !important; }
+    .hero h1 { font-size: 32px !important; }
+    .hero p { font-size: 16px !important; }
+}
+
+/* 2. تصميم الرؤية والرسالة الاحترافي */
+.vm-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.vm-card {
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.vm-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0; /* للعربية */
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--copper), var(--gold));
+    transition: width 0.4s ease;
+}
+
+/* دعم الاتجاه الإنجليزي للرؤية والرسالة */
+html[dir="ltr"] .vm-card::before {
+    right: auto;
+    left: 0;
+}
+
+.vm-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(13, 59, 46, 0.12);
+}
+
+.vm-card:hover::before {
+    width: 100%;
+    opacity: 0.04;
+}
+
+.vm-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(184, 115, 51, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--copper);
+    margin-bottom: 25px;
+    transition: all 0.4s ease;
+}
+
+.vm-card:hover .vm-icon {
+    background: var(--copper);
+    color: var(--white);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.vm-title {
+    font-size: 24px;
+    color: var(--green-dark);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.vm-text {
+    color: var(--text-light);
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+/* 3. شبكة المميزات (لماذا تختارنا) المتجاوبة */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* تم التصغير ليتناسب مع الهاتف */
+    gap: 30px;
+}
+
+.feature-card {
+    background: var(--white);
+    padding: 35px 25px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.4s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(13, 59, 46, 0.1);
+    border-color: var(--copper-light);
+}
+
+.feature-icon {
+    font-size: 42px;
+    color: var(--copper);
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.15);
+    color: var(--green-mid);
+}
+
+.feature-title {
+    font-size: 18px;
+    color: var(--green-dark);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.feature-text {
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* 4. تأثير الظهور المتتابع (Staggered Animation) */
+.fade-up-delay-1 { transition-delay: 0.1s; }
+.fade-up-delay-2 { transition-delay: 0.2s; }
+.fade-up-delay-3 { transition-delay: 0.3s; }
+.fade-up-delay-4 { transition-delay: 0.4s; }
+
+/* 5. إصلاحات الهاتف النهائية */
+@media (max-width: 768px) {
+    .vm-container { grid-template-columns: 1fr; gap: 25px; }
+    .vm-card { padding: 30px 20px; }
+    .features-grid { grid-template-columns: 1fr; } /* عمود واحد في الهاتف لوضوح أكبر */
+    .feature-card { padding: 30px 20px; display: flex; flex-direction: column; align-items: center; }
+}

@@ -16,24 +16,21 @@
 
     <style>
         body { font-family: 'Poppins', sans-serif; }
-        h1, h2, .section-title { font-family: 'Playfair Display', serif; }
+        h1, h2, .section-title, .vm-title, .feature-title { font-family: 'Playfair Display', serif; }
         .logo { flex-direction: row; }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header id="header">
         <div class="nav-container">
             <a href="en.html" class="logo">
                 <div class="logo-icon"><i class="bi bi-tree-fill"></i></div>
                 <div class="logo-text">Nabatat <span>Elhaya</span></div>
             </a>
-            
             <div class="mobile-toggle" id="mobileToggle">
                 <span></span><span></span><span></span>
             </div>
-
             <nav id="nav">
                 <ul id="navMenu">
                     <li><a href="en.html">Home</a></li>
@@ -47,22 +44,20 @@
                     </li>
                     <li><a href="about-en.html" class="active">About Us</a></li>
                     <li><a href="contact-en.html">Contact</a></li>
-                    <li><a href="about.html" class="lang-btn" style="color: var(--gold); font-weight: bold;"><i class="bi bi-globe"></i> AR</a></li>
+                    <li><a href="about.html" class="lang-btn"><i class="bi bi-globe"></i> AR</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home" style="min-height: 60vh;">
+    <section class="hero" style="min-height: 60vh;">
         <div class="hero-content" style="text-align: center; margin: 0 auto;">
-            <span class="hero-tag">✦ Our Story & Roots ✦</span>
-            <h1>Rooted in the <span class="accent">Earth</span><br>Reaching the World</h1>
-            <p style="margin: 0 auto;">15 years of excellence in bridging Egypt's fertile lands with global markets, through a supply chain built on trust and flexibility.</p>
+            <span class="hero-tag fade-up">✦ Our Story & Roots ✦</span>
+            <h1 class="fade-up fade-up-delay-1">Rooted in the <span class="accent">Earth</span><br>Reaching the World</h1>
+            <p class="fade-up fade-up-delay-2" style="margin: 0 auto;">15 years of excellence in bridging Egypt's fertile lands with global markets, through a supply chain built on trust and flexibility.</p>
         </div>
     </section>
 
-    <!-- Our Story Section -->
     <section class="about">
         <div class="container">
             <div class="about-grid">
@@ -76,68 +71,65 @@
                         We understand that every product has its unique nature. Therefore, we designed our supply network to be fast and adaptable, tailored to the specific requirements of each herb, spice, or seed, ensuring our clients receive the product at its peak freshness and quality, regardless of the destination.
                     </p>
                 </div>
-                <div class="about-image fade-up">
+                <div class="about-image fade-up fade-up-delay-2">
                     <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=80" alt="Supply Chain and Agriculture">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Vision & Mission Section -->
     <section style="background-color: var(--cream);">
         <div class="container">
             <div class="section-header fade-up">
                 <span class="section-tag">Our Compass</span>
                 <h2 class="section-title">Vision & <span class="accent">Mission</span></h2>
             </div>
-            <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
-                <div class="product-card fade-up" style="padding: 40px; text-align: center; border-top: 4px solid var(--copper);">
-                    <i class="bi bi-eye" style="font-size: 48px; color: var(--copper); margin-bottom: 20px;"></i>
-                    <h3 class="product-name">Our Vision</h3>
-                    <p class="product-desc">To be the world's premier and most trusted partner in exporting Egyptian herbs, setting a new global standard for quality and sustainability.</p>
+            <div class="vm-container">
+                <div class="vm-card fade-up fade-up-delay-1">
+                    <div class="vm-icon"><i class="bi bi-eye"></i></div>
+                    <h3 class="vm-title">Our Vision</h3>
+                    <p class="vm-text">To be the world's premier and most trusted partner in exporting Egyptian herbs, setting a new global standard for quality and sustainability while preserving the authenticity of Egyptian products.</p>
                 </div>
-                <div class="product-card fade-up" style="padding: 40px; text-align: center; border-top: 4px solid var(--green-mid);">
-                    <i class="bi bi-bullseye" style="font-size: 48px; color: var(--green-mid); margin-bottom: 20px;"></i>
-                    <h3 class="product-name">Our Mission</h3>
-                    <p class="product-desc">Delivering the purest agricultural products to any destination worldwide, on time and in any required quantity, while supporting local farmers and ensuring sustainable practices.</p>
+                <div class="vm-card fade-up fade-up-delay-2">
+                    <div class="vm-icon" style="background: rgba(13, 59, 46, 0.1); color: var(--green-mid);"><i class="bi bi-bullseye"></i></div>
+                    <h3 class="vm-title">Our Mission</h3>
+                    <p class="vm-text">Delivering the purest agricultural products to any destination worldwide, on time and in any required quantity, while supporting local farmers and ensuring eco-friendly, sustainable practices.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us Section -->
     <section>
         <div class="container">
             <div class="section-header fade-up">
                 <span class="section-tag">Our Advantages</span>
                 <h2 class="section-title">Why Choose <span class="accent">Nabatat Elhaya</span>?</h2>
             </div>
-            <div class="products-grid">
-                <div class="product-card fade-up" style="padding: 30px; text-align: center;">
-                    <i class="bi bi-award" style="font-size: 40px; color: var(--copper); margin-bottom: 15px;"></i>
-                    <h4 class="product-name" style="font-size: 20px;">15 Years of Proven Experience</h4>
-                    <p class="product-desc">Years of accumulated expertise in understanding global market demands and international quality standards.</p>
+            <div class="features-grid">
+                <div class="feature-card fade-up fade-up-delay-1">
+                    <i class="bi bi-award feature-icon"></i>
+                    <h4 class="feature-title">15 Years of Proven Experience</h4>
+                    <p class="feature-text">Years of accumulated expertise in understanding global market demands and strict international quality standards.</p>
                 </div>
-                <div class="product-card fade-up" style="padding: 30px; text-align: center;">
-                    <i class="bi bi-diagram-3" style="font-size: 40px; color: var(--copper); margin-bottom: 15px;"></i>
-                    <h4 class="product-name" style="font-size: 20px;">Flexible & Reliable Supply Chain</h4>
-                    <p class="product-desc">A fast and trusted network with local suppliers, specifically designed to adapt to the unique nature of each product.</p>
+                <div class="feature-card fade-up fade-up-delay-2">
+                    <i class="bi bi-diagram-3 feature-icon"></i>
+                    <h4 class="feature-title">Flexible & Reliable Supply Chain</h4>
+                    <p class="feature-text">A fast and trusted network with local suppliers, specifically designed to adapt to the unique nature of each product.</p>
                 </div>
-                <div class="product-card fade-up" style="padding: 30px; text-align: center;">
-                    <i class="bi bi-globe2" style="font-size: 40px; color: var(--copper); margin-bottom: 15px;"></i>
-                    <h4 class="product-name" style="font-size: 20px;">Global Export Without Borders</h4>
-                    <p class="product-desc">Comprehensive logistical capabilities allowing us to export our products to anywhere in the world efficiently and safely.</p>
+                <div class="feature-card fade-up fade-up-delay-3">
+                    <i class="bi bi-globe2 feature-icon"></i>
+                    <h4 class="feature-title">Global Export Without Borders</h4>
+                    <p class="feature-text">Comprehensive logistical capabilities allowing us to export our products to anywhere in the world efficiently and safely.</p>
                 </div>
-                <div class="product-card fade-up" style="padding: 30px; text-align: center;">
-                    <i class="bi bi-clock-history" style="font-size: 40px; color: var(--copper); margin-bottom: 15px;"></i>
-                    <h4 class="product-name" style="font-size: 20px;">Commitment to Deadlines & Quantities</h4>
-                    <p class="product-desc">We guarantee the supply of required quantities on time, precisely, regardless of the order size, whether small or large.</p>
+                <div class="feature-card fade-up fade-up-delay-4">
+                    <i class="bi bi-clock-history feature-icon"></i>
+                    <h4 class="feature-title">Commitment to Deadlines & Quantities</h4>
+                    <p class="feature-text">We guarantee the supply of required quantities on time, precisely, regardless of the order size, whether small or large.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section (with mailto form) -->
     <section class="contact">
         <div class="container">
             <div class="section-header fade-up">
@@ -165,8 +157,7 @@
                         </span>
                     </div>
                 </div>
-                
-                <form class="contact-form fade-up" id="contactForm">
+                <form class="contact-form fade-up fade-up-delay-2" id="contactForm">
                     <input type="text" id="clientName" placeholder="Name or Company" required>
                     <input type="email" id="clientEmail" placeholder="Email Address" required>
                     <textarea id="clientMessage" placeholder="Your message or order details..." required rows="5"></textarea>
@@ -176,19 +167,16 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2026 Nabatat Elhaya Export. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- WhatsApp Float -->
     <a href="https://wa.me/201067131398" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
         <i class="bi bi-whatsapp"></i>
     </a>
 
-    <!-- JavaScript Files -->
     <script src="js/main.js"></script>
 </body>
 </html>
