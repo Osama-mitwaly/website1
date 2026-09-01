@@ -1195,3 +1195,15 @@ html[dir="ltr"] .vm-card::before {
         font-size: 24px;
     }
 }
+/* ===== إصلاح إجباري لظهور أيقونة العين في جميع الصفحات ===== */
+.product-card:hover .product-overlay {
+    opacity: 1 !important;
+    display: flex !important;
+    z-index: 50 !important;
+    pointer-events: auto !important;
+}
+
+.view-details-btn {
+    z-index: 51 !important;
+    pointer-events: auto !important; /* يضمن أن الزر قابل للنقر ولا يغطيه شيء */
+}
