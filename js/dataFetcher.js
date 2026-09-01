@@ -72,7 +72,6 @@ function renderProducts(category, isArabic) {
         const productDesc = isArabic ? product.description.ar : product.description.en;
         const whatsappMsg = isArabic ? `أريد الاستفسار عن منتج: ${productName}` : `I would like to inquire about: ${productName}`;
         
-        // ترجمة اسم القسم
         let catName = '';
         if (product.category === 'herbs') catName = isArabic ? 'أعشاب' : 'Herbs';
         else if (product.category === 'spices') catName = isArabic ? 'توابل' : 'Spices';
@@ -81,28 +80,29 @@ function renderProducts(category, isArabic) {
 
         const originText = isArabic ? 'المنشأ: <strong>مصر</strong>' : 'Origin: <strong>Egypt</strong>';
         const linkText = isArabic ? 'استفسار ←' : 'Inquire →';
+        const viewText = isArabic ? 'عرض التفاصيل' : 'View Details';
 
-        // استخدام نفس هيكل HTML الخاص بك بالضبط
-       // في نهاية دالة renderProducts، استبدل productCard بهذا:
-const productCard = `
-    <div class="product-card fade-in visible" onclick="window.location.href='product-detail.html?id=${product.id}'" style="cursor: pointer;">
-        <div class="product-image">
-            <img src="${product.image}" alt="${productName}">
-            <div class="product-overlay">
-                <span>عرض التفاصيل</span>
+        const productCard = `
+            <div class="product-card fade-in visible">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${productName}">
+                    <div class="product-overlay">
+                        <a href="product-detail.html?id=${product.id}" class="view-details-btn" title="${viewText}">
+                            <i class="bi bi-eye-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">${catName}</div>
+                    <h3 class="product-name">${productName}</h3>
+                    <p class="product-desc">${productDesc}</p>
+                    <div class="product-footer">
+                        <div class="product-origin">${originText}</div>
+                        <a href="https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}" target="_blank" class="product-link">${linkText}</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="product-info">
-            <div class="product-category">${catName}</div>
-            <h3 class="product-name">${productName}</h3>
-            <p class="product-desc">${productDesc}</p>
-            <div class="product-footer">
-                <div class="product-origin">${originText}</div>
-                <span class="product-link">${linkText}</span>
-            </div>
-        </div>
-    </div>
-`;
+        `;
         productsContainer.innerHTML += productCard;
     });
 }

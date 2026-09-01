@@ -88,72 +88,68 @@
         <i class="bi bi-whatsapp"></i>
     </a>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
-            authDomain: "napatatelhaya-98cb9.firebaseapp.com",
-            projectId: "napatatelhaya-98cb9",
-            storageBucket: "napatatelhaya-98cb9.firebasestorage.app",
-            messagingSenderId: "794316862369",
-            appId: "1:794316862369:web:592fF5ce4e867c97bc91e0"
-        };
+    const firebaseConfig = {
+        apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
+        authDomain: "napatatelhaya-98cb9.firebaseapp.com",
+        projectId: "napatatelhaya-98cb9",
+        storageBucket: "napatatelhaya-98cb9.firebasestorage.app",
+        messagingSenderId: "794316862369",
+        appId: "1:794316862369:web:592fF5ce4e867c97bc91e0"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-        // الحصول على معرف المنتج من URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = urlParams.get('id');
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
 
-        if (!productId) {
-            window.location.href = 'products.html';
-        }
+    if (!productId) {
+        window.location.href = 'products.html';
+    }
 
-        // جلب بيانات المنتج
-        async function loadProduct() {
-            try {
-                const productRef = doc(db, "products", productId);
-                const productSnap = await getDoc(productRef);
+    async function loadProduct() {
+        try {
+            // البحث عن المنتج باستخدام الحقل id بدلاً من Document ID
+            const q = query(
+                collection(db, "products"), 
+                where("id", "==", parseInt(productId))
+            );
+            const querySnapshot = await getDocs(q);
 
-                if (productSnap.exists()) {
-                    const product = productSnap.data();
-                    const isArabic = document.documentElement.lang === 'ar';
-                    
-                    document.getElementById('productTitle').textContent = isArabic ? product.name.ar : product.name.en;
-                    document.getElementById('productName').textContent = isArabic ? product.name.ar : product.name.en;
-                    document.getElementById('productImage').src = product.image;
-                    document.getElementById('productDescription').textContent = isArabic ? product.description.ar : product.description.en;
-                    
-                    // ترجمة الفئة
-                    const categories = {
-                        'herbs': { ar: 'أعشاب', en: 'Herbs' },
-                        'spices': { ar: 'توابل', en: 'Spices' },
-                        'seeds': { ar: 'بذور', en: 'Seeds' }
-                    };
-                    document.getElementById('productCategory').textContent = categories[product.category][isArabic ? 'ar' : 'en'];
-                    
-                    // رابط الواتساب
-                    const whatsappMsg = isArabic ? 
-                        `أريد الاستفسار عن منتج: ${product.name.ar}` : 
-                        `I would like to inquire about: ${product.name.en}`;
-                    document.getElementById('whatsappLink').href = `https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}`;
-                    
-                    // تحديث عنوان الصفحة
-                    document.title = `${isArabic ? product.name.ar : product.name.en} | نباتات الحياة`;
-                } else {
-                    window.location.href = 'products.html';
-                }
-            } catch (error) {
-                console.error("Error loading product:", error);
+            if (!querySnapshot.empty) {
+                const product = querySnapshot.docs[0].data();
+                
+                document.getElementById('productTitle').textContent = product.name.ar;
+                document.getElementById('productName').textContent = product.name.ar;
+                document.getElementById('productImage').src = product.image;
+                document.getElementById('productDescription').textContent = product.description.ar;
+                
+                const categories = {
+                    'herbs': 'أعشاب',
+                    'spices': 'توابل',
+                    'seeds': 'بذور'
+                };
+                document.getElementById('productCategory').textContent = categories[product.category] || product.category;
+                
+                const whatsappMsg = `أريد الاستفسار عن منتج: ${product.name.ar}`;
+                document.getElementById('whatsappLink').href = `https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}`;
+                
+                document.title = `${product.name.ar} | نباتات الحياة`;
+            } else {
                 window.location.href = 'products.html';
             }
+        } catch (error) {
+            console.error("Error loading product:", error);
+            window.location.href = 'products.html';
         }
+    }
 
-        loadProduct();
-    </script>
+    loadProduct();
+</script>
 
     <script src="js/main.js"></script>
 </body>
