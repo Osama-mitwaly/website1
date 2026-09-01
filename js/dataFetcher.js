@@ -16,25 +16,34 @@ const db = getFirestore(app);
 let allProducts = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const productsContainer = document.querySelector('.products-grid'); // تم التحديث ليتطابق مع الكود الخاص بك
+    const productsContainer = document.querySelector('.products-grid');
     if (!productsContainer) return;
 
     const currentLang = document.documentElement.lang || 'en';
     const isArabic = currentLang === 'ar';
 
     try {
-        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">جاري تحميل المنتجات... 🌿</p>' : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">Loading products... 🌿</p>';
+        productsContainer.innerHTML = isArabic 
+            ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">جاري تحميل المنتجات... 🌿</p>' 
+            : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">Loading products... 🌿</p>';
 
         const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) {
-            productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">لا توجد منتجات حالياً.</p>' : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">No products available currently.</p>';
+            productsContainer.innerHTML = isArabic 
+                ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">لا توجد منتجات حالياً.</p>' 
+                : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">No products available currently.</p>';
             return;
         }
 
+        // ==========================================
+        // التعديل الجذري هنا: حفظ المعرف الحقيقي للمستند
+        // ==========================================
         querySnapshot.forEach((doc) => {
-            allProducts.push(doc.data());
+            const data = doc.data();
+            data.docId = doc.id; // إضافة المعرف الحقيقي لربطه بصفحة التفاصيل
+            allProducts.push(data);
         });
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -48,7 +57,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (error) {
         console.error("Error fetching products:", error);
-        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">حدث خطأ في تحميل البيانات.</p>' : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">Error loading data.</p>';
+        productsContainer.innerHTML = isArabic 
+            ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">حدث خطأ في تحميل البيانات.</p>' 
+            : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">Error loading data.</p>';
     }
 });
 
@@ -63,7 +74,9 @@ function renderProducts(category, isArabic) {
         : allProducts.filter(p => p.category === category);
 
     if (filteredProducts.length === 0) {
-        productsContainer.innerHTML = isArabic ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">لا توجد منتجات في هذا القسم.</p>' : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">No products in this category.</p>';
+        productsContainer.innerHTML = isArabic 
+            ? '<p style="text-align:center; width:100%; grid-column: 1 / -1;">لا توجد منتجات في هذا القسم.</p>' 
+            : '<p style="text-align:center; width:100%; grid-column: 1 / -1;">No products in this category.</p>';
         return;
     }
 
@@ -82,12 +95,15 @@ function renderProducts(category, isArabic) {
         const linkText = isArabic ? 'استفسار ←' : 'Inquire →';
         const viewText = isArabic ? 'عرض التفاصيل' : 'View Details';
 
+        // استخدام المعرف الحقيقي (docId) الذي قمنا بحفظه في الأعلى
+        const detailUrl = `product-detail.html?id=${product.docId}`;
+
         const productCard = `
             <div class="product-card fade-in visible">
                 <div class="product-image">
                     <img src="${product.image}" alt="${productName}">
                     <div class="product-overlay">
-                        <a href="product-detail.html?id=${product.id}" class="view-details-btn" title="${viewText}">
+                        <a href="${detailUrl}" class="view-details-btn" title="${viewText}">
                             <i class="bi bi-eye-fill"></i>
                         </a>
                     </div>

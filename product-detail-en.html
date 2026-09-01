@@ -94,9 +94,9 @@
         <i class="bi bi-whatsapp"></i>
     </a>
 
-   <script type="module">
+ <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
@@ -111,33 +111,26 @@
     const db = getFirestore(app);
 
     const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id');
+    const docId = urlParams.get('id');
 
-    if (!productId) {
+    if (!docId) {
         window.location.href = 'products-en.html';
     }
 
     async function loadProduct() {
         try {
-            const q = query(
-                collection(db, "products"), 
-                where("id", "==", parseInt(productId))
-            );
-            const querySnapshot = await getDocs(q);
+            const productRef = doc(db, "products", docId);
+            const productSnap = await getDoc(productRef);
 
-            if (!querySnapshot.empty) {
-                const product = querySnapshot.docs[0].data();
+            if (productSnap.exists()) {
+                const product = productSnap.data();
                 
                 document.getElementById('productTitle').textContent = product.name.en;
                 document.getElementById('productName').textContent = product.name.en;
                 document.getElementById('productImage').src = product.image;
                 document.getElementById('productDescription').textContent = product.description.en;
                 
-                const categories = {
-                    'herbs': 'Herbs',
-                    'spices': 'Spices',
-                    'seeds': 'Seeds'
-                };
+                const categories = { 'herbs': 'Herbs', 'spices': 'Spices', 'seeds': 'Seeds' };
                 document.getElementById('productCategory').textContent = categories[product.category] || product.category;
                 
                 const whatsappMsg = `I would like to inquire about: ${product.name.en}`;

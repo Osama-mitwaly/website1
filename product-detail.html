@@ -88,9 +88,9 @@
         <i class="bi bi-whatsapp"></i>
     </a>
 
-  <script type="module">
+ <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
@@ -105,34 +105,27 @@
     const db = getFirestore(app);
 
     const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id');
+    const docId = urlParams.get('id');
 
-    if (!productId) {
+    if (!docId) {
         window.location.href = 'products.html';
     }
 
     async function loadProduct() {
         try {
-            // البحث عن المنتج باستخدام الحقل id بدلاً من Document ID
-            const q = query(
-                collection(db, "products"), 
-                where("id", "==", parseInt(productId))
-            );
-            const querySnapshot = await getDocs(q);
+            // جلب المستند مباشرة باستخدام المعرف الحقيقي
+            const productRef = doc(db, "products", docId);
+            const productSnap = await getDoc(productRef);
 
-            if (!querySnapshot.empty) {
-                const product = querySnapshot.docs[0].data();
+            if (productSnap.exists()) {
+                const product = productSnap.data();
                 
                 document.getElementById('productTitle').textContent = product.name.ar;
                 document.getElementById('productName').textContent = product.name.ar;
                 document.getElementById('productImage').src = product.image;
                 document.getElementById('productDescription').textContent = product.description.ar;
                 
-                const categories = {
-                    'herbs': 'أعشاب',
-                    'spices': 'توابل',
-                    'seeds': 'بذور'
-                };
+                const categories = { 'herbs': 'أعشاب', 'spices': 'توابل', 'seeds': 'بذور' };
                 document.getElementById('productCategory').textContent = categories[product.category] || product.category;
                 
                 const whatsappMsg = `أريد الاستفسار عن منتج: ${product.name.ar}`;
