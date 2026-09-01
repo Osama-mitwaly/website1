@@ -151,24 +151,34 @@
 
     <script src="js/main.js"></script>
     
-    <script>
+<script>
     document.addEventListener('DOMContentLoaded', () => {
         const langSwitcher = document.getElementById('langSwitcher');
         if (!langSwitcher) return;
 
         const currentUrl = new URL(window.location.href);
         let newPathname = currentUrl.pathname;
+        const langText = document.getElementById('langText');
 
-        // التبديل الذكي بين المسارات مع الحفاظ على المعرفات
-        if (newPathname.includes('product-detail-en.html')) {
-            newPathname = newPathname.replace('product-detail-en.html', 'product-detail.html');
-            document.getElementById('langText').textContent = 'EN'; // للصفحة الإنجليزية
+        // التبديل الذكي بين المسارات
+        if (newPathname.includes('-en.html')) {
+            // نحن في الصفحة الإنجليزية، نريد الذهاب للعربية
+            newPathname = newPathname.replace('-en.html', '.html');
+            if (newPathname.includes('index.html') === false && newPathname.endsWith('.html') === false) {
+                 newPathname = newPathname.replace('.html', '-ar.html'); // حالة خاصة إذا كان لديك ملفات -ar
+            }
+            if (langText) langText.textContent = 'EN';
         } else {
-            newPathname = newPathname.replace('product-detail.html', 'product-detail-en.html');
-            document.getElementById('langText').textContent = 'AR'; // للصفحة العربية
+            // نحن في الصفحة العربية، نريد الذهاب للإنجليزية
+            if (newPathname.includes('index.html')) {
+                newPathname = newPathname.replace('index.html', 'en.html');
+            } else {
+                newPathname = newPathname.replace('.html', '-en.html');
+            }
+            if (langText) langText.textContent = 'AR';
         }
 
-        // إنشاء رابط جديد يحافظ على search params (مثل ?id=xyz)
+        // إنشاء الرابط الجديد مع الحفاظ على أي معاملات (مثل ?id=123)
         const newUrl = new URL(newPathname, currentUrl.origin);
         newUrl.search = currentUrl.search; 
         
