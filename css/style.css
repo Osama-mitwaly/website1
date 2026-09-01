@@ -1108,3 +1108,28 @@ html[dir="ltr"] .dropdown-menu li a { text-align: left; }
         color: var(--white) !important;
     }
 }
+
+/* ===== إصلاح اتجاه القائمة المنسدلة لتصبح عمودية تماماً ===== */
+.dropdown-menu {
+    display: flex !important;
+    flex-direction: column !important; /* يجبر العناصر على الترتيب العمودي */
+    align-items: flex-start !important;
+    width: 100%;
+}
+
+.dropdown-menu li {
+    width: 100%;
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    width: 100%;
+    text-align: right; /* للعربية */
+    padding: 10px 20px !important;
+}
+
+/* دعم اللغة الإنجليزية */
+html[dir="ltr"] .dropdown-menu li a {
+    text-align: left;
+}
