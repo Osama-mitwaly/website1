@@ -150,40 +150,6 @@
     </script>
 
     <script src="js/main.js"></script>
-    
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const langSwitcher = document.getElementById('langSwitcher');
-        if (!langSwitcher) return;
 
-        const currentUrl = new URL(window.location.href);
-        let newPathname = currentUrl.pathname;
-        const langText = document.getElementById('langText');
-
-        // التبديل الذكي بين المسارات
-        if (newPathname.includes('-en.html')) {
-            // نحن في الصفحة الإنجليزية، نريد الذهاب للعربية
-            newPathname = newPathname.replace('-en.html', '.html');
-            if (newPathname.includes('index.html') === false && newPathname.endsWith('.html') === false) {
-                 newPathname = newPathname.replace('.html', '-ar.html'); // حالة خاصة إذا كان لديك ملفات -ar
-            }
-            if (langText) langText.textContent = 'EN';
-        } else {
-            // نحن في الصفحة العربية، نريد الذهاب للإنجليزية
-            if (newPathname.includes('index.html')) {
-                newPathname = newPathname.replace('index.html', 'en.html');
-            } else {
-                newPathname = newPathname.replace('.html', '-en.html');
-            }
-            if (langText) langText.textContent = 'AR';
-        }
-
-        // إنشاء الرابط الجديد مع الحفاظ على أي معاملات (مثل ?id=123)
-        const newUrl = new URL(newPathname, currentUrl.origin);
-        newUrl.search = currentUrl.search; 
-        
-        langSwitcher.href = newUrl.toString();
-    });
-</script>
 </body>
 </html>
