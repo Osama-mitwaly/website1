@@ -43,7 +43,7 @@
                     </li>
                     <li><a href="about-en.html">About Us</a></li>
                     <li><a href="contact-en.html">Contact</a></li>
-                    <li><a href="product-detail.html" class="lang-btn"><i class="bi bi-globe"></i> AR</a></li>
+                    <li><a href="#" id="langSwitcher" class="lang-btn"><i class="bi bi-globe"></i> AR</a></li>
                 </ul>
             </nav>
         </div>
@@ -150,5 +150,15 @@
 </script>
 
     <script src="js/main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const langSwitcher = document.getElementById('langSwitcher');
+        if (langSwitcher) {
+            const currentUrl = window.location.href;
+            const newUrl = currentUrl.replace('product-detail-en.html', 'product-detail.html');
+            langSwitcher.href = newUrl;
+        }
+    });
+</script>
 </body>
 </html>

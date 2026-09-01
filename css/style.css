@@ -122,14 +122,8 @@ section {
     color: var(--copper);
 }
 
-.section-subtitlef{
-    color:white;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
 .section-subtitle {
-    color:var(--text-light);
+    color: var(--text-light);
     max-width: 600px;
     margin: 0 auto;
 }
@@ -145,8 +139,7 @@ section {
     gap: 30px;
 }
 
-/* ===== تنسيقات بطاقة المنتج (مدمجة ومصححة) ===== */
-
+/* ===== تنسيقات بطاقة المنتج ===== */
 .product-card {
     background: var(--white);
     border-radius: 15px;
@@ -155,7 +148,7 @@ section {
     transition: transform var(--transition-speed), box-shadow var(--transition-speed);
     display: flex;
     flex-direction: column;
-    height: 100%; /* لضمان تساوي ارتفاع البطاقات */
+    height: 100%;
 }
 
 .product-card:hover {
@@ -164,7 +157,7 @@ section {
 }
 
 .product-image {
-    position: relative; /* ضروري جداً لظهور الأيقونة والشارة فوق الصورة */
+    position: relative;
     overflow: hidden;
     height: 260px;
     width: 100%;
@@ -174,15 +167,14 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block; /* يمنع أي فراغ صغير أسفل الصورة */
+    display: block;
     transition: transform 0.5s ease;
 }
 
 .product-card:hover .product-image img {
-    transform: scale(1.05); /* تكبير بسيط للصورة عند التحويم لإضفاء حيوية */
+    transform: scale(1.05);
 }
 
-/* شارة المنتج (مثل: الأكثر مبيعاً) */
 .product-badge {
     position: absolute;
     top: 15px;
@@ -193,59 +185,15 @@ section {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 700;
-    z-index: 10; /* أعلى من الصورة */
+    z-index: 10;
 }
 
-/* طبقة التعتيم وأيقونة العين */
-.product-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(13, 59, 46, 0.7); /* لون أخضر داكن شفاف */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 15; /* يغطي الصورة والشارة عند التحويم */
-}
-
-.product-card:hover .product-overlay {
-    opacity: 1;
-}
-
-.view-details-btn {
-    width: 60px;
-    height: 60px;
-    background: var(--white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: var(--copper);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-}
-
-.view-details-btn:hover {
-    background: var(--copper);
-    color: var(--white);
-    transform: scale(1.1);
-}
-
-/* معلومات المنتج */
 .product-info {
     padding: 25px;
-    flex-grow: 1; /* يضمن دفع المحتوى للأسفل بشكل متناسق */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
-
-/* (تأكد من أن باقي تنسيقات .product-category, .product-name, .product-desc, .product-footer موجودة كما كانت في ملفك الأصلي) */
 
 .product-category {
     color: var(--copper);
@@ -323,7 +271,151 @@ section {
     box-shadow: 0 10px 30px rgba(13, 59, 46, 0.2);
 }
 
-/* ===== قسم اتصل بنا وتنسيق الأيقونات ===== */
+/* ===== تحسينات صفحة من نحن ===== */
+@media (max-width: 768px) {
+    .hero { min-height: 50vh !important; }
+    .hero-content { padding: 100px 20px 40px !important; }
+    .hero h1 { font-size: 32px !important; }
+    .hero p { font-size: 16px !important; }
+}
+
+.vm-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.vm-card {
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.vm-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--copper), var(--gold));
+    transition: width 0.4s ease;
+}
+
+html[dir="ltr"] .vm-card::before {
+    right: auto;
+    left: 0;
+}
+
+.vm-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(13, 59, 46, 0.12);
+}
+
+.vm-card:hover::before {
+    width: 100%;
+    opacity: 0.04;
+}
+
+.vm-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(184, 115, 51, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--copper);
+    margin-bottom: 25px;
+    transition: all 0.4s ease;
+}
+
+.vm-card:hover .vm-icon {
+    background: var(--copper);
+    color: var(--white);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.vm-title {
+    font-size: 24px;
+    color: var(--green-dark);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.vm-text {
+    color: var(--text-light);
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: var(--white);
+    padding: 35px 25px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.4s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(13, 59, 46, 0.1);
+    border-color: var(--copper-light);
+}
+
+.feature-icon {
+    font-size: 42px;
+    color: var(--copper);
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.15);
+    color: var(--green-mid);
+}
+
+.feature-title {
+    font-size: 18px;
+    color: var(--green-dark);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.feature-text {
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.fade-up-delay-1 { transition-delay: 0.1s; }
+.fade-up-delay-2 { transition-delay: 0.2s; }
+.fade-up-delay-3 { transition-delay: 0.3s; }
+.fade-up-delay-4 { transition-delay: 0.4s; }
+
+@media (max-width: 768px) {
+    .vm-container { grid-template-columns: 1fr; gap: 25px; }
+    .vm-card { padding: 30px 20px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .feature-card { padding: 30px 20px; display: flex; flex-direction: column; align-items: center; }
+}
+
+/* ===== قسم اتصل بنا ===== */
 .contact {
     background: var(--green-dark);
     color: var(--white);
@@ -384,394 +476,7 @@ section {
     font-family: inherit;
 }
 
-/* ===== الفوتر ===== */
-footer {
-    background: #082419;
-    color: var(--white);
-    text-align: center;
-    padding: 30px 0;
-}
-
-/* ===== الحيوية والأنيميشن (Animations) ===== */
-html {
-    scroll-behavior: smooth;
-}
-
-header.scrolled {
-    padding: 10px 0;
-    background: rgba(13, 59, 46, 0.98);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
-}
-
-.fade-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ===== زر الواتساب العائم ===== */
-.whatsapp-float {
-    position: fixed;
-    bottom: 30px;
-    left: 30px; 
-    background-color: #25d366;
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    z-index: 1000;
-    transition: transform 0.3s ease;
-    font-size: 30px;
-    text-decoration: none;
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.1);
-    color: white;
-}
-
-/* ===== تهيئة زر قائمة الموبايل (Hamburger) ===== */
-.mobile-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.mobile-toggle span {
-    width: 30px;
-    height: 3px;
-    background-color: var(--white);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-/* ===== تجاوب الشاشات وحل مشكلة القائمة ===== */
-@media (max-width: 768px) {
-    .about-grid, .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-    }
-    
-    .mobile-toggle {
-        display: flex; /* إظهار الزر في الموبايل */
-    }
-
-    nav {
-        position: fixed;
-        top: 0;
-        right: -100%; /* إخفاء القائمة خارج الشاشة */
-        width: 75%;
-        height: 100vh;
-        background-color: var(--green-dark);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: right 0.4s ease;
-        z-index: 1000;
-        box-shadow: -5px 0 20px rgba(0,0,0,0.6);
-    }
-
-    /* هذا الكلاس سيضيفه الجافاسكريبت لإظهار القائمة */
-    nav.active {
-        right: 0;
-    }
-
-    /* حل المشكلة: إجبار الـ ul على الظهور كعمود */
-    #navMenu {
-        display: flex !important;
-        flex-direction: column;
-        gap: 35px;
-        text-align: center;
-        padding: 0;
-    }
-
-    #navMenu li a {
-        font-size: 22px;
-    }
-
-    /* تأثير تحويل البرجر إلى علامة X عند الفتح */
-    nav.active ~ .mobile-toggle span:nth-child(1),
-    .mobile-toggle.active span:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-    }
-    nav.active ~ .mobile-toggle span:nth-child(2),
-    .mobile-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
-    nav.active ~ .mobile-toggle span:nth-child(3),
-    .mobile-toggle.active span:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
-    }
-}
-/* ===== ضبط أيقونة الواتساب في المنتصف تماماً ===== */
-/* ===== 1. القاعدة العامة (تُطبق على النسخة الإنجليزية) ===== */
-.whatsapp-float i {
-    position: relative;
-    top: -1px;  
-    left: 1px;  
-    line-height: 1; 
-}
-
-/* ===== 2. التعديل المخصص للنسخة العربية (يُطبق فقط في index.html) ===== */
-html[dir="rtl"] .whatsapp-float i {
-    top: 3px; /* هذه القيمة ستلغي القيمة السابقة وتدفع الأيقونة للأسفل في النسخة العربية فقط */
-    left: 0;  /* لإلغاء الإزاحة لليسار إن لم تكن بحاجة إليها في العربي */
-}
-/* ===== القائمة المنسدلة (بحركة انسيابية ناعمة) ===== */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
-    /* تم إلغاء display: none لكي تعمل الحركة */
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: var(--white);
-    min-width: 200px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    z-index: 100;
-    list-style: none;
-    gap: 0;
-
-    /* إعدادات النعومة والحركة */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(15px); /* تبدأ من الأسفل قليلاً */
-    padding: 0;
-    transition: all 0.4s ease; /* سرعة النزول ونعومته */
-}
-
-/* إظهار القائمة بنعومة عند الفتح */
-.dropdown.active .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0); /* تستقر في مكانها */
-    padding: 10px 0;
-}
-
-.dropdown-menu li {
-    width: 100%;
-}
-
-.dropdown-menu li a {
-    display: block;
-    padding: 10px 20px;
-    color: var(--green-dark) !important;
-    font-size: 16px !important;
-    text-align: right;
-    transition: background 0.3s;
-}
-
-.dropdown-menu li a:hover {
-    background-color: var(--cream);
-}
-
-html[dir="ltr"] .dropdown-menu li a {
-    text-align: left;
-}
-
-/* حركة دوران السهم عند الفتح */
-.dropdown > a i {
-    transition: transform 0.3s ease;
-    display: inline-block;
-}
-
-.dropdown.active > a i {
-    transform: rotate(180deg);
-}
-
-/* ===== حركة الانزلاق (Slide Down) في الموبايل ===== */
-@media (max-width: 768px) {
-    .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        background-color: rgba(255, 255, 255, 0.05);
-        transform: none; /* إلغاء حركة الصعود في الموبايل */
-        max-height: 0; /* تبدأ بارتفاع صفر لكي تُطوى */
-        overflow: hidden; /* إخفاء ما يخرج عن الارتفاع */
-    }
-
-    .dropdown.active .dropdown-menu {
-        max-height: 400px; /* مساحة كافية لتفرد بداخلها */
-        margin-top: 10px;
-    }
-
-    .dropdown-menu li a {
-        color: var(--white) !important;
-        font-size: 18px !important;
-    }
-}
-/* ===== تحسينات صفحة من نحن (About Us Enhancements) ===== */
-
-/* 1. إصلاح الهيرو على الهاتف */
-@media (max-width: 768px) {
-    .hero { min-height: 50vh !important; }
-    .hero-content { padding: 100px 20px 40px !important; }
-    .hero h1 { font-size: 32px !important; }
-    .hero p { font-size: 16px !important; }
-}
-
-/* 2. تصميم الرؤية والرسالة الاحترافي */
-.vm-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-top: 20px;
-}
-
-.vm-card {
-    background: var(--white);
-    padding: 40px 30px;
-    border-radius: 16px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.04);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-}
-
-.vm-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0; /* للعربية */
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, var(--copper), var(--gold));
-    transition: width 0.4s ease;
-}
-
-/* دعم الاتجاه الإنجليزي للرؤية والرسالة */
-html[dir="ltr"] .vm-card::before {
-    right: auto;
-    left: 0;
-}
-
-.vm-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(13, 59, 46, 0.12);
-}
-
-.vm-card:hover::before {
-    width: 100%;
-    opacity: 0.04;
-}
-
-.vm-icon {
-    width: 70px;
-    height: 70px;
-    background: rgba(184, 115, 51, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    color: var(--copper);
-    margin-bottom: 25px;
-    transition: all 0.4s ease;
-}
-
-.vm-card:hover .vm-icon {
-    background: var(--copper);
-    color: var(--white);
-    transform: scale(1.1) rotate(5deg);
-}
-
-.vm-title {
-    font-size: 24px;
-    color: var(--green-dark);
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.vm-text {
-    color: var(--text-light);
-    line-height: 1.8;
-    font-size: 15px;
-}
-
-/* 3. شبكة المميزات (لماذا تختارنا) المتجاوبة */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* تم التصغير ليتناسب مع الهاتف */
-    gap: 30px;
-}
-
-.feature-card {
-    background: var(--white);
-    padding: 35px 25px;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid rgba(0,0,0,0.04);
-    transition: all 0.4s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(13, 59, 46, 0.1);
-    border-color: var(--copper-light);
-}
-
-.feature-icon {
-    font-size: 42px;
-    color: var(--copper);
-    margin-bottom: 20px;
-    display: inline-block;
-    transition: transform 0.4s ease;
-}
-
-.feature-card:hover .feature-icon {
-    transform: scale(1.15);
-    color: var(--green-mid);
-}
-
-.feature-title {
-    font-size: 18px;
-    color: var(--green-dark);
-    margin-bottom: 12px;
-    font-weight: 700;
-}
-
-.feature-text {
-    color: var(--text-light);
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-/* 4. تأثير الظهور المتتابع (Staggered Animation) */
-.fade-up-delay-1 { transition-delay: 0.1s; }
-.fade-up-delay-2 { transition-delay: 0.2s; }
-.fade-up-delay-3 { transition-delay: 0.3s; }
-.fade-up-delay-4 { transition-delay: 0.4s; }
-
-/* 5. إصلاحات الهاتف النهائية */
-@media (max-width: 768px) {
-    .vm-container { grid-template-columns: 1fr; gap: 25px; }
-    .vm-card { padding: 30px 20px; }
-    .features-grid { grid-template-columns: 1fr; } /* عمود واحد في الهاتف لوضوح أكبر */
-    .feature-card { padding: 30px 20px; display: flex; flex-direction: column; align-items: center; }
-}
-/* ===== تحسينات صفحة تواصل معنا (Contact Page Enhancements) ===== *//* ===== تحسينات صفحة تواصل معنا (Contact Page Enhancements) ===== */
-
-/* 1. بطاقات معلومات الاتصال */
+/* ===== تحسينات صفحة تواصل معنا ===== */
 .contact-info-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -865,7 +570,6 @@ html[dir="ltr"] .vm-card::before {
     color: var(--copper);
 }
 
-/* رابط "اضغط لفتح النموذج" */
 .info-action-link {
     color: var(--copper) !important;
     font-size: 13px;
@@ -886,7 +590,6 @@ html[dir="ltr"] .vm-card::before {
     transform: translateY(-2px);
 }
 
-/* 2. شبكة نموذج الاتصال + ساعات العمل */
 .contact-main-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -894,7 +597,6 @@ html[dir="ltr"] .vm-card::before {
     align-items: start;
 }
 
-/* 3. ساعات العمل المحسنة */
 .business-hours {
     background: var(--white);
     padding: 40px;
@@ -953,7 +655,6 @@ html[dir="ltr"] .vm-card::before {
     font-weight: 600;
 }
 
-/* 4. مزايا إضافية تحت ساعات العمل */
 .contact-benefits {
     margin-top: 30px;
     padding-top: 25px;
@@ -966,7 +667,7 @@ html[dir="ltr"] .vm-card::before {
     gap: 12px;
     margin-bottom: 15px;
     font-size: 15px;
-    color: var(--white);
+    color: var(--white); /* تم التعديل للون الأبيض كما طلبت */
     font-weight: 500;
 }
 
@@ -976,7 +677,6 @@ html[dir="ltr"] .vm-card::before {
     flex-shrink: 0;
 }
 
-/* 5. تأثيرات حيوية إضافية */
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
@@ -986,102 +686,201 @@ html[dir="ltr"] .vm-card::before {
     animation: float 3s ease-in-out infinite;
 }
 
-/* 6. حل مشكلة التمرير عند الضغط على الروابط الداخلية */
 #contactFormSection {
     scroll-margin-top: 100px;
 }
 
-/* 7. تحسينات الهاتف */
 @media (max-width: 768px) {
-    .contact-info-cards {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-buttons { flex-direction: column; }
+    .contact-info-cards { grid-template-columns: 1fr; gap: 20px; }
+    .info-card { padding: 30px 20px; }
+    .info-icon { width: 70px; height: 70px; font-size: 30px; }
+    .contact-main-grid { grid-template-columns: 1fr; gap: 30px; }
+    .business-hours { padding: 25px 20px; }
+    .hours-title { font-size: 18px; }
+    .hours-list li { font-size: 14px; padding: 12px 0; }
+    .benefit-item { font-size: 14px; }
+}
+
+/* ===== الفوتر والحيوية ===== */
+footer {
+    background: #082419;
+    color: var(--white);
+    text-align: center;
+    padding: 30px 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+header.scrolled {
+    padding: 10px 0;
+    background: rgba(13, 59, 46, 0.98);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; 
+    background-color: #25d366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    color: white;
+}
+
+.whatsapp-float i {
+    position: relative;
+    top: -1px;  
+    left: 1px;  
+    line-height: 1; 
+}
+
+html[dir="rtl"] .whatsapp-float i {
+    top: 3px;
+    left: 0;
+}
+
+/* ===== القائمة المنسدلة ===== */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--white);
+    min-width: 200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    z-index: 100;
+    list-style: none;
+    gap: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    padding: 0;
+    transition: all 0.4s ease;
+}
+
+.dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    padding: 10px 0;
+}
+
+.dropdown-menu li {
+    width: 100%;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--green-dark) !important;
+    font-size: 16px !important;
+    text-align: right;
+    transition: background 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background-color: var(--cream);
+}
+
+html[dir="ltr"] .dropdown-menu li a {
+    text-align: left;
+}
+
+.dropdown > a i {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.dropdown.active > a i {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+    .mobile-toggle { display: flex; }
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        height: 100vh;
+        background-color: var(--green-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.4s ease;
+        z-index: 1000;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.6);
     }
-    
-    .info-card {
-        padding: 30px 20px;
+    nav.active { right: 0; }
+    #navMenu {
+        display: flex !important;
+        flex-direction: column;
+        gap: 35px;
+        text-align: center;
+        padding: 0;
     }
+    #navMenu li a { font-size: 22px; }
+    nav.active ~ .mobile-toggle span:nth-child(1),
+    .mobile-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    nav.active ~ .mobile-toggle span:nth-child(2),
+    .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+    nav.active ~ .mobile-toggle span:nth-child(3),
+    .mobile-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
     
-    .info-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 30px;
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background-color: rgba(255, 255, 255, 0.05);
+        transform: none;
+        max-height: 0;
+        overflow: hidden;
     }
-    
-    .contact-main-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+    .dropdown.active .dropdown-menu {
+        max-height: 400px;
+        margin-top: 10px;
     }
-    
-    .business-hours {
-        padding: 25px 20px;
-    }
-    
-    .hours-title {
-        font-size: 18px;
-    }
-    
-    .hours-list li {
-        font-size: 14px;
-        padding: 12px 0;
-    }
-    
-    .benefit-item {
-        font-size: 14px;
+    .dropdown-menu li a {
+        color: var(--white) !important;
+        font-size: 18px !important;
     }
 }
 
 /* ===== صفحة تفاصيل المنتج ===== */
-
-/* Overlay مع أيقونة العين */
-.product-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(13, 59, 46, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.product-card:hover .product-overlay {
-    opacity: 1;
-}
-
-.view-details-btn {
-    width: 70px;
-    height: 70px;
-    background: var(--white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    color: var(--copper);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-}
-
-.view-details-btn:hover {
-    background: var(--copper);
-    color: var(--white);
-    transform: scale(1.1);
-}
-
-.view-details-btn i {
-    transition: transform 0.3s ease;
-}
-
-.view-details-btn:hover i {
-    transform: scale(1.2);
-}
-
-/* تفاصيل المنتج */
 .product-detail-hero {
     padding: 150px 0 60px;
     background: linear-gradient(135deg, rgba(13, 59, 46, 0.9), rgba(13, 59, 46, 0.8)), url('https://images.unsplash.com/photo-1596040033229-a98211ebd058d?auto=format&fit=crop&w=1200&q=60');
@@ -1165,45 +964,63 @@ html[dir="ltr"] .vm-card::before {
     flex-wrap: wrap;
 }
 
-/* تحسينات الهاتف */
 @media (max-width: 768px) {
-    .product-detail-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .product-detail-image {
-        position: relative;
-        top: 0;
-    }
-    
-    .product-detail-info h1 {
-        font-size: 32px;
-    }
-    
-    .product-detail-actions {
-        flex-direction: column;
-    }
-    
-    .product-detail-actions .btn {
-        width: 100%;
-    }
-    
-    .view-details-btn {
-        width: 60px;
-        height: 60px;
-        font-size: 24px;
-    }
+    .product-detail-grid { grid-template-columns: 1fr; gap: 30px; }
+    .product-detail-image { position: relative; top: 0; }
+    .product-detail-info h1 { font-size: 32px; }
+    .product-detail-actions { flex-direction: column; }
+    .product-detail-actions .btn { width: 100%; }
 }
-/* ===== إصلاح إجباري لظهور أيقونة العين في جميع الصفحات ===== */
+
+/* ========================================================= */
+/* ===== الحل النهائي والشامل لأيقونة العين (يعمل في جميع الصفحات) ===== */
+/* ========================================================= */
+.product-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(13, 59, 46, 0.7) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+    z-index: 15 !important;
+    pointer-events: none !important; /* يسمح بالنقر على ما تحته عندما يكون مخفياً */
+}
+
 .product-card:hover .product-overlay {
     opacity: 1 !important;
-    display: flex !important;
-    z-index: 50 !important;
-    pointer-events: auto !important;
+    pointer-events: auto !important; /* يسمح بالنقر على الأيقونة عند الظهور */
 }
 
 .view-details-btn {
-    z-index: 51 !important;
-    pointer-events: auto !important; /* يضمن أن الزر قابل للنقر ولا يغطيه شيء */
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    background: var(--white) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 24px !important;
+    color: var(--copper) !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3) !important;
+    z-index: 16 !important;
+}
+
+.view-details-btn:hover {
+    background: var(--copper) !important;
+    color: var(--white) !important;
+    transform: scale(1.1) !important;
+}
+
+.view-details-btn i {
+    font-size: 24px !important;
+    display: block !important;
 }

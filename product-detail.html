@@ -37,8 +37,7 @@
                     </li>
                     <li><a href="about.html">من نحن</a></li>
                     <li><a href="contact.html">اتصل بنا</a></li>
-                    <li><a href="product-detail-en.html" class="lang-btn"><i class="bi bi-globe"></i> EN</a></li>
-                </ul>
+                    <li><a href="#" id="langSwitcher" class="lang-btn"><i class="bi bi-globe"></i> EN</a></li>
             </nav>
         </div>
     </header>
@@ -145,5 +144,16 @@
 </script>
 
     <script src="js/main.js"></script>
+    <script>
+    // تبديل اللغة مع الحفاظ على معرف المنتج
+    document.addEventListener('DOMContentLoaded', () => {
+        const langSwitcher = document.getElementById('langSwitcher');
+        if (langSwitcher) {
+            const currentUrl = window.location.href;
+            const newUrl = currentUrl.replace('product-detail.html', 'product-detail-en.html');
+            langSwitcher.href = newUrl;
+        }
+    });
+</script>
 </body>
 </html>
