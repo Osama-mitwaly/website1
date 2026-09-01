@@ -22,34 +22,40 @@
 </head>
 <body>
 
-    <header id="header">
-        <div class="nav-container">
-            <a href="en.html" class="logo">
-                <div class="logo-icon"><i class="bi bi-tree-fill"></i></div>
-                <div class="logo-text">Nabatat <span>Elhaya</span></div>
-            </a>
-            <div class="mobile-toggle" id="mobileToggle">
-                <span></span><span></span><span></span>
-            </div>
-            <nav id="nav">
-                <ul id="navMenu">
-                    <li><a href="en.html">Home</a></li>
-                    <li class="dropdown">
-                        <a href="products-en.html">Products <i class="bi bi-chevron-down" style="font-size: 14px;"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="products-en.html?category=herbs">Herbs</a></li>
-                            <li><a href="products-en.html?category=spices">Spices</a></li>
-                            <li><a href="products-en.html?category=seeds">Seeds</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="about-en.html">About Us</a></li>
-                    <li><a href="contact-en.html" class="active">Contact</a></li>
-                    <li><a href="contact.html" class="lang-btn"><i class="bi bi-globe"></i> AR</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+   <header id="mainHeader">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="bi bi-tree-fill"></i></div>
+            <div class="logo-text">Nabatat <span>Elhaya</span></div>
+        </a>
+        
+        <!-- زر البرجر منيو (موحد في كل الصفحات) -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
+        <nav id="mainNav">
+            <ul id="navMenu">
+                <!-- ملاحظة: عدل الروابط في كل صفحة لتناسب الصفحة الحالية (active) -->
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="products.html" class="dropdown-toggle">Our Products <i class="bi bi-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="products.html?category=herbs">Herbs</a></li>
+                        <li><a href="products.html?category=spices">Spices</a></li>
+                        <li><a href="products.html?category=seeds">Seeds</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+                <!-- زر اللغة الموحد -->
+                <li><a href="products.html" id="langSwitcher" class="lang-btn"><i class="bi bi-globe"></i> <span id="langText">AR</span></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
     <!-- Hero Section -->
     <section class="hero" style="min-height: 55vh; background-image: linear-gradient(135deg, rgba(13, 59, 46, 0.85), rgba(13, 59, 46, 0.7)), url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1200&q=60');">
         <div class="hero-content" style="text-align: center; margin: 0 auto;">

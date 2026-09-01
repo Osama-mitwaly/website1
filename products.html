@@ -67,28 +67,6 @@
   .lang-btn::after { display: none !important; }
   .lang-btn:hover { color: var(--copper-light) !important; transform: translateY(-2px); }
 
-  /* ===== زر قائمة الهاتف (Hamburger) ===== */
-  .mobile-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    cursor: pointer;
-    z-index: 1001;
-  }
-  .mobile-toggle span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: var(--white);
-    border-radius: 3px;
-    transition: all 0.3s ease-in-out;
-  }
-  .mobile-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-  .mobile-toggle.active span:nth-child(2) { opacity: 0; }
-  .mobile-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
   /* ===== PAGE HEADER ===== */
   .page-header { background: linear-gradient(135deg, rgba(13, 59, 46, 0.9), rgba(13, 59, 46, 0.8)), url('https://image.qwenlm.ai/public_source/f925885c-9cf5-478e-a6f5-b6f34c2588bb/1a6e639e1-f6bf-43e1-8311-ee50d5f96330.png'); background-size: cover; background-position: center; padding: 150px 20px 80px; text-align: center; color: white; }
   .page-header h1 { font-size: 42px; margin-bottom: 15px; color: var(--copper-light); }
@@ -133,66 +111,45 @@
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
-    .mobile-toggle { display: flex; } 
-    
-    /* إخراج عنصر nav بالكامل من تدفق الصفحة لضمان عمل space-between بشكل مثالي */
-    #nav {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 75%;
-      max-width: 320px;
-      height: 100vh;
-      background: var(--green-dark);
-      z-index: 999;
-      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: -5px 0 25px rgba(0,0,0,0.3);
-    }
-    #nav.active { right: 0; }
-    
-    #nav ul {
-      display: flex;
-      flex-direction: column;
-      padding: 100px 30px 30px;
-      gap: 25px;
-      list-style: none;
-      margin: 0;
-    }
-    #nav ul li { width: 100%; text-align: right; }
-    #nav a { font-size: 18px; display: block; padding: 10px 0; }
-    .lang-btn { justify-content: center; margin-top: 20px; font-size: 18px !important; }
-    
     .footer-grid { grid-template-columns: 1fr; }
   }
-
   
 </style>
 </head>
 <body>
 
-<header id="header">
-  <div class="nav-container">
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🌿</div>
-      <div class="logo-text">نباتات <span>الحياة</span></div>
-    </a>
-    
-    <div class="mobile-toggle" id="mobileToggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+<header id="mainHeader">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="bi bi-tree-fill"></i></div>
+            <div class="logo-text">نباتات <span>الحياة</span></div>
+        </a>
+        
+        <!-- زر البرجر منيو -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-    <nav id="nav">
-      <ul id="navMenu">
-        <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="products.html" class="active">المنتجات</a></li>
-        <li><a href="about.html">من نحن</a></li>
-        <li><a href="index.html#contact">تواصل معنا</a></li>
-        <li><a href="products-en.html" class="lang-btn"><i class="bi bi-globe"></i>EN</a></li>
-      </ul>
-    </nav>
-  </div>
+        <nav id="mainNav">
+            <ul id="navMenu">
+                <li><a href="index.html" >الرئيسية</a></li>
+                <li class="dropdown">
+                    <a href="products.html" class="dropdown-toggle">منتجاتنا <i class="bi bi-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="products.html?category=herbs">أعشاب</a></li>
+                        <li><a href="products.html?category=spices">توابل</a></li>
+                        <li><a href="products.html?category=seeds">بذور</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">من نحن</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+                <!-- زر اللغة (سيتم تحديث رابطه تلقائياً بواسطة السكريبت في الأسفل) -->
+                <li><a href="#" id="langSwitcher" class="lang-btn"><i class="bi bi-globe"></i> <span id="langText">EN</span></a></li>
+            </ul>
+        </nav>
+    </div>
 </header>
 
 <section class="page-header">
@@ -244,14 +201,14 @@
 </footer>
 
 <script>
-  const header = document.getElementById('header');
+  const header = document.getElementById('mainHeader');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
   });
 
   const mobileToggle = document.getElementById('mobileToggle');
-  const nav = document.getElementById('nav');
+  const nav = document.getElementById('mainNav');
 
   mobileToggle.addEventListener('click', () => {
     mobileToggle.classList.toggle('active');
