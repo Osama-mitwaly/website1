@@ -1,5 +1,46 @@
-document.addEventListener('DOMContentLoaded', () => {
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+// ==========================================
+// 0. تحميل إعدادات الموقع من Firebase (اللوجو والاسم)
+// ==========================================
+async function loadSiteSettings() {
+    try {
+        const db = getFirestore();
+        const snap = await getDoc(doc(db, 'settings', 'general'));
+        if (snap.exists()) {
+            const d = snap.data();
+            
+            // تحديث اللوجو
+            const logoElements = document.querySelectorAll('.logo-icon');
+            logoElements.forEach(el => {
+                if (d.logo) {
+                    el.innerHTML = `<img src="${d.logo}" alt="Logo" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
+                }
+            });
+            
+            // تحديث الاسم (يفصل الكلمة الأولى لتلوينها بشكل مختلف حسب CSS)
+            const nameElements = document.querySelectorAll('.logo-text');
+            nameElements.forEach(el => {
+                const isAr = document.documentElement.lang === 'ar';
+                const name = isAr ? d.companyNameAr : d.companyNameEn;
+                if (name) {
+                    const parts = name.split(' ');
+                    const firstWord = parts[0];
+                    const restOfWords = parts.slice(1).join(' ');
+                    el.innerHTML = `${firstWord} <span>${restOfWords}</span>`;
+                }
+            });
+        }
+    } catch (error) {
+        console.warn("تعذر تحميل إعدادات الموقع تلقائياً:", error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
     
+    // استدعاء دالة تحميل الإعدادات فوراً عند جاهزية الصفحة
+    await loadSiteSettings();
+
     // ==========================================
     // 1. تأثير تصغير شريط التنقل (Header) عند التمرير
     // ==========================================
@@ -52,9 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const body = encodeURIComponent(`الاسم / Name: ${name}\nالبريد / Email: ${email}\n\nالرسالة / Message:\n${message}`);
             
             window.location.href = `mailto:${receiverEmail}?subject=${subject}&body=${body}`;
-            
-            // اختياري: إعادة تعيين النموذج بعد الإرسال
-            // contactForm.reset();
         });
     }
 
