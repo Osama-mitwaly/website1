@@ -83,22 +83,26 @@ function renderProducts(category, isArabic) {
         const linkText = isArabic ? 'استفسار ←' : 'Inquire →';
 
         // استخدام نفس هيكل HTML الخاص بك بالضبط
-        const productCard = `
-            <div class="product-card fade-in visible">
-                <div class="product-image">
-                    <img src="${product.image}" alt="${productName}">
-                </div>
-                <div class="product-info">
-                    <div class="product-category">${catName}</div>
-                    <h3 class="product-name">${productName}</h3>
-                    <p class="product-desc">${productDesc}</p>
-                    <div class="product-footer">
-                        <div class="product-origin">${originText}</div>
-                        <a href="https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}" target="_blank" class="product-link">${linkText}</a>
-                    </div>
-                </div>
+       // في نهاية دالة renderProducts، استبدل productCard بهذا:
+const productCard = `
+    <div class="product-card fade-in visible" onclick="window.location.href='product-detail.html?id=${product.id}'" style="cursor: pointer;">
+        <div class="product-image">
+            <img src="${product.image}" alt="${productName}">
+            <div class="product-overlay">
+                <span>عرض التفاصيل</span>
             </div>
-        `;
+        </div>
+        <div class="product-info">
+            <div class="product-category">${catName}</div>
+            <h3 class="product-name">${productName}</h3>
+            <p class="product-desc">${productDesc}</p>
+            <div class="product-footer">
+                <div class="product-origin">${originText}</div>
+                <span class="product-link">${linkText}</span>
+            </div>
+        </div>
+    </div>
+`;
         productsContainer.innerHTML += productCard;
     });
 }
