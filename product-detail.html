@@ -38,13 +38,14 @@
                     <li><a href="about.html">من نحن</a></li>
                     <li><a href="contact.html">اتصل بنا</a></li>
                     <li><a href="#" id="langSwitcher" class="lang-btn"><i class="bi bi-globe"></i> EN</a></li>
+                </ul>
             </nav>
         </div>
     </header>
 
     <section class="product-detail-hero">
         <div class="hero-content">
-            <span class="hero-tag fade-up">✦ تفاصيل المنتج </span>
+            <span class="hero-tag fade-up">✦ تفاصيل المنتج ✦</span>
             <h1 id="productTitle" class="fade-up fade-up-delay-1">جاري التحميل...</h1>
         </div>
     </section>
@@ -87,73 +88,73 @@
         <i class="bi bi-whatsapp"></i>
     </a>
 
- <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
-        authDomain: "napatatelhaya-98cb9.firebaseapp.com",
-        projectId: "napatatelhaya-98cb9",
-        storageBucket: "napatatelhaya-98cb9.firebasestorage.app",
-        messagingSenderId: "794316862369",
-        appId: "1:794316862369:web:592fF5ce4e867c97bc91e0"
-    };
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
+            authDomain: "napatatelhaya-98cb9.firebaseapp.com",
+            projectId: "napatatelhaya-98cb9",
+            storageBucket: "napatatelhaya-98cb9.firebasestorage.app",
+            messagingSenderId: "794316862369",
+            appId: "1:794316862369:web:592fF5ce4e867c97bc91e0"
+        };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const docId = urlParams.get('id');
+        const urlParams = new URLSearchParams(window.location.search);
+        const docId = urlParams.get('id');
 
-    if (!docId) {
-        window.location.href = 'products.html';
-    }
-
-    async function loadProduct() {
-        try {
-            // جلب المستند مباشرة باستخدام المعرف الحقيقي
-            const productRef = doc(db, "products", docId);
-            const productSnap = await getDoc(productRef);
-
-            if (productSnap.exists()) {
-                const product = productSnap.data();
-                
-                document.getElementById('productTitle').textContent = product.name.ar;
-                document.getElementById('productName').textContent = product.name.ar;
-                document.getElementById('productImage').src = product.image;
-                document.getElementById('productDescription').textContent = product.description.ar;
-                
-                const categories = { 'herbs': 'أعشاب', 'spices': 'توابل', 'seeds': 'بذور' };
-                document.getElementById('productCategory').textContent = categories[product.category] || product.category;
-                
-                const whatsappMsg = `أريد الاستفسار عن منتج: ${product.name.ar}`;
-                document.getElementById('whatsappLink').href = `https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}`;
-                
-                document.title = `${product.name.ar} | نباتات الحياة`;
-            } else {
-                window.location.href = 'products.html';
-            }
-        } catch (error) {
-            console.error("Error loading product:", error);
+        if (!docId) {
             window.location.href = 'products.html';
         }
-    }
 
-    loadProduct();
-</script>
+        async function loadProduct() {
+            try {
+                const productRef = doc(db, "products", docId);
+                const productSnap = await getDoc(productRef);
+
+                if (productSnap.exists()) {
+                    const product = productSnap.data();
+                    
+                    document.getElementById('productTitle').textContent = product.name.ar;
+                    document.getElementById('productName').textContent = product.name.ar;
+                    document.getElementById('productImage').src = product.image;
+                    document.getElementById('productDescription').textContent = product.description.ar;
+                    
+                    const categories = { 'herbs': 'أعشاب', 'spices': 'توابل', 'seeds': 'بذور' };
+                    document.getElementById('productCategory').textContent = categories[product.category] || product.category;
+                    
+                    const whatsappMsg = `أريد الاستفسار عن منتج: ${product.name.ar}`;
+                    document.getElementById('whatsappLink').href = `https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}`;
+                    
+                    document.title = `${product.name.ar} | نباتات الحياة`;
+                } else {
+                    window.location.href = 'products.html';
+                }
+            } catch (error) {
+                console.error("Error loading product:", error);
+                window.location.href = 'products.html';
+            }
+        }
+
+        loadProduct();
+    </script>
 
     <script src="js/main.js"></script>
+    
     <script>
-    // تبديل اللغة مع الحفاظ على معرف المنتج
-    document.addEventListener('DOMContentLoaded', () => {
-        const langSwitcher = document.getElementById('langSwitcher');
-        if (langSwitcher) {
-            const currentUrl = window.location.href;
-            const newUrl = currentUrl.replace('product-detail.html', 'product-detail-en.html');
-            langSwitcher.href = newUrl;
-        }
-    });
-</script>
+        // تبديل اللغة مع الحفاظ على معرف المنتج
+        document.addEventListener('DOMContentLoaded', () => {
+            const langSwitcher = document.getElementById('langSwitcher');
+            if (langSwitcher) {
+                const currentUrl = window.location.href;
+                const newUrl = currentUrl.replace('product-detail.html', 'product-detail-en.html');
+                langSwitcher.href = newUrl;
+            }
+        });
+    </script>
 </body>
 </html>

@@ -94,71 +94,72 @@
         <i class="bi bi-whatsapp"></i>
     </a>
 
- <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
-        authDomain: "napatatelhaya-98cb9.firebaseapp.com",
-        projectId: "napatatelhaya-98cb9",
-        storageBucket: "napatatelhaya-98cb9.firebasestorage.app",
-        messagingSenderId: "794316862369",
-        appId: "1:794316862369:web:592fF5ce4e867c97bc91e0"
-    };
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
+            authDomain: "napatatelhaya-98cb9.firebaseapp.com",
+            projectId: "napatatelhaya-98cb9",
+            storageBucket: "napatatelhaya-98cb9.firebasestorage.app",
+            messagingSenderId: "794316862369",
+            appId: "1:794316862369:web:592fF5ce4e867c97bc91e0"
+        };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const docId = urlParams.get('id');
+        const urlParams = new URLSearchParams(window.location.search);
+        const docId = urlParams.get('id');
 
-    if (!docId) {
-        window.location.href = 'products-en.html';
-    }
-
-    async function loadProduct() {
-        try {
-            const productRef = doc(db, "products", docId);
-            const productSnap = await getDoc(productRef);
-
-            if (productSnap.exists()) {
-                const product = productSnap.data();
-                
-                document.getElementById('productTitle').textContent = product.name.en;
-                document.getElementById('productName').textContent = product.name.en;
-                document.getElementById('productImage').src = product.image;
-                document.getElementById('productDescription').textContent = product.description.en;
-                
-                const categories = { 'herbs': 'Herbs', 'spices': 'Spices', 'seeds': 'Seeds' };
-                document.getElementById('productCategory').textContent = categories[product.category] || product.category;
-                
-                const whatsappMsg = `I would like to inquire about: ${product.name.en}`;
-                document.getElementById('whatsappLink').href = `https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}`;
-                
-                document.title = `${product.name.en} | Nabatat Elhaya`;
-            } else {
-                window.location.href = 'products-en.html';
-            }
-        } catch (error) {
-            console.error("Error loading product:", error);
+        if (!docId) {
             window.location.href = 'products-en.html';
         }
-    }
 
-    loadProduct();
-</script>
+        async function loadProduct() {
+            try {
+                const productRef = doc(db, "products", docId);
+                const productSnap = await getDoc(productRef);
+
+                if (productSnap.exists()) {
+                    const product = productSnap.data();
+                    
+                    document.getElementById('productTitle').textContent = product.name.en;
+                    document.getElementById('productName').textContent = product.name.en;
+                    document.getElementById('productImage').src = product.image;
+                    document.getElementById('productDescription').textContent = product.description.en;
+                    
+                    const categories = { 'herbs': 'Herbs', 'spices': 'Spices', 'seeds': 'Seeds' };
+                    document.getElementById('productCategory').textContent = categories[product.category] || product.category;
+                    
+                    const whatsappMsg = `I would like to inquire about: ${product.name.en}`;
+                    document.getElementById('whatsappLink').href = `https://wa.me/201067131398?text=${encodeURIComponent(whatsappMsg)}`;
+                    
+                    document.title = `${product.name.en} | Nabatat Elhaya`;
+                } else {
+                    window.location.href = 'products-en.html';
+                }
+            } catch (error) {
+                console.error("Error loading product:", error);
+                window.location.href = 'products-en.html';
+            }
+        }
+
+        loadProduct();
+    </script>
 
     <script src="js/main.js"></script>
+    
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const langSwitcher = document.getElementById('langSwitcher');
-        if (langSwitcher) {
-            const currentUrl = window.location.href;
-            const newUrl = currentUrl.replace('product-detail-en.html', 'product-detail.html');
-            langSwitcher.href = newUrl;
-        }
-    });
-</script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const langSwitcher = document.getElementById('langSwitcher');
+            if (langSwitcher) {
+                const currentUrl = window.location.href;
+                const newUrl = currentUrl.replace('product-detail-en.html', 'product-detail.html');
+                langSwitcher.href = newUrl;
+            }
+        });
+    </script>
 </body>
 </html>
