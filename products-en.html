@@ -184,24 +184,23 @@
             <span></span>
         </button>
 
-        <nav id="mainNav">
-            <ul id="navMenu">
-                <!-- ملاحظة: عدل الروابط في كل صفحة لتناسب الصفحة الحالية (active) -->
-                <li><a href="index.html">Home</a></li>
-                <li class="dropdown">
-                    <a href="products.html" class="dropdown-toggle">Our Products <i class="bi bi-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="products.html?category=herbs">Herbs</a></li>
-                        <li><a href="products.html?category=spices">Spices</a></li>
-                        <li><a href="products.html?category=seeds">Seeds</a></li>
-                    </ul>
-                </li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <!-- زر اللغة الموحد -->
-                <li><a href="products.html" id="langSwitcher" class="lang-btn"><i class="bi bi-globe"></i> <span id="langText">AR</span></a></li>
+       <nav id="mainNav">
+    <ul id="navMenu">
+        <li><a href="en.html">Home</a></li>
+        <li class="dropdown">
+            <a href="products-en.html" class="active dropdown-toggle">Our Products <i class="bi bi-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="products-en.html?category=herbs">Herbs</a></li>
+                <li><a href="products-en.html?category=spices">Spices</a></li>
+                <li><a href="products-en.html?category=seeds">Seeds</a></li>
             </ul>
-        </nav>
+        </li>
+        <li><a href="about-en.html">About Us</a></li>
+        <li><a href="contact-en.html">Contact Us</a></li>
+        <!-- زر اللغة للعودة للعربية -->
+        <li><a href="products.html" id="langSwitcher" class="lang-btn"><i class="bi bi-globe"></i> <span id="langText">AR</span></a></li>
+    </ul>
+</nav>
     </div>
 </header>
 <section class="page-header">
@@ -251,30 +250,37 @@
 </footer>
 
 <script>
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
-  });
+  // 1. تصحيح معرف الهيدر
+  const header = document.getElementById('mainHeader');
+  if (header) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      });
+  }
 
+  // 2. تصحيح معرف القائمة (من 'nav' إلى 'mainNav')
   const mobileToggle = document.getElementById('mobileToggle');
-  const nav = document.getElementById('nav');
+  const mainNav = document.getElementById('mainNav'); 
 
-  mobileToggle.addEventListener('click', () => {
-    mobileToggle.classList.toggle('active');
-    nav.classList.toggle('active');
-  });
+  if (mobileToggle && mainNav) {
+      // فتح وإغلاق القائمة
+      mobileToggle.addEventListener('click', () => {
+        mobileToggle.classList.toggle('active');
+        mainNav.classList.toggle('active');
+      });
 
-  document.querySelectorAll('#navMenu a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileToggle.classList.remove('active');
-      nav.classList.remove('active');
-    });
-  });
+      // إغلاق القائمة عند النقر على أي رابط
+      document.querySelectorAll('#navMenu a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileToggle.classList.remove('active');
+          mainNav.classList.remove('active');
+        });
+      });
+  }
 </script>
 
 <script type="module" src="js/dataFetcher.js"></script>
-
-
 </body>
 </html>
+
