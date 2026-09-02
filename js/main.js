@@ -1,8 +1,11 @@
+// ==========================================
+// 1. الاستيراد الصحيح والكامل (تم إصلاح الخطأ هنا)
+// ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 // ==========================================
-// 0. تهيئة Firebase في هذا الملف (ضروري جداً للـ Modules)
+// 2. تهيئة Firebase
 // ==========================================
 const firebaseConfig = {
     apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
@@ -17,67 +20,65 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // ==========================================
-// 1. دالة تحميل إعدادات الموقع (اللوجو والاسم)
-// ==========================================
-// ==========================================
-// 1. دالة تحميل إعدادات الموقع (اللوجو والاسم) - نسخة محسّنة
+// 3. دالة تحميل الإعدادات (اللوجو والاسم)
 // ==========================================
 async function loadSiteSettings() {
-    console.log("🔄 [LOGO] جاري تحميل الإعدادات...");
-    console.log(" [LOGO] عدد عناصر اللوجو الموجودة:", document.querySelectorAll('.logo-icon').length);
+    console.log("🔄 [LOGO] بدء عملية تحميل الإعدادات...");
     
     try {
+        // محاولة جلب البيانات
         const snap = await getDoc(doc(db, 'settings', 'general'));
         
         if (!snap.exists()) {
-            console.warn("⚠️ [LOGO] لم يتم العثور على مستند 'general' في Firestore");
-            console.log("📋 [LOGO] جميع المستندات المتاحة في settings:", (await getDocs(collection(db, 'settings'))).docs.map(d => d.id));
+            console.warn("⚠️ [LOGO] لم يتم العثور على مستند 'general'. تأكد من حفظ البيانات من لوحة التحكم أولاً.");
             return;
         }
         
-        const d = snap.data();
-        console.log("✅ [LOGO] تم جلب البيانات:", d);
+        const data = snap.data();
+        console.log("✅ [LOGO] تم جلب البيانات بنجاح:", data);
         
-        // تحديث اللوجو - طريقة أكثر قوة
-        if (d.logo) {
+        // أ: تحديث اللوجو
+        if (data.logo && data.logo.trim() !== "") {
             const logoContainers = document.querySelectorAll('.logo-icon');
-            console.log("🖼️ [LOGO] عدد الحاويات التي تم تحديثها:", logoContainers.length);
+            console.log(`🖼️ [LOGO] جاري تحديث ${logoContainers.length} عنصر لوجو...`);
             
-            logoContainers.forEach((el, index) => {
-                console.log(` [LOGO] تحديث اللوجو #${index + 1}`);
-                el.innerHTML = `<img src="${d.logo}" alt="Logo" style="width:100%; height:100%; object-fit:cover; border-radius:50%; display:block;">`;
+            logoContainers.forEach(el => {
+                // نستخدم innerHTML لاستبدال الأيقونة النصية بالصورة
+                el.innerHTML = `<img src="${data.logo}" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;">`;
             });
+            console.log("✅ [LOGO] تم تحديث اللوجو بنجاح.");
         } else {
-            console.warn("⚠️ [LOGO] حقل اللوجو فارغ في قاعدة البيانات");
+            console.warn("⚠️ [LOGO] حقل اللوجو فارغ في قاعدة البيانات.");
         }
         
-        // تحديث الاسم
+        // ب: تحديث الاسم
         const nameElements = document.querySelectorAll('.logo-text');
-        nameElements.forEach(el => {
-            const isAr = document.documentElement.lang === 'ar';
-            const name = isAr ? d.companyNameAr : d.companyNameEn;
-            if (name) {
-                const parts = name.split(' ');
+        const isAr = document.documentElement.lang === 'ar';
+        const name = isAr ? data.companyNameAr : data.companyNameEn;
+        
+        if (name && name.trim() !== "") {
+            nameElements.forEach(el => {
+                const parts = name.trim().split(' ');
                 const firstWord = parts[0];
                 const restOfWords = parts.slice(1).join(' ');
                 el.innerHTML = `${firstWord} <span>${restOfWords}</span>`;
-            }
-        });
+            });
+            console.log("✅ [LOGO] تم تحديث الاسم بنجاح.");
+        }
         
     } catch (error) {
-        console.error("❌ [LOGO] خطأ في تحميل الإعدادات:", error);
-        console.error(" [LOGO] تفاصيل الخطأ:", error.code, error.message);
+        console.error("❌ [LOGO] حدث خطأ فادح أثناء تحميل الإعدادات:", error);
     }
 }
 
+// ==========================================
+// 4. تشغيل الكود عند جاهزية الصفحة
+// ==========================================
 document.addEventListener('DOMContentLoaded', async () => {
-    
-    // استدعاء دالة تحميل الإعدادات فوراً
+    // 1. استدعاء دالة الإعدادات فوراً
     await loadSiteSettings();
 
-    // ==========================================
-    // 2. تأثير تصغير شريط التنقل (Header) عند التمرير
-    // ==========================================
+    // 2. تأثير تصغير الهيدر
     const header = document.getElementById('mainHeader');
     if (header) {
         window.addEventListener('scroll', () => {
@@ -89,50 +90,38 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // ==========================================
-    // 3. مراقب التمرير لإظهار العناصر بنعومة (Scroll Reveal)
-    // ==========================================
+    // 3. Scroll Reveal
     const fadeElements = document.querySelectorAll('.fade-up');
-    const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible'); 
                 observer.unobserve(entry.target);      
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
 
     fadeElements.forEach(el => observer.observe(el));
 
-    // ==========================================
-    // 4. برمجة نموذج الاتصال لفتح تطبيق الإيميل (Mailto)
-    // ==========================================
+    // 4. نموذج الاتصال (Mailto)
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault(); 
-            
             const name = document.getElementById('clientName').value;
             const email = document.getElementById('clientEmail').value;
             const message = document.getElementById('clientMessage').value;
             const receiverEmail = 'alsayed0852.as@gmail.com';
-            
             const currentLang = document.documentElement.lang;
-            const subjectTitle = currentLang === 'en' 
-                ? 'New Inquiry from Nabatat Elhaya -' 
-                : 'طلب تواصل جديد من موقع نباتات الحياة -';
+            const subjectTitle = currentLang === 'en' ? 'New Inquiry from Nabatat Elhaya -' : 'طلب تواصل جديد من موقع نباتات الحياة -';
             
             const subject = encodeURIComponent(`${subjectTitle} ${name}`);
             const body = encodeURIComponent(`الاسم / Name: ${name}\nالبريد / Email: ${email}\n\nالرسالة / Message:\n${message}`);
-            
             window.location.href = `mailto:${receiverEmail}?subject=${subject}&body=${body}`;
         });
     }
 
-    // ==========================================
-    // 5. برمجة قائمة الجوال (Hamburger Menu) الموحدة
-    // ==========================================
+    // 5. قائمة الجوال
     const mobileToggle = document.getElementById('mobileToggle');
     const mainNav = document.getElementById('mainNav');
 
@@ -142,8 +131,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             mainNav.classList.toggle('active');
         });
 
-        const navLinks = mainNav.querySelectorAll('a:not(.dropdown-toggle)');
-        navLinks.forEach(link => {
+        mainNav.querySelectorAll('a:not(.dropdown-toggle)').forEach(link => {
             link.addEventListener('click', () => {
                 mobileToggle.classList.remove('active');
                 mainNav.classList.remove('active');
@@ -151,11 +139,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // ==========================================
-    // 6. برمجة القائمة المنسدلة (Dropdown) الذكية
-    // ==========================================
-    const dropdowns = document.querySelectorAll('.dropdown');
-    dropdowns.forEach(dropdown => {
+    // 6. القائمة المنسدلة
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
         const toggle = dropdown.querySelector('.dropdown-toggle');
         if (toggle) {
             toggle.addEventListener('click', function(e) {
@@ -168,15 +153,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     document.addEventListener('click', function(e) {
-        dropdowns.forEach(dropdown => {
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
             if (!dropdown.contains(e.target)) {
                 dropdown.classList.remove('active');
             }
         });
     });
 });
-// محاولة ثانية بعد 2 ثانية (للتأكد من تحميل الصفحة بالكامل)
-setTimeout(() => {
-    console.log("🔄 [LOGO] محاولة ثانية للتحميل...");
-    loadSiteSettings();
-}, 2000);
