@@ -175,3 +175,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 });
+// محاولة ثانية بعد 2 ثانية (للتأكد من تحميل الصفحة بالكامل)
+setTimeout(() => {
+    console.log("🔄 [LOGO] محاولة ثانية للتحميل...");
+    loadSiteSettings();
+}, 2000);
