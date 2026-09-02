@@ -19,41 +19,54 @@ const db = getFirestore(app);
 // ==========================================
 // 1. دالة تحميل إعدادات الموقع (اللوجو والاسم)
 // ==========================================
+// ==========================================
+// 1. دالة تحميل إعدادات الموقع (اللوجو والاسم) - نسخة محسّنة
+// ==========================================
 async function loadSiteSettings() {
-    console.log("🔄 جاري محاولة تحميل إعدادات الموقع من Firebase...");
+    console.log("🔄 [LOGO] جاري تحميل الإعدادات...");
+    console.log(" [LOGO] عدد عناصر اللوجو الموجودة:", document.querySelectorAll('.logo-icon').length);
+    
     try {
         const snap = await getDoc(doc(db, 'settings', 'general'));
-        if (snap.exists()) {
-            console.log("✅ تم العثور على الإعدادات بنجاح:", snap.data());
-            const d = snap.data();
+        
+        if (!snap.exists()) {
+            console.warn("⚠️ [LOGO] لم يتم العثور على مستند 'general' في Firestore");
+            console.log("📋 [LOGO] جميع المستندات المتاحة في settings:", (await getDocs(collection(db, 'settings'))).docs.map(d => d.id));
+            return;
+        }
+        
+        const d = snap.data();
+        console.log("✅ [LOGO] تم جلب البيانات:", d);
+        
+        // تحديث اللوجو - طريقة أكثر قوة
+        if (d.logo) {
+            const logoContainers = document.querySelectorAll('.logo-icon');
+            console.log("🖼️ [LOGO] عدد الحاويات التي تم تحديثها:", logoContainers.length);
             
-            // تحديث اللوجو
-            const logoElements = document.querySelectorAll('.logo-icon');
-            logoElements.forEach(el => {
-                if (d.logo) {
-                    el.innerHTML = `<img src="${d.logo}" alt="Logo" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
-                    console.log("🖼️ تم تحديث اللوجو في الصفحة.");
-                }
-            });
-            
-            // تحديث الاسم
-            const nameElements = document.querySelectorAll('.logo-text');
-            nameElements.forEach(el => {
-                const isAr = document.documentElement.lang === 'ar';
-                const name = isAr ? d.companyNameAr : d.companyNameEn;
-                if (name) {
-                    const parts = name.split(' ');
-                    const firstWord = parts[0];
-                    const restOfWords = parts.slice(1).join(' ');
-                    el.innerHTML = `${firstWord} <span>${restOfWords}</span>`;
-                    console.log("📝 تم تحديث الاسم إلى:", name);
-                }
+            logoContainers.forEach((el, index) => {
+                console.log(` [LOGO] تحديث اللوجو #${index + 1}`);
+                el.innerHTML = `<img src="${d.logo}" alt="Logo" style="width:100%; height:100%; object-fit:cover; border-radius:50%; display:block;">`;
             });
         } else {
-            console.warn("⚠️ لم يتم العثور على مستند الإعدادات (general) في قاعدة البيانات. تأكد من حفظها من لوحة التحكم أولاً.");
+            console.warn("⚠️ [LOGO] حقل اللوجو فارغ في قاعدة البيانات");
         }
+        
+        // تحديث الاسم
+        const nameElements = document.querySelectorAll('.logo-text');
+        nameElements.forEach(el => {
+            const isAr = document.documentElement.lang === 'ar';
+            const name = isAr ? d.companyNameAr : d.companyNameEn;
+            if (name) {
+                const parts = name.split(' ');
+                const firstWord = parts[0];
+                const restOfWords = parts.slice(1).join(' ');
+                el.innerHTML = `${firstWord} <span>${restOfWords}</span>`;
+            }
+        });
+        
     } catch (error) {
-        console.error("❌ خطأ فادح في تحميل إعدادات الموقع:", error);
+        console.error("❌ [LOGO] خطأ في تحميل الإعدادات:", error);
+        console.error(" [LOGO] تفاصيل الخطأ:", error.code, error.message);
     }
 }
 
