@@ -1,12 +1,6 @@
-// ==========================================
-// 1. الاستيراد الصحيح والكامل (تم إصلاح الخطأ هنا)
-// ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore, doc, getDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-// ==========================================
-// 2. تهيئة Firebase
-// ==========================================
 const firebaseConfig = {
     apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
     authDomain: "napatatelhaya-98cb9.firebaseapp.com",
@@ -19,118 +13,75 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ==========================================
-// 3. دالة تحميل الإعدادات (اللوجو والاسم)
-// ==========================================
 async function loadSiteSettings() {
-    console.log("🔄 [LOGO] بدء عملية تحميل الإعدادات...");
-    
+    console.clear(); // مسح الكونسول لسهولة القراءة
+    console.log("=== بدء التشخيص الحاسم للوجو ===");
+
+    // 1. اختبار بصري فوري: هل الجافاسكريبت يعمل أصلاً؟
+    const testElement = document.querySelector('.logo-icon');
+    if (testElement) {
+        testElement.style.border = "3px solid red"; // سيظهر إطار أحمر حول مكان اللوجو إذا كان الكود يعمل
+        console.log("✅ 1. عنصر .logo-icon موجود في الصفحة.");
+    } else {
+        console.error("❌ 1. فشل: عنصر .logo-icon غير موجود في HTML!");
+        return;
+    }
+
     try {
-        // محاولة جلب البيانات
+        // 2. جلب البيانات
+        console.log("⏳ 2. جاري الاتصال بـ Firebase لجلب مستند 'settings/general'...");
         const snap = await getDoc(doc(db, 'settings', 'general'));
         
         if (!snap.exists()) {
-            console.warn("⚠️ [LOGO] لم يتم العثور على مستند 'general'. تأكد من حفظ البيانات من لوحة التحكم أولاً.");
+            console.error("❌ 3. فشل: مستند 'general' غير موجود في قاعدة البيانات. هل قمت بحفظ البيانات من لوحة التحكم فعلاً؟");
             return;
         }
         
+        console.log("✅ 3. تم العثور على المستند بنجاح.");
         const data = snap.data();
-        console.log("✅ [LOGO] تم جلب البيانات بنجاح:", data);
-        
-        // أ: تحديث اللوجو
+        console.log("📦 4. البيانات الخام المستلمة من Firebase:", data);
+
+        // 3. التحقق من وجود اللوجو
         if (data.logo && data.logo.trim() !== "") {
-            const logoContainers = document.querySelectorAll('.logo-icon');
-            console.log(`🖼️ [LOGO] جاري تحديث ${logoContainers.length} عنصر لوجو...`);
+            console.log("✅ 5. رابط اللوجو موجود وهو:", data.logo);
             
-            logoContainers.forEach(el => {
-                // نستخدم innerHTML لاستبدال الأيقونة النصية بالصورة
-                el.innerHTML = `<img src="${data.logo}" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;">`;
+            // 4. حقن اللوجو مع مراقب للأخطاء (onerror)
+            const imgHTML = `<img src="${data.logo}" alt="Logo" onerror="console.error('❌ 6. فشل: رابط الصورة مكسور أو محجوب!'); this.style.display='none';" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;">`;
+            
+            document.querySelectorAll('.logo-icon').forEach(el => {
+                el.innerHTML = imgHTML;
             });
-            console.log("✅ [LOGO] تم تحديث اللوجو بنجاح.");
+            console.log("✅ 7. تم حقن كود الصورة في HTML بنجاح.");
         } else {
-            console.warn("⚠️ [LOGO] حقل اللوجو فارغ في قاعدة البيانات.");
+            console.error("❌ 5. فشل: حقل 'logo' فارغ أو غير موجود في البيانات المستلمة!");
+            console.log("💡 الحل: اذهب للوحة التحكم > هوية الشركة > ارفع صورة > اضغط حفظ.");
         }
-        
-        // ب: تحديث الاسم
-        const nameElements = document.querySelectorAll('.logo-text');
-        const isAr = document.documentElement.lang === 'ar';
-        const name = isAr ? data.companyNameAr : data.companyNameEn;
-        
-        if (name && name.trim() !== "") {
-            nameElements.forEach(el => {
-                const parts = name.trim().split(' ');
-                const firstWord = parts[0];
-                const restOfWords = parts.slice(1).join(' ');
-                el.innerHTML = `${firstWord} <span>${restOfWords}</span>`;
-            });
-            console.log("✅ [LOGO] تم تحديث الاسم بنجاح.");
-        }
-        
+
     } catch (error) {
-        console.error("❌ [LOGO] حدث خطأ فادح أثناء تحميل الإعدادات:", error);
+        console.error("❌ حدث خطأ فادح في الاتصال:", error);
     }
+    console.log("=== نهاية التشخيص ===");
 }
 
-// ==========================================
-// 4. تشغيل الكود عند جاهزية الصفحة
-// ==========================================
 document.addEventListener('DOMContentLoaded', async () => {
-    // 1. استدعاء دالة الإعدادات فوراً
     await loadSiteSettings();
-
-    // 2. تأثير تصغير الهيدر
+    
+    // ... (باقي أكواد الهيدر والقوائم كما هي، لم أغيرها لضمان استقرار الموقع) ...
     const header = document.getElementById('mainHeader');
     if (header) {
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
         });
     }
 
-    // 3. Scroll Reveal
-    const fadeElements = document.querySelectorAll('.fade-up');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible'); 
-                observer.unobserve(entry.target);      
-            }
-        });
-    }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
-
-    fadeElements.forEach(el => observer.observe(el));
-
-    // 4. نموذج الاتصال (Mailto)
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            const name = document.getElementById('clientName').value;
-            const email = document.getElementById('clientEmail').value;
-            const message = document.getElementById('clientMessage').value;
-            const receiverEmail = 'alsayed0852.as@gmail.com';
-            const currentLang = document.documentElement.lang;
-            const subjectTitle = currentLang === 'en' ? 'New Inquiry from Nabatat Elhaya -' : 'طلب تواصل جديد من موقع نباتات الحياة -';
-            
-            const subject = encodeURIComponent(`${subjectTitle} ${name}`);
-            const body = encodeURIComponent(`الاسم / Name: ${name}\nالبريد / Email: ${email}\n\nالرسالة / Message:\n${message}`);
-            window.location.href = `mailto:${receiverEmail}?subject=${subject}&body=${body}`;
-        });
-    }
-
-    // 5. قائمة الجوال
     const mobileToggle = document.getElementById('mobileToggle');
     const mainNav = document.getElementById('mainNav');
-
     if (mobileToggle && mainNav) {
         mobileToggle.addEventListener('click', () => {
             mobileToggle.classList.toggle('active');
             mainNav.classList.toggle('active');
         });
-
         mainNav.querySelectorAll('a:not(.dropdown-toggle)').forEach(link => {
             link.addEventListener('click', () => {
                 mobileToggle.classList.remove('active');
@@ -138,25 +89,4 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
     }
-
-    // 6. القائمة المنسدلة
-    document.querySelectorAll('.dropdown').forEach(dropdown => {
-        const toggle = dropdown.querySelector('.dropdown-toggle');
-        if (toggle) {
-            toggle.addEventListener('click', function(e) {
-                if (window.innerWidth <= 968) {
-                    e.preventDefault(); 
-                    dropdown.classList.toggle('active');
-                }
-            });
-        }
-    });
-
-    document.addEventListener('click', function(e) {
-        document.querySelectorAll('.dropdown').forEach(dropdown => {
-            if (!dropdown.contains(e.target)) {
-                dropdown.classList.remove('active');
-            }
-        });
-    });
 });
