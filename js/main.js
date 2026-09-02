@@ -1,13 +1,30 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 // ==========================================
-// 0. تحميل إعدادات الموقع من Firebase (اللوجو والاسم)
+// 0. تهيئة Firebase في هذا الملف (ضروري جداً للـ Modules)
+// ==========================================
+const firebaseConfig = {
+    apiKey: "AIzaSyDTZfOOSxaWFlAc_smFxGKb3Sv3HH8tEAw",
+    authDomain: "napatatelhaya-98cb9.firebaseapp.com",
+    projectId: "napatatelhaya-98cb9",
+    storageBucket: "napatatelhaya-98cb9.firebasestorage.app",
+    messagingSenderId: "794316862369",
+    appId: "1:794316862369:web:592fF5ce4e867c97bc91e0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ==========================================
+// 1. دالة تحميل إعدادات الموقع (اللوجو والاسم)
 // ==========================================
 async function loadSiteSettings() {
+    console.log("🔄 جاري محاولة تحميل إعدادات الموقع من Firebase...");
     try {
-        const db = getFirestore();
         const snap = await getDoc(doc(db, 'settings', 'general'));
         if (snap.exists()) {
+            console.log("✅ تم العثور على الإعدادات بنجاح:", snap.data());
             const d = snap.data();
             
             // تحديث اللوجو
@@ -15,10 +32,11 @@ async function loadSiteSettings() {
             logoElements.forEach(el => {
                 if (d.logo) {
                     el.innerHTML = `<img src="${d.logo}" alt="Logo" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
+                    console.log("🖼️ تم تحديث اللوجو في الصفحة.");
                 }
             });
             
-            // تحديث الاسم (يفصل الكلمة الأولى لتلوينها بشكل مختلف حسب CSS)
+            // تحديث الاسم
             const nameElements = document.querySelectorAll('.logo-text');
             nameElements.forEach(el => {
                 const isAr = document.documentElement.lang === 'ar';
@@ -28,21 +46,24 @@ async function loadSiteSettings() {
                     const firstWord = parts[0];
                     const restOfWords = parts.slice(1).join(' ');
                     el.innerHTML = `${firstWord} <span>${restOfWords}</span>`;
+                    console.log("📝 تم تحديث الاسم إلى:", name);
                 }
             });
+        } else {
+            console.warn("⚠️ لم يتم العثور على مستند الإعدادات (general) في قاعدة البيانات. تأكد من حفظها من لوحة التحكم أولاً.");
         }
     } catch (error) {
-        console.warn("تعذر تحميل إعدادات الموقع تلقائياً:", error);
+        console.error("❌ خطأ فادح في تحميل إعدادات الموقع:", error);
     }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
     
-    // استدعاء دالة تحميل الإعدادات فوراً عند جاهزية الصفحة
+    // استدعاء دالة تحميل الإعدادات فوراً
     await loadSiteSettings();
 
     // ==========================================
-    // 1. تأثير تصغير شريط التنقل (Header) عند التمرير
+    // 2. تأثير تصغير شريط التنقل (Header) عند التمرير
     // ==========================================
     const header = document.getElementById('mainHeader');
     if (header) {
@@ -56,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ==========================================
-    // 2. مراقب التمرير لإظهار العناصر بنعومة (Scroll Reveal)
+    // 3. مراقب التمرير لإظهار العناصر بنعومة (Scroll Reveal)
     // ==========================================
     const fadeElements = document.querySelectorAll('.fade-up');
     const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
@@ -72,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     fadeElements.forEach(el => observer.observe(el));
 
     // ==========================================
-    // 3. برمجة نموذج الاتصال لفتح تطبيق الإيميل (Mailto)
+    // 4. برمجة نموذج الاتصال لفتح تطبيق الإيميل (Mailto)
     // ==========================================
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
@@ -97,19 +118,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ==========================================
-    // 4. برمجة قائمة الجوال (Hamburger Menu) الموحدة
+    // 5. برمجة قائمة الجوال (Hamburger Menu) الموحدة
     // ==========================================
     const mobileToggle = document.getElementById('mobileToggle');
     const mainNav = document.getElementById('mainNav');
 
     if (mobileToggle && mainNav) {
-        // فتح وإغلاق القائمة الرئيسية
         mobileToggle.addEventListener('click', () => {
             mobileToggle.classList.toggle('active');
             mainNav.classList.toggle('active');
         });
 
-        // إغلاق القائمة تلقائياً عند الضغط على أي رابط عادي (ليس قائمة منسدلة)
         const navLinks = mainNav.querySelectorAll('a:not(.dropdown-toggle)');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -120,25 +139,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ==========================================
-    // 5. برمجة القائمة المنسدلة (Dropdown) الذكية
+    // 6. برمجة القائمة المنسدلة (Dropdown) الذكية
     // ==========================================
     const dropdowns = document.querySelectorAll('.dropdown');
-    
     dropdowns.forEach(dropdown => {
         const toggle = dropdown.querySelector('.dropdown-toggle');
-        
         if (toggle) {
             toggle.addEventListener('click', function(e) {
-                // تفعيل النقر للطي والفرد فقط على شاشات الهاتف والأجهزة اللوحية
                 if (window.innerWidth <= 968) {
-                    e.preventDefault(); // منع الانتقال للرابط في الهاتف
+                    e.preventDefault(); 
                     dropdown.classList.toggle('active');
                 }
             });
         }
     });
 
-    // إغلاق القائمة المنسدلة عند النقر في أي مكان خارجها
     document.addEventListener('click', function(e) {
         dropdowns.forEach(dropdown => {
             if (!dropdown.contains(e.target)) {
@@ -146,5 +161,4 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     });
-
 });
